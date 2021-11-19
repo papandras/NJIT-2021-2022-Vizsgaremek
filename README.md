@@ -1,4 +1,4 @@
-# NJIT-2021-2021-Vizsgaremek
+# NJIT-2021-2022-Vizsgaremek
 
 ## Projekt name: *under processing*
 
