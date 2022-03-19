@@ -3,12 +3,12 @@
         <LoginOrRegister></LoginOrRegister>
         <input type="text" placeholder="Felhasználónév">
         <input type="password" placeholder="Jelszó">
-        <input type="submit" value="Login">
+        <RouterLink to="/index"><input type="submit" value="Bejelentkezek" @click="Login"></RouterLink>
         <p>vagy</p>
-        <p>
-            <img src="#" alt="Google icon">
+        <button>
+            <img src="https://image.similarpng.com/very-thumbnail/2020/12/Illustration-of-Google-icon-on-transparent-background-PNG.png" style="height: 20px" alt="Google icon">
             Bejelntkezés Google fiókkal
-        </p>
+        </button>
     </div>
 </template>
 
@@ -17,6 +17,11 @@ import LoginOrRegister from "./LoginOrRegister.vue";
 export default {
     components:{
         LoginOrRegister
+    },
+    methods:{
+        Login(){
+            alert("Bejelentkeztél");
+        }
     },
     mounted(){
 

@@ -7,10 +7,10 @@
         <input type="password" placeholder="Jelszó megerősítés">
         <input type="submit" value="Regisztrálok">
         <p>vagy</p>
-        <p>
-            <img src="#" alt="Google icon">
-            Regiszráció Google fiókkal
-        </p>
+        <button>
+            <img src="https://image.similarpng.com/very-thumbnail/2020/12/Illustration-of-Google-icon-on-transparent-background-PNG.png" style="height: 20px" alt="Google icon">
+            Regisztráció Google fiókkal
+        </button>
     </div>
 </template>
 
