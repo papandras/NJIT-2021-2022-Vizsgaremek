@@ -14,16 +14,14 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        return User::create([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password'))
-        ]);
+        $data = $request->validated();
+        $data["password"] = Hash::make($data["password"]);
+        return User::create($data);
     }
 
     public function login(LoginRequest $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        if (!Auth::attempt($request->only('name', 'password'))) {
             return response([
                 'message' => 'Hibás adatok!'
             ], Response::HTTP_UNAUTHORIZED);
