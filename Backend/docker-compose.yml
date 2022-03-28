@@ -1,0 +1,52 @@
+version: '3'
+
+networks:
+  webapp:
+
+services:
+  web:
+    image: nginx:stable-alpine
+    ports:
+      - "${PORT_WEB}:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf:rw
+      - ./docker/logs/nginx:/var/logs/nginx:rw
+    depends_on:
+      - php
+      - db
+    networks:
+      - webapp
+  php:
+    image: rcsnjszg/php:0.1
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./:/var/www/html:rw
+    networks:
+      - webapp
+
+  db:
+    image: ubuntu/mysql:8.0-20.04_beta
+    environment:
+        - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+        - MYSQL_USER=${DB_USERNAME}
+        - MYSQL_PASSWORD=${DB_PASSWORD}
+        - MYSQL_DATABASE=${DB_DATABASE}
+    volumes:
+        - "./docker/mysql/var/lib/mysql:/var/lib/mysql:rw"
+    networks:
+        - webapp
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "${PORT_PHPMYADMIN}:80"
+    environment:
+      # - PMA_ARBITRARY=1 # csatlakozás tetszőleges szerverhez
+      - PMA_HOST=db # A megadot szerverhez kapcsolódjon
+      # - PMA_USER=${DB_USERNAME}
+      # - PMA_PASSWORD=${DB_PASSWORD}
+    networks:
+      - webapp
