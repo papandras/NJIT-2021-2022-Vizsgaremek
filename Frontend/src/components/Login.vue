@@ -2,10 +2,10 @@
   <div>
     <div id="success"></div>
     <LoginOrRegister></LoginOrRegister>
-    <form>
-      <input type="text" placeholder="Felhasználónév" />
-      <input type="password" placeholder="Jelszó" />
-      <input type="submit" value="Bejelentkezek" @click="Login" />
+    <form @submit.prevent="submit">
+      <input v-model="data.name" type="text" placeholder="Felhasználónév" />
+      <input v-model="data.password" type="password" placeholder="Jelszó" />
+      <input type="submit" value="Bejelentkezek" />
       <!--<RouterLink to="/index"><input type="submit" value="Bejelentkezek" @click="Login"></RouterLink>-->
     </form>
     <p>vagy</p>
@@ -20,16 +20,45 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import LoginOrRegister from "./LoginOrRegister.vue";
+import {reactive} from "vue";
+import {useRouter} from "vue-router";
 export default {
   components: {
     LoginOrRegister,
   },
-  methods: {
-    Login() {
-      alert("Bejelentkeztél");
-    },
+  setup(){
+    const data = reactive({
+      name: '',
+      password: ''
+    });
+    const router = useRouter();
+    const submit = async() => {
+        await fetch("http://localhost:8881/api/login", {
+              method: "POST",
+              headers: {
+                  "Accept": "application/json",
+                  "Content-Type": "application/json",
+              },
+              credentials: 'include',
+              body: JSON.stringify(data),
+          })
+          .then((response) => {
+            console.log(response);
+              if (response.status < 300) {
+                  router.push("/index");
+              }
+          })
+          .catch((error) => {
+              console.log(error.errors);
+          });
+    }
+
+    return{
+      data,
+      submit
+    }
   },
   mounted() {},
 };
