@@ -1,12 +1,16 @@
 <template>
   <div class="index">
-    {{message}}
-    <h1>Index</h1>
+    <Menu id="menu"></Menu>
+    <div id="content">
+      {{message}}
+      <h1>Index</h1>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import {onMounted, ref} from 'vue';
+import Menu from "../components/LeftSideMenu.vue"
 export default{
   name: "Index",
   setup(){
@@ -25,7 +29,29 @@ export default{
     return{
       message
     }
-  }
+  },
+  components:{
+        Menu
+    }
 }
 
 </script>
+
+<style scoped>
+  .index{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 100%;
+    grid-template-areas: 
+      "menu content"
+    ;
+  }
+
+  #menu{
+    grid-area: menu;
+  }
+
+  #content{
+    grid-area: content;
+  }
+</style>
