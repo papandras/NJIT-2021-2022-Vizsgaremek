@@ -1,14 +1,19 @@
 <template>
   <div id="main">
     <ul id="pager">
-      <PagerListItem @click="clickedpage(hello)" v-for="tab in tabsCount" :key="db"></PagerListItem>
-      <button @click="newTab">+</button>
+      <PagerListItem v-for="tab in tabsCount" :key="db"></PagerListItem>
+      <button @click="newTab" id="newTab">+</button>
     </ul>
     <IndexPage></IndexPage>
   </div>
+  <vue-basic-alert 
+       :duration="300"
+       :closeIn="300"
+       ref="alert" />
 </template>
 
 <script lang="ts">
+import {ref} from 'vue';
 import IndexPage from "../components/Index.vue";
 import PagerListItem from "../components/PagerListItem.vue";
 export default {
@@ -18,11 +23,13 @@ export default {
     PagerListItem,
   },
   setup() {
-    const hello = "helloooo";
-    let tabsCount = 1;
+    let tabsCount = ref(1);
     const newTab = () => {
-      tabsCount += 1;
-      console.log(tabsCount);
+      if(tabsCount.value < 6){
+        tabsCount.value += 1;
+      }else{
+        alert("Maximum 6 ablakot lehet megnyitni!");
+      }
     };
 
     const clickedpage = (par) => {
@@ -33,7 +40,6 @@ export default {
       newTab,
       clickedpage,
       tabsCount,
-      hello
     };
   },
 };
@@ -52,6 +58,8 @@ export default {
 #pager {
   grid-area: pager;
   user-select: none;
+  border: 1px solid black;
+  line-height: fit-content;
 }
 
 #pager > li {
@@ -69,5 +77,18 @@ export default {
 
 IndexPage {
   grid-area: content;
+}
+
+#newTab{
+  background-color: #E9D8A6;
+  border: none;
+  font-size: 150%;
+  width: 30px;
+  height: 30px;
+}
+
+#newTab:hover{
+  border: 1px solid rgb(20, 14, 14);
+  border-radius: 10px;
 }
 </style>
