@@ -19,6 +19,11 @@ const router = createRouter({
       name: "index",
       component: () => import("../views/IndexView.vue"),
     },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "notfound",
+      component: () => import("../views/NotFoundPage.vue"),
+    },
   ],
 });
 
