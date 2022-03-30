@@ -64,7 +64,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   #bejelentkezes{
     background-color: #009688;
     color: white;
