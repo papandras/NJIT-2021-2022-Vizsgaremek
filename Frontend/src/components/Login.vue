@@ -75,6 +75,7 @@ export default {
     margin: auto;
     margin-top: 30px;
     margin-left: 685px;
+    border: none;
   }
 
   #felhasznalonev{
@@ -118,9 +119,5 @@ export default {
     border: none;
     border-radius: 5px;
     background-color: white;
-  }
-
-  button{
-    border: none;
   }
 </style>

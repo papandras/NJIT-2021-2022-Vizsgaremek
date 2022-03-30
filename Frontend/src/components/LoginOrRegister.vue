@@ -17,6 +17,7 @@
     box-shadow: none;
     margin: 20px;
     margin-top: 120px;
+    border: none;
   }
   #whitediv{
     width: 400px;
@@ -29,5 +30,6 @@
     justify-content: center;
     margin-top: 80px;
     padding-top: 0px;
+    border: none;
   }
 </style>
