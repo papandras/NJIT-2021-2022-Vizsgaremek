@@ -1,57 +1,70 @@
 <template>
-  <div class="index">
-    <Menu id="menu"></Menu>
-    <div id="content">
-      {{message}}
-      <h1>Index</h1>
-    </div>
+  <div id="main">
+    <ul id="pager">
+      <li>
+        <p>{{"Index page"}}</p>
+        <button>x</button>
+      </li>
+      <button>+</button>
+    </ul>
+    <IndexPage></IndexPage>
   </div>
 </template>
 
 <script lang="ts">
-import {onMounted, ref} from 'vue';
-import Menu from "../components/LeftSideMenu.vue"
-export default{
+import IndexPage from "../components/Index.vue";
+export default {
   name: "Index",
-  setup(){
-    const message = ref('Nem vagy bejelentkezve');
-    onMounted(async () => {
-      const response = await fetch("http://localhost:8881/api/user", {
-              method: "GET",
-              credentials: 'include',
-          });
-
-          const content = await response.json();
-
-          message.value = `Hello ${content.name}`;
-    });
-
-    return{
-      message
-    }
+  components: {
+    IndexPage,
   },
-  components:{
-        Menu
-    }
-}
-
+};
 </script>
 
 <style scoped>
-  .index{
+  #main{
     display: grid;
-    grid-template-columns: 20% 80%;
-    grid-template-rows: 100%;
+    grid-template-columns: 100%;
+    grid-template-rows: 20% 80%;
     grid-template-areas: 
-      "menu content"
+      "pager"
+      "content"
     ;
   }
 
-  #menu{
-    grid-area: menu;
+  #pager{
+    grid-area: pager;
+    user-select: none;
   }
 
-  #content{
+  #pager>li{
+    display: inline-block;
+    border: 2px solid black;
+    margin-right: 2px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 140px;
+    text-align: center;
+    line-height: 1%;
+  }
+  li>button, li>p{
+    display: inline-block;
+  }
+  li>p{
+    margin-right: 30px;
+  }
+  li>button{
+    border: none;
+    background-color: white;
+  }
+  li>button:hover{
+    border: 1px solid black;
+    border-radius: 50%;
+  }
+  
+  IndexPage{
     grid-area: content;
   }
 </style>
