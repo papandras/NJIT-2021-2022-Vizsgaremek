@@ -3,13 +3,13 @@
     <div id="success"></div>
     <LoginOrRegister></LoginOrRegister>
     <form @submit.prevent="submit">
-      <input v-model="data.name" type="text" placeholder="Felhasználónév" />
-      <input v-model="data.password" type="password" placeholder="Jelszó" />
-      <input type="submit" value="Bejelentkezek" />
+      <input v-model="data.name" type="text" placeholder="Felhasználónév" id="felhasznalonev" />
+      <input v-model="data.password" type="password" placeholder="Jelszó" id="jelszo"/>
+      <input type="submit" value="Belépek" id="bejelentkezes" />
       <!--<RouterLink to="/index"><input type="submit" value="Bejelentkezek" @click="Login"></RouterLink>-->
     </form>
     <p>vagy</p>
-    <button>
+    <button class="google">
       <img
         src="https://image.similarpng.com/very-thumbnail/2020/12/Illustration-of-Google-icon-on-transparent-background-PNG.png"
         style="height: 20px"
@@ -63,3 +63,60 @@ export default {
   mounted() {},
 };
 </script>
+
+<style>
+  #bejelentkezes{
+    background-color: #009688;
+    color: white;
+    width: 140px;
+    height: 50px;
+    border-radius: 5px;
+    box-shadow: none;
+    margin: auto;
+    margin-top: 30px;
+    margin-left: 685px;
+  }
+
+  #felhasznalonev{
+    margin-top: -380px;
+    margin-left: 640px;
+    display: flex;
+    justify-content: center;
+    background-color: #C4C4C4;
+    opacity: 80%;
+    border-radius: 5px;
+    border-color: none;
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    border: none;
+  }
+
+  #jelszo{
+    margin-top: 20px;
+    margin-left: 640px;
+    display: flex;
+    justify-content: center;
+    background-color: #C4C4C4;
+    opacity: 80%;
+    border-radius: 5px;
+    border-color: none;
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    border: none;
+  }
+
+  p{
+    margin-top: 30px;
+    margin-left: 740px;
+  }
+
+  .google{
+    margin-top: 10px;
+    margin-left: 660px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+  }
+</style>
