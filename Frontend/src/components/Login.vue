@@ -120,4 +120,8 @@ export default {
     border-radius: 5px;
     background-color: white;
   }
+
+  button{
+    border: none;
+  }
 </style>
