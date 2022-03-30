@@ -64,7 +64,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   #bejelentkezes{
     background-color: #009688;
     color: white;
@@ -75,6 +75,7 @@ export default {
     margin: auto;
     margin-top: 30px;
     margin-left: 685px;
+    border: none;
   }
 
   #felhasznalonev{
