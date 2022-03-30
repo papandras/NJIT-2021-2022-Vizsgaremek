@@ -2,20 +2,20 @@
     <div>
       <LoginOrRegister></LoginOrRegister>
       <form @submit.prevent="submit">
-        <input v-model="data.name" type="text" placeholder="Felhasználónév" minlength="3" maxlength="20" required />
+        <input v-model="data.name" type="text" placeholder="Felhasználónév" minlength="3" maxlength="20" required id="felhasznalonev"/>
         <sub>{{ nameLenght }}/20</sub>
         <div>{{ name }}</div>
-        <input v-model="data.email" type="email" placeholder="E-mail cím" minlength="10" maxlength="50" required />
+        <input v-model="data.email" type="email" placeholder="E-mail cím" minlength="10" maxlength="50" required id="e-mail"/>
         <sub>{{ emailLenght }}/50</sub>
         <div>{{ mail }}</div>
-        <input v-model="data.password" type="password" placeholder="Jelszó" minlength="8" maxlength="20" required />
+        <input v-model="data.password" type="password" placeholder="Jelszó" minlength="8" maxlength="20" required id="jelszo"/>
         <sub>{{ passwordLenght }}/20</sub>
-        <input v-model="data.passwordConfirm" type="password" placeholder="Jelszó megerősítés" minlength="8" maxlength="20" required />
+        <input v-model="data.passwordConfirm" type="password" placeholder="Jelszó megerősítés" minlength="8" maxlength="20" required id="jelszo"/>
         <sub>{{ passwordConfirmLenght }}/20</sub>
         <input type="submit" value="Regisztrálok" />
       </form>
       <p>vagy</p>
-      <button>
+      <button class="google">
         <img src="https://image.similarpng.com/very-thumbnail/2020/12/Illustration-of-Google-icon-on-transparent-background-PNG.png" style="height: 20px" alt="Google icon" />
         Regisztráció Google fiókkal
       </button>
@@ -82,3 +82,63 @@
         },
     };
 </script>
+
+<style scoped>
+  #felhasznalonev{
+    margin-top: -380px;
+    margin-left: 640px;
+    display: flex;
+    justify-content: center;
+    background-color: #C4C4C4;
+    opacity: 80%;
+    border-radius: 5px;
+    border-color: none;
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    border: none;
+  }
+
+  #e-mail{
+    margin-top: -380px;
+    margin-left: 640px;
+    display: flex;
+    justify-content: center;
+    background-color: #C4C4C4;
+    opacity: 80%;
+    border-radius: 5px;
+    border-color: none;
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    border: none;
+  }
+
+  #jelszo{
+    margin-top: 20px;
+    margin-left: 640px;
+    display: flex;
+    justify-content: center;
+    background-color: #C4C4C4;
+    opacity: 80%;
+    border-radius: 5px;
+    border-color: none;
+    width: 15%;
+    height: 30px;
+    text-align: center;
+    border: none;
+  }
+
+  p{
+    margin-top: 30px;
+    margin-left: 740px;
+  }
+
+  .google{
+    margin-top: 10px;
+    margin-left: 660px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+  }
+</style>
