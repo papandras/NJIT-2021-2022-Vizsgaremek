@@ -1,9 +1,9 @@
 <template>
-    <div id="whitediv">
-        <nav>
-      <RouterLink to="/"><input type="button" value="Bejelentkezés" class="bejelentkezes"></RouterLink>
-      <RouterLink to="/register"><input type="button" value="Regisztráció" class="bejelentkezes"></RouterLink>
-    </nav>
+    <div >
+        <nav id="whitediv">
+          <RouterLink to="/"><input type="button" value="Bejelentkezés" class="bejelentkezes"></RouterLink>
+          <RouterLink to="/register"><input type="button" value="Regisztráció" class="bejelentkezes"></RouterLink>
+       </nav>
     </div>
 </template>
 
@@ -19,7 +19,7 @@
     margin-top: 120px;
     border: none;
   }
-  #whitediv{
+  /*#whitediv{
     width: 400px;
     height: 600px;
     background-color: white;
@@ -31,5 +31,8 @@
     margin-top: 80px;
     padding-top: 0px;
     border: none;
+  }*/
+  nav{
+    text-align: center;
   }
 </style>

@@ -14,3 +14,10 @@ export default{
     }
 }
 </script>
+
+<style scoped>
+  LoginPage{
+    display: block;
+    margin: auto;
+  }
+</style>
