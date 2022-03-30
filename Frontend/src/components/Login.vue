@@ -2,8 +2,8 @@
   <div id="whitediv">
     <LoginOrRegister></LoginOrRegister>
     <form @submit.prevent="submit">
-      <input v-model="data.name" type="text" placeholder="Felhasználónév" id="felhasznalonev"/>
-      <input v-model="data.password" type="password" placeholder="Jelszó" id="jelszo"/>
+      <input v-model="data.name" type="text" placeholder="Felhasználónév" class="input"/>
+      <input v-model="data.password" type="password" placeholder="Jelszó" class="input"/>
       <input type="submit" value="Belépek" id="bejelentkezes" />
     </form>
     <p>vagy</p>
@@ -67,8 +67,6 @@ export default {
   vertical-align: center;
   text-align: center;
   margin: auto;
-  /*display: flex;
-  justify-content: center;*/
   margin-top: 80px;
   padding-top: 0px;
   border: none;
@@ -85,16 +83,10 @@ form > input {
   border-radius: 5px;
   box-shadow: none;
   margin: auto;
-  /*margin-top: 30px;
-    margin-left: 685px;*/
   border: none;
 }
 
-#felhasznalonev {
-  /*margin-top: -380px;
-    margin-left: 640px;
-  display: flex;
-  justify-content: center;*/
+.input {
   background-color: #c4c4c4;
   opacity: 80%;
   border-radius: 5px;
@@ -103,34 +95,17 @@ form > input {
   height: 30px;
   text-align: center;
   border: none;
-}
-
-#jelszo {
-  margin-top: 20px;
-  margin-bottom: 20px;
-    /*margin-left: 640px;
-  display: flex;
-  justify-content: center;*/
-  background-color: #c4c4c4;
-  opacity: 80%;
-  border-radius: 5px;
-  border-color: none;
-  width: 60%;
-  height: 30px;
-  text-align: center;
-  border: none;
-}
-
-p {
-  /*margin-top: 30px;
-    margin-left: 740px;*/
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .google {
-  /*margin-top: 10px;
-    margin-left: 660px;*/
   border: none;
   border-radius: 5px;
   background-color: white;
+}
+
+p{
+  user-select: none;
 }
 </style>

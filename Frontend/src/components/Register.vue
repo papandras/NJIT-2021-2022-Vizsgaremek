@@ -1,18 +1,18 @@
 <template>
-    <div>
+    <div id="whitediv">
       <LoginOrRegister></LoginOrRegister>
       <form @submit.prevent="submit">
-        <input v-model="data.name" type="text" placeholder="Felhasználónév" minlength="3" maxlength="20" required id="felhasznalonev"/>
+        <input v-model="data.name" type="text" placeholder="Felhasználónév" minlength="3" maxlength="20" required class="input"/>
         <sub>{{ nameLenght }}/20</sub>
         <div>{{ name }}</div>
-        <input v-model="data.email" type="email" placeholder="E-mail cím" minlength="10" maxlength="50" required id="e-mail"/>
+        <input v-model="data.email" type="email" placeholder="E-mail cím" minlength="10" maxlength="50" required class="input"/>
         <sub>{{ emailLenght }}/50</sub>
         <div>{{ mail }}</div>
-        <input v-model="data.password" type="password" placeholder="Jelszó" minlength="8" maxlength="20" required id="jelszo"/>
+        <input v-model="data.password" type="password" placeholder="Jelszó" minlength="8" maxlength="20" required class="input"/>
         <sub>{{ passwordLenght }}/20</sub>
-        <input v-model="data.passwordConfirm" type="password" placeholder="Jelszó megerősítés" minlength="8" maxlength="20" required id="jelszo"/>
+        <input v-model="data.passwordConfirm" type="password" placeholder="Jelszó megerősítés" minlength="8" maxlength="20" required class="input"/>
         <sub>{{ passwordConfirmLenght }}/20</sub>
-        <input type="submit" value="Regisztrálok" />
+        <input type="submit" value="Regisztrálok" id="regisztracio"/>
       </form>
       <p>vagy</p>
       <button class="google">
@@ -84,61 +84,61 @@
 </script>
 
 <style scoped>
-  #felhasznalonev{
-    margin-top: -380px;
-    margin-left: 640px;
-    display: flex;
-    justify-content: center;
-    background-color: #C4C4C4;
-    opacity: 80%;
-    border-radius: 5px;
-    border-color: none;
-    width: 15%;
-    height: 30px;
-    text-align: center;
-    border: none;
-  }
-
-  #e-mail{
-    margin-top: -380px;
-    margin-left: 640px;
-    display: flex;
-    justify-content: center;
-    background-color: #C4C4C4;
-    opacity: 80%;
-    border-radius: 5px;
-    border-color: none;
-    width: 15%;
-    height: 30px;
-    text-align: center;
-    border: none;
-  }
-
-  #jelszo{
-    margin-top: 20px;
-    margin-left: 640px;
-    display: flex;
-    justify-content: center;
-    background-color: #C4C4C4;
-    opacity: 80%;
-    border-radius: 5px;
-    border-color: none;
-    width: 15%;
-    height: 30px;
-    text-align: center;
-    border: none;
-  }
-
-  p{
-    margin-top: 30px;
-    margin-left: 740px;
-  }
-
-  .google{
-    margin-top: 10px;
-    margin-left: 660px;
-    border: none;
-    border-radius: 5px;
+  #whitediv {
+    width: 400px;
+    height: 700px;
     background-color: white;
+    border-radius: 5px;
+    vertical-align: center;
+    text-align: center;
+    margin: auto;
+    margin-top: 80px;
+    padding-top: 0px;
+    border: none;
   }
+
+  form > input {
+  display: block;
+  margin: auto;
+  }
+
+  form > sub{
+    position: relative;
+    left: 30%;
+    user-select: none;
+  }
+
+  .input {
+    background-color: #c4c4c4;
+    opacity: 80%;
+    border-radius: 5px;
+    border-color: none;
+    width: 60%;
+    height: 30px;
+    text-align: center;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  #regisztracio {
+  background-color: #009688;
+  color: white;
+  width: 140px;
+  height: 50px;
+  border-radius: 5px;
+  box-shadow: none;
+  margin: auto;
+  border: none;
+}
+
+.google {
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+}
+
+p{
+  user-select: none;
+}
 </style>
