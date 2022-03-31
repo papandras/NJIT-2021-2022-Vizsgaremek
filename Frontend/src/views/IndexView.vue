@@ -4,7 +4,9 @@
       <PagerListItem v-for="tab in tabsCount" :key="db"></PagerListItem>
       <button @click="newTab" id="newTab">+</button>
     </ul>
-    <IndexPage></IndexPage>
+    <div id="indexpage">
+      <IndexPage></IndexPage>
+    </div>
   </div>
   <vue-basic-alert 
        :duration="300"
@@ -48,8 +50,7 @@ export default {
 <style scoped>
 #main {
   display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 10% 90%;
+  grid-template-rows: 1fr 19fr;
   grid-template-areas:
     "pager"
     "content";
@@ -58,24 +59,9 @@ export default {
 #pager {
   grid-area: pager;
   user-select: none;
-  border: 1px solid black;
-  line-height: fit-content;
 }
 
-#pager > li {
-  display: inline-block;
-  border: 2px solid black;
-  margin-right: 2px;
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  width: 140px;
-  text-align: center;
-  line-height: 1%;
-}
-
-IndexPage {
+#indexpage {
   grid-area: content;
 }
 

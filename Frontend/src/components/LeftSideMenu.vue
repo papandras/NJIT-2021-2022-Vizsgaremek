@@ -36,9 +36,6 @@
 </template>
 
 <style scoped>
-.menu{
-    background-color: #C4C4C4;
-}
 
 .profpic{
     margin: 20px 0px 0px 15px;

@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
   .bejelentkezes{
     background-color: #009688;
     color: white;
