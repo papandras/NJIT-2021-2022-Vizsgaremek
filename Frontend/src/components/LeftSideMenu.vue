@@ -32,10 +32,11 @@
     </div>
 </template>
 
-<style>
+<style scoped>
+
 .menu{
     background-color: #C4C4C4;
-<style scoped>
+}
 
 .profpic{
     margin: 20px 0px 0px 15px;
