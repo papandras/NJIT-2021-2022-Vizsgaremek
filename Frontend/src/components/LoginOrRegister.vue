@@ -1,6 +1,6 @@
 <template>
     <div >
-        <nav id="whitediv">
+        <nav>
           <RouterLink to="/"><input type="button" value="Bejelentkezés" class="bejelentkezes"></RouterLink>
           <RouterLink to="/register"><input type="button" value="Regisztráció" class="bejelentkezes"></RouterLink>
        </nav>
@@ -16,7 +16,6 @@
     border-radius: 5px;
     box-shadow: none;
     margin: 20px;
-    margin-top: 120px;
     border: none;
   }
 
