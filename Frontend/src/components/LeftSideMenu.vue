@@ -53,7 +53,6 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 200px;
   background-color: #C4C4C4;
   height: 100%; /* Full height */
   position: fixed; /* Make it stick, even on scroll */
