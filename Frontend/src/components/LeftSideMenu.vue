@@ -37,7 +37,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .LOGO{
     margin: 15px 0px 0px 15px;
     width: 150px;
