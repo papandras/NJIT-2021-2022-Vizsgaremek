@@ -2,11 +2,6 @@
     <div class="menu">
         <ul>
             <li>
-                <div class="LOGO">
-                    <img src="public/logo.svg" alt="logo" class="LOGOimg">
-                </div>
-            </li>
-            <li>
                 <div class="profpic">
                     <img src="#" alt="profilpic">
                     <p>Szia {{"Valaki"}}</p>
@@ -38,14 +33,8 @@
 </template>
 
 <style>
-.LOGO{
-    margin: 15px 0px 0px 15px;
-    width: 150px;
-    height: 100px;
-}
-.LOGOimg{
-    width: 150px;
-    height: 100px;
+.menu{
+    background-color: #C4C4C4;
 }
 .profpic{
     margin: 20px 0px 0px 15px;
@@ -89,6 +78,7 @@ li a:active {
   color: white;
 }
 </style>
+
 <script>
 export default {
     name: "Menu",
