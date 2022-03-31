@@ -2,9 +2,7 @@
     <div class="menu">
         <ul>
             <li>
-                <div class="LOGO">
-                    <img src="public/logo.svg" alt="logo" class="LOGOimg">
-                </div>
+
             </li>
             <li>
                 <div class="profpic">
@@ -37,16 +35,11 @@
     </div>
 </template>
 
-<style>
-.LOGO{
-    margin: 15px 0px 0px 15px;
-    width: 150px;
-    height: 100px;
+<style scoped>
+.menu{
+    background-color: #C4C4C4;
 }
-.LOGOimg{
-    width: 150px;
-    height: 100px;
-}
+
 .profpic{
     margin: 20px 0px 0px 15px;
     width: 150px;
@@ -60,7 +53,6 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 200px;
   background-color: #C4C4C4;
   height: 100%; /* Full height */
   position: fixed; /* Make it stick, even on scroll */

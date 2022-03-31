@@ -16,10 +16,16 @@
         <input type="submit" value="Regisztrálok" id="regisztracio"/>
       </form>
       <p>vagy</p>
-      <button class="google">
-        <img src="https://image.similarpng.com/very-thumbnail/2020/12/Illustration-of-Google-icon-on-transparent-background-PNG.png" style="height: 20px" alt="Google icon" />
+      <button class="googleButton">
+      <div class="google">
+        <div id="googleImg">
+        <img src="@/assets/google_icon.svg" style="height: 20px" alt="Google icon" />
+      </div>
+      <div id="googleText">
         Regisztráció Google fiókkal
-      </button>
+      </div>
+      </div>
+    </button>
     </div>
   </template>
 
@@ -137,12 +143,6 @@
   border: 2px solid #c4c4c4;
 }
 
-.google{
-  text-align: center;
-  box-shadow: 1px solid #c4c4c4;
-  line-height: 200%;
-}
-
 p{
   user-select: none;
 }
@@ -153,6 +153,38 @@ input{
 
 input:focus{
   border: 2px solid #009688;
+}
+
+.googleButton{
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  height: 40px;
+  box-shadow: 0 0 2px #009688;
+}
+
+.googleButton:active{
+  border: 2px solid #009688;
+}
+
+.google {
+  display: grid;
+  grid-template-columns: 11% 89%;
+  grid-template-rows: 100%;
+  grid-template-areas: "pic content";
+  margin: auto;
+}
+
+#googleImg{
+  grid-area: pic;
+  margin-right: 10px;
+  position: relative;
+  top: 5px;
+}
+
+#googleText{
+  grid-area: content;
+  line-height: 28px;
 }
 
 #logo{
