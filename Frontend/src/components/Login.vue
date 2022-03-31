@@ -3,8 +3,8 @@
     <img src="@/assets/logo.svg" alt="Logo" id="logo">
     <LoginOrRegister></LoginOrRegister>
     <form @submit.prevent="submit">
-      <input v-model="data.name" type="text" placeholder="Felhasználónév" class="input"/>
-      <input v-model="data.password" type="password" placeholder="Jelszó" class="input"/>
+      <input v-model="data.name" type="text" placeholder="Felhasználónév" class="input" required minlength="3" maxlength="20"/>
+      <input v-model="data.password" type="password" placeholder="Jelszó" class="input" required minlength="8" maxlength="20"/>
       <input type="submit" value="Belépek" id="bejelentkezes" />
     </form>
     <p>vagy</p>
@@ -74,7 +74,7 @@ export default {
   vertical-align: center;
   text-align: center;
   margin: auto;
-  margin-top: 80px;
+  margin-top: 50px;
   padding-top: 0px;
   border: none;
 }
