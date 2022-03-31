@@ -2,9 +2,7 @@
     <div class="menu">
         <ul>
             <li>
-                <div class="LOGO">
-                    <img src="public/logo.svg" alt="logo" class="LOGOimg">
-                </div>
+
             </li>
             <li>
                 <div class="profpic">
@@ -38,15 +36,6 @@
 </template>
 
 <style scoped>
-.LOGO{
-    margin: 15px 0px 0px 15px;
-    width: 150px;
-    height: 100px;
-}
-.LOGOimg{
-    width: 150px;
-    height: 100px;
-}
 .profpic{
     margin: 20px 0px 0px 15px;
     width: 150px;
