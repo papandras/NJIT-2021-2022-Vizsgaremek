@@ -2,6 +2,9 @@
     <div class="menu">
         <ul>
             <li>
+
+            </li>
+            <li>
                 <div class="profpic">
                     <img src="#" alt="profilpic">
                     <p>Szia {{"Valaki"}}</p>
@@ -33,7 +36,6 @@
 </template>
 
 <style scoped>
-
 .menu{
     background-color: #C4C4C4;
 }
@@ -80,7 +82,6 @@ li a:active {
   color: white;
 }
 </style>
-
 <script>
 export default {
     name: "Menu",
