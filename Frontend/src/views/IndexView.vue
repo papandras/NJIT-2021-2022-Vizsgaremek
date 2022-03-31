@@ -2,7 +2,7 @@
   <div id="main">
     <ul id="pager">
       <PagerListItem v-for="tab in tabsCount" :key="db"></PagerListItem>
-      <button @click="newTab" id="newTab">+</button>
+      <p @click="newTab" id="newTab">+</p>
     </ul>
     <div id="indexpage">
       <IndexPage></IndexPage>
@@ -59,6 +59,7 @@ export default {
 #pager {
   grid-area: pager;
   user-select: none;
+  line-height: 38px;
 }
 
 #indexpage {
@@ -69,8 +70,10 @@ export default {
   background-color: #E9D8A6;
   border: none;
   font-size: 150%;
-  width: 30px;
   height: 30px;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: inline;
 }
 
 #newTab:hover{

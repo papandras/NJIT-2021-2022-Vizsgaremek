@@ -8,15 +8,20 @@
 <style scoped>
 li {
   display: inline-block;
-  margin-right: 2px;
   /*border: 2px solid black;
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 5px;
   border-bottom-left-radius: 5px;*/
-  border-right: 2px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 2px solid black;
   width: 140px;
   text-align: center;
+  line-height: 38px;
+}
+li:nth-child(1){
+  border-left: none;
 }
 li:nth-last-child(2){
   border-right: none;
@@ -25,6 +30,8 @@ li:nth-last-child(2){
   border: none;
   background-color: #E9D8A6;
   display: none;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 li:hover > #close{
     display: inline-block;

@@ -162,6 +162,8 @@ input:focus{
   height: 40px;
   box-shadow: 0 0 2px #009688;
   margin-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .googleButton:active{
