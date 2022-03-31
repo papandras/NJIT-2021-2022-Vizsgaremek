@@ -1,5 +1,6 @@
 <template>
   <div id="whitediv">
+    <img src="@/assets/logo.svg" alt="Logo" id="logo">
     <LoginOrRegister></LoginOrRegister>
     <form @submit.prevent="submit">
       <input v-model="data.name" type="text" placeholder="Felhasználónév" class="input"/>
@@ -152,6 +153,12 @@ input{
 
 input:focus{
   border: 2px solid #009688;
+}
+
+#logo{
+  width: 400px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 </style>

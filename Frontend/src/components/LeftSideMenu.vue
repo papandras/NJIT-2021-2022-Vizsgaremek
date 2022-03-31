@@ -2,11 +2,15 @@
     <div class="menu">
         <ul>
             <li>
-                <img src="#" alt="logo">
+                <div class="LOGO">
+                    <img src="public/logo.svg" alt="logo" class="LOGOimg">
+                </div>
             </li>
             <li>
-                <img src="#" alt="profilpic">
-                <p>Szia {{"Valaki"}}</p>
+                <div class="profpic">
+                    <img src="#" alt="profilpic">
+                    <p>Szia {{"Valaki"}}</p>
+                </div>
             </li>
             <li>
                 <RouterLink to="#"><p>Főoldal</p></RouterLink>
@@ -20,7 +24,7 @@
             <li>
                 <RouterLink to="#"><p>Törölt elemek</p></RouterLink>
             </li>
-            <li>
+            <li class="stat">
                 <RouterLink to="#"><p>Statisztika</p></RouterLink>
             </li>
             <li>
@@ -33,6 +37,58 @@
     </div>
 </template>
 
+<style>
+.LOGO{
+    margin: 15px 0px 0px 15px;
+    width: 150px;
+    height: 100px;
+}
+.LOGOimg{
+    width: 150px;
+    height: 100px;
+}
+.profpic{
+    margin: 20px 0px 0px 15px;
+    width: 150px;
+    height: 100px;
+    background-color: red;
+}
+.stat{
+    margin-top: 100px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #C4C4C4;
+  height: 100%; /* Full height */
+  position: fixed; /* Make it stick, even on scroll */
+  overflow: auto; /* Enable scrolling if the sidenav has too much content */
+}
+
+li a {
+  display: block;
+  width: 150px;
+  height: 30px;
+  color: #000;
+  margin: 20px;
+  text-decoration: none;
+  text-align: center;
+  background-color: white;
+  color: black;
+}
+
+li a:hover {
+  background-color: red;
+  color: white;
+}
+
+li a:active {
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
 <script>
 export default {
     name: "Menu",

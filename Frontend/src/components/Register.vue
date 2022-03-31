@@ -1,5 +1,6 @@
 <template>
     <div id="whitediv">
+      <img src="@/assets/logo.svg" alt="Logo" id="logo">
       <LoginOrRegister></LoginOrRegister>
       <form @submit.prevent="submit">
         <input v-model="data.name" type="text" placeholder="Felhasználónév" minlength="3" maxlength="20" required class="input"/>
@@ -92,13 +93,13 @@
 <style scoped>
   #whitediv {
     width: 400px;
-    height: 700px;
+    height: 800px;
     background-color: white;
     border-radius: 5px;
     vertical-align: center;
     text-align: center;
     margin: auto;
-    margin-top: 80px;
+    margin-top: 50px;
     padding-top: 0px;
     border: none;
   }
@@ -184,6 +185,12 @@ input:focus{
 #googleText{
   grid-area: content;
   line-height: 28px;
+}
+
+#logo{
+  width: 400px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 </style>
