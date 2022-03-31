@@ -7,9 +7,15 @@
       <input type="submit" value="Belépek" id="bejelentkezes" />
     </form>
     <p>vagy</p>
-    <button class="google">
-      <img src="https://image.similarpng.com/very-thumbnail/2020/12/Illustration-of-Google-icon-on-transparent-background-PNG.png" style="height: 20px" alt="Google icon" />
-      Bejelntkezés Google fiókkal
+    <button class="googleButton">
+      <div class="google">
+        <div id="googleImg">
+        <img src="@/assets/google_icon.svg" style="height: 20px" alt="Google icon" />
+      </div>
+      <div id="googleText">
+        Bejelentkezés Google fiókkal
+      </div>
+      </div>
     </button>
   </div>
 </template>
@@ -104,10 +110,36 @@ form > input {
   margin-bottom: 10px;
 }
 
-.google {
+.googleButton{
   border: none;
   border-radius: 5px;
   background-color: white;
+  height: 40px;
+  box-shadow: 0 0 2px #009688;
+}
+
+.googleButton:active{
+  border: 2px solid #009688;
+}
+
+.google {
+  display: grid;
+  grid-template-columns: 11% 89%;
+  grid-template-rows: 100%;
+  grid-template-areas: "pic content";
+  margin: auto;
+}
+
+#googleImg{
+  grid-area: pic;
+  margin-right: 10px;
+  position: relative;
+  top: 5px;
+}
+
+#googleText{
+  grid-area: content;
+  line-height: 28px;
 }
 
 p{
