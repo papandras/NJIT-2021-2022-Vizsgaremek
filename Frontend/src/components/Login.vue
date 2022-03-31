@@ -84,6 +84,11 @@ form > input {
   box-shadow: none;
   margin: auto;
   border: none;
+  margin-top: 20px;
+}
+
+#bejelentkezes:active{
+  border: 2px solid #c4c4c4
 }
 
 .input {
@@ -108,4 +113,13 @@ form > input {
 p{
   user-select: none;
 }
+
+input{
+  outline: none;
+}
+
+input:focus{
+  border: 2px solid #009688;
+}
+
 </style>

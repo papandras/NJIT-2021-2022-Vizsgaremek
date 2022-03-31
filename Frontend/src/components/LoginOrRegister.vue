@@ -19,20 +19,12 @@
     margin-top: 120px;
     border: none;
   }
-  /*#whitediv{
-    width: 400px;
-    height: 600px;
-    background-color: white;
-    border-radius: 5px;
-    vertical-align: center;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    margin-top: 80px;
-    padding-top: 0px;
-    border: none;
-  }*/
+
   nav{
     text-align: center;
+  }
+
+  .bejelentkezes:active{
+    border: 2px solid #c4c4c4;
   }
 </style>

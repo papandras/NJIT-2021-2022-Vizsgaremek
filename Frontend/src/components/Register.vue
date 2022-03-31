@@ -132,13 +132,26 @@
   border: none;
 }
 
-.google {
-  border: none;
-  border-radius: 5px;
-  background-color: white;
+#regisztracio:active{
+  border: 2px solid #c4c4c4;
+}
+
+.google{
+  text-align: center;
+  box-shadow: 1px solid #c4c4c4;
+  line-height: 200%;
 }
 
 p{
   user-select: none;
 }
+
+input{
+  outline: none;
+}
+
+input:focus{
+  border: 2px solid #009688;
+}
+
 </style>
