@@ -95,7 +95,7 @@ export default {
           })
           .then(response => {
               if(response.status < 300){
-                  store.logged = true;
+                  store.logged = false;
               }
           })
         }
