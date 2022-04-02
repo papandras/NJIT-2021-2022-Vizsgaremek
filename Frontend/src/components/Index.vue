@@ -12,27 +12,7 @@
       </div>
       <div id="last_file">
         <h1>Legutóbbi fájlok</h1>
-        <table>
-          <th>
-            <td>
-              <input type="checkbox" name="" id="">
-            </td>
-            <td>
-              Típus
-            </td>
-            <td>
-              Méret
-            </td>
-            <td>
-              Legutóbbi módosítás
-            </td>
-            <td>
-              Tagok
-            </td>
-            <td>#</td>
-          </th>
-          <TableRow></TableRow>
-        </table>
+        <LastFilesTable></LastFilesTable>
       </div>
       <div id="stat"></div>
       <div id="upload"></div>
@@ -43,7 +23,7 @@
 <script lang="ts">
 import { onMounted, ref } from "vue";
 import Menu from "../components/LeftSideMenu.vue";
-import TableRow from "./LastFilesTableRow.vue";
+import LastFilesTable from "./LastFilesTable.vue";
 export default {
   name: "Index",
   setup() {
@@ -65,7 +45,7 @@ export default {
   },
   components: {
     Menu,
-    TableRow
+    LastFilesTable
   },
 };
 </script>

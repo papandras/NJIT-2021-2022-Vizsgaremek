@@ -1,13 +1,15 @@
 <template>
   <tr>
     <td>
-      <input type="checkbox" :name="data.checkboxname" />
+      <input type="checkbox" :name="checkboxname" />
     </td>
     <td>
-      <img src="#" alt="type icon" />
+      <img src="#" :alt="type" />
     </td>
-    <td>{{data.title}}</td>
-    <td>0.5 MB</td>
+    <td>{{ title }}</td>
+    <td>{{ size }}</td>
+    <td>{{ lastedited }}</td>
+    <td></td>
     <td>
       <img src="@/assets/doticon.svg" alt="menu" />
     </td>
@@ -15,18 +17,17 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { toRefs, reactive } from "vue";
 export default {
-    setup(){
-        const data = reactive({
-            checkboxname: "",
-            title: "Cím",
-            size: ""
-        })
-
-        return{
-            data
-        }
+  props:{
+    checkboxname: String,
+    type: String, 
+    title: String,
+    size: String,
+    lastedited: String
+  },
+    setup(props){
+        const { checkboxname, type, title, size, lastedited } = toRefs(props)
     }
 }
 </script>
