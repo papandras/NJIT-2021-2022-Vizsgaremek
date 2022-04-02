@@ -79,9 +79,11 @@ li a:active {
 }
 </style>
 <script>
+import { useAuth } from '../store/auth.js';
 export default {
     name: "Menu",
     setup(){
+        const store = useAuth();
         const logout = async () => {
             await fetch("http://localhost:8881/api/logout", {
               method: "POST",
@@ -90,6 +92,11 @@ export default {
                   "Content-Type": "application/json",
               },
               credentials: 'include',
+          })
+          .then(response => {
+              if(response.status < 300){
+                  store.logged = true;
+              }
           })
         }
 

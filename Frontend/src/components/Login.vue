@@ -1,21 +1,40 @@
 <template>
   <div id="whitediv">
-    <img src="@/assets/logo.svg" alt="Logo" id="logo">
+    <img src="@/assets/logo.svg" alt="Logo" id="logo" />
     <LoginOrRegister></LoginOrRegister>
+    <div id="failed_login" v-if="data.failed">Hibás felhasználónév vagy jelszó!</div>
     <form @submit.prevent="submit">
-      <input v-model="data.name" type="text" placeholder="Felhasználónév" class="input" required minlength="3" maxlength="20"/>
-      <input v-model="data.password" type="password" placeholder="Jelszó" class="input" required minlength="8" maxlength="20"/>
+      <input
+        v-model="data.name"
+        type="text"
+        placeholder="Felhasználónév"
+        class="input"
+        required
+        minlength="3"
+        maxlength="20"
+      />
+      <input
+        v-model="data.password"
+        type="password"
+        placeholder="Jelszó"
+        class="input"
+        required
+        minlength="8"
+        maxlength="20"
+      />
       <input type="submit" value="Belépek" id="bejelentkezes" />
     </form>
     <p>vagy</p>
     <button class="googleButton">
       <div class="google">
         <div id="googleImg">
-        <img src="@/assets/google_icon.svg" style="height: 20px" alt="Google icon" />
-      </div>
-      <div id="googleText">
-        Bejelentkezés Google fiókkal
-      </div>
+          <img
+            src="@/assets/google_icon.svg"
+            style="height: 20px"
+            alt="Google icon"
+          />
+        </div>
+        <div id="googleText">Bejelentkezés Google fiókkal</div>
       </div>
     </button>
   </div>
@@ -25,14 +44,17 @@
 import LoginOrRegister from "./LoginOrRegister.vue";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
+import { useAuth } from '../store/auth.js';
 export default {
   components: {
     LoginOrRegister,
   },
   setup() {
+    const store = useAuth();
     const data = reactive({
       name: "",
       password: "",
+      failed: false
     });
     const router = useRouter();
     const submit = async () => {
@@ -48,7 +70,11 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.status < 300) {
+            store.logged = true;
             router.push("/index");
+          } else {
+            data.failed = true;
+            setTimeout(() => {data.failed = false;}, 5000);
           }
         })
         .catch((error) => {
@@ -66,6 +92,19 @@ export default {
 </script>
 
 <style scoped>
+#failed_login {
+  width: 300px;
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  display: block;
+  margin: auto;
+  border-radius: 5px;
+}
 #whitediv {
   width: 400px;
   height: 600px;
@@ -94,8 +133,8 @@ form > input {
   margin-top: 20px;
 }
 
-#bejelentkezes:active{
-  border: 2px solid #c4c4c4
+#bejelentkezes:active {
+  border: 2px solid #c4c4c4;
 }
 
 .input {
@@ -111,7 +150,7 @@ form > input {
   margin-bottom: 10px;
 }
 
-.googleButton{
+.googleButton {
   border: none;
   border-radius: 5px;
   background-color: white;
@@ -122,7 +161,7 @@ form > input {
   padding-right: 20px;
 }
 
-.googleButton:active{
+.googleButton:active {
   border: 2px solid #009688;
 }
 
@@ -134,34 +173,33 @@ form > input {
   margin: auto;
 }
 
-#googleImg{
+#googleImg {
   grid-area: pic;
   margin-right: 10px;
   position: relative;
   top: 5px;
 }
 
-#googleText{
+#googleText {
   grid-area: content;
   line-height: 28px;
 }
 
-p{
+p {
   user-select: none;
 }
 
-input{
+input {
   outline: none;
 }
 
-input:focus{
+input:focus {
   border: 2px solid #009688;
 }
 
-#logo{
+#logo {
   width: 400px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-
 </style>

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/LoginView.vue";
-
+import { useAuth } from '../store/auth.js';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -10,6 +10,7 @@ const router = createRouter({
       component: Login,
       meta: {
         title: "5File | Bejelentkezés",
+        requiresAuth: false
       }
     },
     {
@@ -18,6 +19,7 @@ const router = createRouter({
       component: () => import("../views/RegisterView.vue"),
       meta: {
         title: "5File | Regisztráció",
+        requiresAuth: false
       }
     },
     {
@@ -26,6 +28,8 @@ const router = createRouter({
       component: () => import("../views/IndexView.vue"),
       meta: {
         title: "5File | Főoldal",
+        requiresAuth: true,
+        requiredRole: "none"
       }
     },
     {
@@ -34,14 +38,22 @@ const router = createRouter({
       component: () => import("../views/NotFoundPage.vue"),
       meta: {
         title: "5File | 404",
+        requiresAuth: true,
+        requiredRole: "none"
       }
     },
   ],
 });
 
 router.beforeEach((to, from, next) => {
+  const store = useAuth();
   document.title = `${to.meta.title}`;
-  next();
+  if(to.meta.requiresAuth && !store.logged){
+    router.replace('/');
+  }
+  else{
+    next();
+  }
 })
 
 export default router;

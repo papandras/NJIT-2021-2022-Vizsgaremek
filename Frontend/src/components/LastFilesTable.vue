@@ -9,7 +9,7 @@
       <th>Méret</th>
       <th>Legutóbbi módosítás</th>
       <th>Tagok</th>
-      <th>#</th>
+      <th></th>
     </tr>
     <TableRow type="doc" title="Cim" size="3 mb" lastedited="2023"></TableRow>
     <TableRow type="jpeg" title="Pelda" size="5 mb" lastedited="2023"></TableRow>
