@@ -33,6 +33,16 @@ const router = createRouter({
       }
     },
     {
+      path: "/unauthorized",
+      name: "unauthorized",
+      component: () => import("../views/UnAuthorized.vue"),
+      meta: {
+        title: "5File | Nem jelenzkeztél be",
+        requiresAuth: false,
+        requiredRole: "none"
+      }
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "notfound",
       component: () => import("../views/NotFoundPage.vue"),
@@ -49,7 +59,8 @@ router.beforeEach((to, from, next) => {
   const store = useAuth();
   document.title = `${to.meta.title}`;
   if(to.meta.requiresAuth && !store.logged){
-    router.replace('/');
+    router.replace('/unauthorized');
+    setTimeout(() => {router.replace('/')}, 6000);
   }
   else{
     next();
