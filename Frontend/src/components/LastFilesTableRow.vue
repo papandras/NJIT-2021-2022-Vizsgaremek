@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { toRefs, reactive } from "vue";
+import { toRefs } from "vue";
 export default {
   props:{
     checkboxname: String,

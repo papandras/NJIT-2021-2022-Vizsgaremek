@@ -14,7 +14,12 @@
         <h1>Legutóbbi fájlok</h1>
         <LastFilesTable></LastFilesTable>
       </div>
-      <div id="stat"></div>
+      <div id="stat">
+        <StatElement icon="media.png" typeName="Media file" size="15" progress="80" color="#03a0c2"></StatElement>
+        <StatElement icon="image.png" typeName="Images" size="10" progress="60" color="#1cc842"></StatElement>
+        <StatElement icon="document.png" typeName="Documents" size="7" progress="40" color="#ffc720"></StatElement>
+        <StatElement icon="other.png" typeName="Other files" size="5" progress="30" color="#9a45ee"></StatElement>
+      </div>
       <div id="upload"></div>
     </div>
   </div>
@@ -24,6 +29,7 @@
 import { onMounted, ref } from "vue";
 import Menu from "../components/LeftSideMenu.vue";
 import LastFilesTable from "./LastFilesTable.vue";
+import StatElement from "./StatElement.vue";
 export default {
   name: "Index",
   setup() {
@@ -45,7 +51,8 @@ export default {
   },
   components: {
     Menu,
-    LastFilesTable
+    LastFilesTable,
+    StatElement
   },
 };
 </script>
@@ -75,21 +82,17 @@ export default {
 
 #search {
   grid-area: search;
-  background-color: red;
 }
 
 #last_file {
   grid-area: lastfiles;
-  background-color: yellow;
 }
 
 #stat {
   grid-area: stat;
-  background-color: green;
 }
 
 #upload {
   grid-area: upload;
-  background-color: blue;
 }
 </style>

@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title}`;
   if(to.meta.requiresAuth && !store.logged){
     router.replace('/unauthorized');
-    setTimeout(() => {router.replace('/')}, 6000);
+    setTimeout(() => {router.replace('/')}, 5000);
   }
   else{
     next();
