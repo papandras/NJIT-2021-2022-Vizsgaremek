@@ -39,9 +39,6 @@ export default {
     width: Number,
     color: String,
   },
-  mounted() {
-    let unfilled = this.maxsize - this.filled;
-    console.log((this.maxsize / 100) * this.filled + "px");
-  },
+  mounted() {},
 };
 </script>

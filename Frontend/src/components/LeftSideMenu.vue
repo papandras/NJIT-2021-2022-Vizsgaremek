@@ -51,9 +51,9 @@ ul {
   margin: 0;
   padding: 0;
   background-color: #C4C4C4;
-  height: 100%; /* Full height */
-  position: fixed; /* Make it stick, even on scroll */
-  overflow: auto; /* Enable scrolling if the sidenav has too much content */
+  height: 100%;
+  position: fixed;
+  overflow: auto;
 }
 
 li a {
@@ -80,9 +80,11 @@ li a:active {
 </style>
 <script>
 import { useAuth } from '../store/auth.js';
+import { useRouter } from "vue-router";
 export default {
     name: "Menu",
     setup(){
+        const router = useRouter();
         const store = useAuth();
         const logout = async () => {
             await fetch("http://localhost:8881/api/logout", {
@@ -96,6 +98,7 @@ export default {
           .then(response => {
               if(response.status < 300){
                   store.logged = false;
+                  router.push("/");
               }
           })
         }

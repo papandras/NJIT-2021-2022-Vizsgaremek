@@ -62,6 +62,9 @@ router.beforeEach((to, from, next) => {
     router.replace('/unauthorized');
     setTimeout(() => {router.replace('/')}, 5000);
   }
+  else if(store.logged && (to.path == '/' || to.path == "/register")){
+    router.replace('/index');
+  }
   else{
     next();
   }

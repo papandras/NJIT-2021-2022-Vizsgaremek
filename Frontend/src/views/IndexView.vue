@@ -24,6 +24,8 @@ export default {
     IndexPage,
     PagerListItem,
   },
+  mounted(){
+  },
   setup() {
     let tabsCount = ref(1);
     const newTab = () => {
