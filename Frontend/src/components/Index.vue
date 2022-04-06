@@ -3,7 +3,6 @@
     <Menu id="menu"></Menu>
     <div id="content">
       <div id="search">
-        {{message}}
         <form>
           <input type="search" name="" id="">
           <input type="submit" value="Keresés">
@@ -26,29 +25,11 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref } from "vue";
 import Menu from "../components/LeftSideMenu.vue";
 import LastFilesTable from "./LastFilesTable.vue";
 import StatElement from "./StatElement.vue";
 export default {
   name: "Index",
-  setup() {
-    const message = ref("Nem vagy bejelentkezve");
-    onMounted(async () => {
-      const response = await fetch("http://localhost:8881/api/user", {
-        method: "GET",
-        credentials: "include",
-      });
-
-      const content = await response.json();
-
-      message.value = `Hello ${content.name}`;
-    });
-
-    return {
-      message,
-    };
-  },
   components: {
     Menu,
     LastFilesTable,
