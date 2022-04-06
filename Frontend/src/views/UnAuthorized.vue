@@ -5,6 +5,7 @@
 
 <script>
 import { useRouter } from "vue-router";
+import { useAuth } from '../store/auth.js';
 export default {
   data() {
     return {
@@ -13,6 +14,8 @@ export default {
   },
   mounted() {
     const router = useRouter();
+    const store = useAuth();
+    store.logged = false;
     for (let i = 1; i <= 5; i++) {
       setTimeout(() => {
         this.counter -= 1;
