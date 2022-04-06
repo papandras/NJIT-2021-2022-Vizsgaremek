@@ -8,10 +8,6 @@
       <IndexPage></IndexPage>
     </div>
   </div>
-  <vue-basic-alert 
-       :duration="300"
-       :closeIn="300"
-       ref="alert" />
 </template>
 
 <script lang="ts">
@@ -36,9 +32,7 @@ export default {
       }
     };
 
-    const clickedpage = (par) => {
-      alert(par);
-    }
+
 
     const changePage = (id) => {
       alert(id);
@@ -46,7 +40,6 @@ export default {
 
     return {
       newTab,
-      clickedpage,
       tabsCount,
       changePage
     };
