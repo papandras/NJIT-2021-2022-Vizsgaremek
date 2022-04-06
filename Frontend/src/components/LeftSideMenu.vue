@@ -8,6 +8,7 @@
                 <div class="profpic">
                     <img src="#" alt="profilpic">
                     <p>Szia {{"Valaki"}}</p>
+                    <p>(<LogOutCounter></LogOutCounter>)</p>
                 </div>
             </li>
             <li>
@@ -81,8 +82,12 @@ li a:active {
 <script>
 import { useAuth } from '../store/auth.js';
 import { useRouter } from "vue-router";
+import LogOutCounter from "./LogOutCounter.vue";
 export default {
     name: "Menu",
+    components:{
+        LogOutCounter
+    },
     setup(){
         const router = useRouter();
         const store = useAuth();
@@ -106,6 +111,16 @@ export default {
         return{
             logout
         }
+    },
+    async mounted(){
+        await fetch("http://localhost:8881/api/getNewCookie", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
     }
 }
 </script>

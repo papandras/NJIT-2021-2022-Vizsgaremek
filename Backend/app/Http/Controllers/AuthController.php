@@ -31,12 +31,26 @@ class AuthController extends Controller
 
         $token = $user->createToken('token')->plainTextToken;
 
-        $cookie = cookie('jwt', $token, 60 * 24, $minutes = 0, $path = null, $domain = null, $httpOnly = false);
+        $cookie = cookie('jwt', $token, 30, $minutes = 0, $path = null, $domain = null, $httpOnly = false);
 
         return response([
             'message' => $token
         ])->withCookie($cookie);
     }
+
+    public function getNewCookie(){
+
+        $user = Auth::user();
+
+        $token = $user->createToken('token')->plainTextToken;
+
+        $cookie = cookie('jwt', $token, 1, $minutes = 0, $path = null, $domain = null, $httpOnly = false);
+
+        return response([
+            'message' => $token
+        ])->withCookie($cookie);
+
+     }
 
     public function user()
     {

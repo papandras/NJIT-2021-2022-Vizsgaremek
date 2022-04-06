@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <ul id="pager">
-      <PagerListItem v-for="tab in tabsCount" :key="db"></PagerListItem>
+      <PagerListItem v-for="tab in tabsCount" :key="tab" @click="changePage(tab)"></PagerListItem>
       <p @click="newTab" id="newTab">+</p>
     </ul>
     <div id="indexpage">
@@ -40,10 +40,15 @@ export default {
       alert(par);
     }
 
+    const changePage = (id) => {
+      alert(id);
+    }
+
     return {
       newTab,
       clickedpage,
       tabsCount,
+      changePage
     };
   },
 };

@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import { useRouter } from "vue-router";
 export default {
   data() {
     return {
@@ -11,8 +12,14 @@ export default {
     };
   },
   mounted() {
+    const router = useRouter();
     for (let i = 1; i <= 5; i++) {
-      setTimeout(() => { this.counter -= 1 }, i * 1000);
+      setTimeout(() => {
+        this.counter -= 1;
+        if(this.counter == 0){
+          router.push("/");
+        }
+      }, i * 1000);
     }
   },
 };
