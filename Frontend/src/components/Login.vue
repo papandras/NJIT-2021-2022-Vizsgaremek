@@ -70,8 +70,17 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.status < 300) {
-            store.logged = true;
-            router.push("/index");
+            fetch("http://localhost:8881/api/user", {
+              method: "GET",
+              credentials: "include",
+            })
+              .then((response) => response.json())
+              .then((response) => {
+                store.user = response;
+                console.log(store.user);
+                store.logged = true;
+                router.push("/index");
+              });
           } else {
             data.failed = true;
             setTimeout(() => {data.failed = false;}, 5000);
