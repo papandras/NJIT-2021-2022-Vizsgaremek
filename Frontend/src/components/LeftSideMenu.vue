@@ -7,7 +7,7 @@
             <li>
                 <div class="profpic">
                     <img src="#" alt="profilpic">
-                    <p>Szia {{"Valaki"}}</p>
+                    <p>Szia {{ store.user.name }}</p>
                     <p>(<LogOutCounter></LogOutCounter>)</p>
                 </div>
             </li>
@@ -84,43 +84,46 @@ import { useAuth } from '../store/auth.js';
 import { useRouter } from "vue-router";
 import LogOutCounter from "./LogOutCounter.vue";
 export default {
-    name: "Menu",
-    components:{
-        LogOutCounter
-    },
-    setup(){
-        const router = useRouter();
-        const store = useAuth();
-        const logout = async () => {
-            await fetch("http://localhost:8881/api/logout", {
-              method: "POST",
-              headers: {
-                  "Accept": "application/json",
-                  "Content-Type": "application/json",
-              },
-              credentials: 'include',
-          })
-          .then(response => {
-              if(response.status < 300){
-                  store.logged = false;
-                  router.push("/");
-              }
-          })
-        }
-
-        return{
-            logout
-        }
-    },
-    async mounted(){
-        await fetch("http://localhost:8881/api/getNewCookie", {
-        method: "GET",
+  name: "Menu",
+  components: {
+    LogOutCounter
+  },
+  data() {
+    return {
+      store: useAuth(),
+    };
+  },
+  setup() {
+    const router = useRouter();
+    const logout = async () => {
+      alert("biztos?");
+      await fetch("http://localhost:8881/api/logout", {
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         credentials: "include",
-      })
-    }
-}
+      }).then((response) => {
+        if (response.status < 300) {
+          router.push("/");
+        }
+      });
+    };
+
+    return {
+      logout,
+    };
+  },
+  async mounted() {
+    await fetch("http://localhost:8881/api/getNewCookie", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+  },
+};
 </script>
