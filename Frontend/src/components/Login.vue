@@ -45,6 +45,7 @@ import LoginOrRegister from "./LoginOrRegister.vue";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useAuth } from '../store/auth.js';
+import axios from 'axios';
 export default {
   components: {
     LoginOrRegister,
@@ -57,43 +58,30 @@ export default {
       failed: false
     });
     const router = useRouter();
-    const submit = async () => {
-      await fetch("http://localhost:8881/api/login", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
+    const submit = () => {
+      axios.post("http://localhost:8881/api/login", data, {
+        withCredentials: true
+      }).then(response => {
+        axios.get("http://localhost:8881/api/user", {
+            withCredentials: true
+          })
+          .then(response => {
+            store.user = response.data;
+            console.log(store.user);
+            store.logged = true;
+            router.push("/index");
+          })
       })
-        .then((response) => {
-          console.log(response);
-          if (response.status < 300) {
-            fetch("http://localhost:8881/api/user", {
-              method: "GET",
-              credentials: "include",
-            })
-              .then((response) => response.json())
-              .then((response) => {
-                store.user = response;
-                console.log(store.user);
-                store.logged = true;
-                router.push("/index");
-              });
-          } else {
-            data.failed = true;
-            setTimeout(() => {data.failed = false;}, 5000);
-          }
-        })
-        .catch((error) => {
-          console.log(error.errors);
-        });
+      .catch(error => {
+        data.failed = true;
+        setTimeout(() => {data.failed = false;}, 5000);
+      })
     };
 
     return {
       data,
       submit,
+      store
     };
   },
   mounted() {},
