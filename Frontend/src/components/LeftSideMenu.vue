@@ -7,7 +7,7 @@
             <li>
                 <div class="profpic">
                     <img src="#" alt="profilpic">
-                    <p>Szia {{ store.user.name }}</p>
+                    <p>Szia {{ "store.user.name" }}</p>
                     <p>(<LogOutCounter></LogOutCounter>)</p>
                 </div>
             </li>
@@ -83,6 +83,7 @@ li a:active {
 import { useAuth } from '../store/auth.js';
 import { useRouter } from "vue-router";
 import LogOutCounter from "./LogOutCounter.vue";
+import axios from 'axios';
 export default {
   name: "Menu",
   components: {
@@ -96,34 +97,20 @@ export default {
   setup() {
     const router = useRouter();
     const logout = async () => {
-      alert("biztos?");
-      await fetch("http://localhost:8881/api/logout", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      }).then((response) => {
-        if (response.status < 300) {
-          router.push("/");
-        }
-      });
+      axios.post("http://localhost:8881/api/logout", null, {
+        withCredentials: true
+      })
+      .then(response => {
+        router.push("/unauthorized");
+      })
     };
 
     return {
       logout,
     };
   },
-  async mounted() {
-    await fetch("http://localhost:8881/api/getNewCookie", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-  },
+  mounted(){
+    axios.get("http://localhost:8881/api/getNewCookie",{ withCredentials: true })
+  }
 };
 </script>
