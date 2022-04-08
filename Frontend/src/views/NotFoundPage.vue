@@ -39,7 +39,7 @@ h1 {
   text-align: center;
   margin-top: 30px;
 }
-.tittle {
+.title {
   text-align: center;
   margin-top: 70px;
   margin-bottom: 100px;
