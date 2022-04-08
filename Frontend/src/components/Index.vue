@@ -5,8 +5,9 @@
       <div id="search">
         <form>
           <input type="search" name="" id="keresesInput">
+          <button id="ujFajl">Új fájl létrehozása</button>
         </form>
-        <button id="ujFajl">Új fájl létrehozása</button>
+        
       </div>
       <div id="last_file">
         <h1>Legutóbbi fájlok</h1>
@@ -64,14 +65,29 @@ export default {
   grid-area: search;
   background-color: #C4C4C4;
   border-radius: 5px;
+  width: 90%;
+  margin: auto;
+  display: block;
 }
 
 #last_file {
   grid-area: lastfiles;
+  background-color: #C4C4C4;
+  width: 90%;
+  border-radius: 5px;
+  margin: auto;
+  display: block;
 }
 
 #stat {
   grid-area: stat;
+  background-color: #C4C4C4;
+  width: 90%;
+  border-radius: 5px;
+  margin: auto;
+  display: block;
+  margin-left: 85px;
+  margin-top: 20px;
 }
 
 #upload {
@@ -91,6 +107,11 @@ form{
   height: 30px;
   color: white;
   display: inline-block;
+  margin: 10px;
+}
+
+#ujFajl:active{
+   border: 2px solid #c4c4c4;
 }
 
 #keresesInput{
