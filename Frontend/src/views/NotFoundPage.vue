@@ -11,7 +11,7 @@
     </div>
     <div class="row">
       <div class="bgc">
-        <h3 class="tittle">
+        <h3 class="title">
           <i>444</i>
         </h3>
       </div>
@@ -23,7 +23,7 @@
 h1 {
   text-align: center;
 }
-.tittle {
+.title {
   text-align: center;
   font-size: 40px;
 }

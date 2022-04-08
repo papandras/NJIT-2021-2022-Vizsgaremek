@@ -41,11 +41,11 @@
 </template>
 
 <script lang="ts">
+import axios from 'axios';
 import LoginOrRegister from "./LoginOrRegister.vue";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useAuth } from '../store/auth.js';
-import axios from 'axios';
 export default {
   components: {
     LoginOrRegister,

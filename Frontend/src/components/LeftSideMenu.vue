@@ -9,7 +9,7 @@
                 <li>
                     <div class="profpic">
                         <img src="#" alt="profilpic">
-                        <p>Szia {{ "store.user.name" }}</p>
+                        <p>Szia {{ store.user.name }}</p>
                         <p>(<LogOutCounter></LogOutCounter>)</p>
                     </div>
                 </li>
@@ -96,24 +96,20 @@ li input:active {
 
 </style>
 <script>
+import axios from 'axios';
 import { useAuth } from '../store/auth.js';
 import { useRouter } from "vue-router";
 import LogOutCounter from "./LogOutCounter.vue";
-import axios from 'axios';
 export default {
   name: "Menu",
   components: {
     LogOutCounter
   },
-  data() {
-    return {
-      store: useAuth(),
-    };
-  },
   setup() {
+    const store = useAuth();
     const router = useRouter();
     const logout = async () => {
-      axios.post("http://localhost:8881/api/logout", null, {
+      await axios.post("http://localhost:8881/api/logout", null, {
         withCredentials: true
       })
       .then(response => {
@@ -123,6 +119,7 @@ export default {
 
     return {
       logout,
+      store
     };
   },
   mounted(){

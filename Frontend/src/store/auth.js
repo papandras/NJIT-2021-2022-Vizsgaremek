@@ -1,22 +1,26 @@
 import { defineStore } from "pinia";
 
 const checkLogged = () => {
-    if(decodeURI(document.cookie.split('=')[1]) != "undefined"/* && decodeURI(document.cookie.split('=')[0] == "jwt")*/){
+    if (decodeURI(document.cookie.split('=')[1]) != "undefined"/* && decodeURI(document.cookie.split('=')[0] == "jwt")*/) {
         return true;
     }
-    else{
+    else {
         return false;
     }
 }
 
-export const useAuth = defineStore("authStore",{
-    state(){
-        return{
+export const useAuth = defineStore("authStore", {
+    state() {
+        return {
             logged: checkLogged(),
-            user: null
+            user: {
+                id: null,
+                name: "default",
+                email: null
+            }
         }
     },
-    actions:{
-        
+    actions: {
+
     }
 })
