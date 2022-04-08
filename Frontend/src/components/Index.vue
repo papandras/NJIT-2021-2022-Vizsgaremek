@@ -4,10 +4,9 @@
     <div id="content">
       <div id="search">
         <form>
-          <input type="search" name="" id="">
-          <input type="submit" value="Keresés">
+          <input type="search" name="" id="keresesInput">
         </form>
-        <button>Új fájl létrehozása</button>
+        <button id="ujFajl">Új fájl létrehozása</button>
       </div>
       <div id="last_file">
         <h1>Legutóbbi fájlok</h1>
@@ -63,6 +62,8 @@ export default {
 
 #search {
   grid-area: search;
+  background-color: #C4C4C4;
+  border-radius: 5px;
 }
 
 #last_file {
@@ -76,4 +77,35 @@ export default {
 #upload {
   grid-area: upload;
 }
+
+form{
+  display: inline-block;
+  width: 80%;
+}
+
+#ujFajl{
+  background-color: #009688;
+  border-radius: 5px;
+  border: none;
+  width: 150px;
+  height: 30px;
+  color: white;
+  display: inline-block;
+}
+
+#keresesInput{
+  width: 50%;
+  height: 30px;
+  border-color: none;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  margin: 5px;
+  display: inline-block;
+}
+
+#keresesInput:focus{
+  border:2px solid #009688;
+}
+
 </style>
