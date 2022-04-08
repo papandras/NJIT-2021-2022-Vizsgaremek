@@ -12,25 +12,25 @@
                 </div>
             </li>
             <li>
-                <RouterLink to="#"><p>Főoldal</p></RouterLink>
+                <RouterLink to="#" class="routerLink"><input type="button" value="Főoldal" class="Főoldal"></RouterLink>
             </li>
             <li>
-                <RouterLink to="#"><p>Megosztott fájlok</p></RouterLink>
+                <RouterLink to="#" class="routerLink"><input type="button" value="Megosztott fájlok" class="MegosztottFájlok"></RouterLink>
             </li>
             <li>
-                <RouterLink to="#"><p>Kedvencek</p></RouterLink>
+                <RouterLink to="#" class="routerLink"><input type="button" value="Kedvencek" class="Kedvencek"></RouterLink>
             </li>
             <li>
-                <RouterLink to="#"><p>Törölt elemek</p></RouterLink>
+                <RouterLink to="#" class="routerLink"><input type="button" value="Törölt elemek" class="TöröltElemek"></RouterLink>
             </li>
             <li class="stat">
-                <RouterLink to="#"><p>Statisztika</p></RouterLink>
+                <RouterLink to="#" class="routerLink"><input type="button" value="Statisztika" class="Statisztika"></RouterLink>
             </li>
             <li>
-                <RouterLink to="#"><p>Beállítások</p></RouterLink>
+                <RouterLink to="#" class="routerLink"><input type="button" value="Beállítások" class="Beállítások"></RouterLink>
             </li>
             <li>
-                <RouterLink to="/" @click="logout">Kijelentkezés</RouterLink>
+                <RouterLink to="/" @click="logout" class="routerLink"><input type="button" value="Kijelentkezés" class="Kijelentkezés"></RouterLink>
             </li>
         </ul>
     </div>
@@ -55,9 +55,10 @@ ul {
   height: 100%;
   position: fixed;
   overflow: auto;
+  border-radius: 5px;
 }
 
-li a {
+li input {
   display: block;
   width: 150px;
   height: 30px;
@@ -67,17 +68,18 @@ li a {
   text-align: center;
   background-color: white;
   color: black;
+  border-radius: 5px;
+  border: none;
 }
 
-li a:hover {
-  background-color: red;
-  color: white;
+li input:active {
+  background-color: #009688;
 }
 
-li a:active {
-  background-color: #04AA6D;
-  color: white;
+.routerLink{
+  text-decoration: none;
 }
+
 </style>
 <script>
 import { useAuth } from '../store/auth.js';
