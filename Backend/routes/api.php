@@ -22,5 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [AuthController::class, 'user'])->name('user');
     Route::get('getNewCookie', [AuthController::class, 'getNewCookie'])->name('getNewCookie');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
     Route::get('users', [UserController::class, 'getAllUsers'])->name('getAllUsers');
+    Route::get('users/{username}', [UserController::class, 'getUser'])->name('getUser');
 });

@@ -2,7 +2,9 @@
   <div id="whitediv">
     <img src="@/assets/logo.svg" alt="Logo" id="logo" />
     <LoginOrRegister></LoginOrRegister>
-    <div id="failed_login" v-if="data.failed">Hibás felhasználónév vagy jelszó!</div>
+    <div id="failed_login" v-if="data.failed">
+      Hibás felhasználónév vagy jelszó!
+    </div>
     <form @submit.prevent="submit">
       <input
         v-model="data.name"
@@ -41,11 +43,11 @@
 </template>
 
 <script lang="ts">
-import axios from 'axios';
+import axios from "axios";
 import LoginOrRegister from "./LoginOrRegister.vue";
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
-import { useAuth } from '../store/auth.js';
+import { useAuth } from "../store/auth.js";
 export default {
   components: {
     LoginOrRegister,
@@ -55,33 +57,30 @@ export default {
     const data = reactive({
       name: "",
       password: "",
-      failed: false
+      failed: false,
     });
     const router = useRouter();
     const submit = () => {
-      axios.post("http://localhost:8881/api/login", data, {
-        withCredentials: true
-      }).then(response => {
-        axios.get("http://localhost:8881/api/user", {
-            withCredentials: true
-          })
-          .then(response => {
-            store.user = response.data;
-            console.log(store.user);
-            store.logged = true;
-            router.push("/index");
-          })
-      })
-      .catch(error => {
-        data.failed = true;
-        setTimeout(() => {data.failed = false;}, 5000);
-      })
+      axios
+        .post("http://localhost:8881/api/login", data, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          store.logged = true;
+          router.push("/index");
+        })
+        .catch((error) => {
+          data.failed = true;
+          setTimeout(() => {
+            data.failed = false;
+          }, 5000);
+        });
     };
 
     return {
       data,
       submit,
-      store
+      store,
     };
   },
   mounted() {},

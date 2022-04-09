@@ -1,7 +1,5 @@
 <template>
-  {{ displayMinutes }}
-  :
-  {{ displaySeconds }}
+  {{ displayMinutes + ":" + displaySeconds }}
 </template>
 
 <script>

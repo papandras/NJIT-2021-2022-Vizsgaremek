@@ -5,7 +5,7 @@
       <div id="search">
         <form>
           <input type="search" name="" id="keresesInput">
-          <button id="ujFajl">Új fájl létrehozása</button>
+          <button id="keresesGomb">Új fájl létrehozása</button>
         </form>
         
       </div>
@@ -37,6 +37,10 @@ export default {
   },
 };
 </script>
+
+<style>
+
+</style>
 
 <style scoped>
 .index {
@@ -99,30 +103,8 @@ form{
   width: 80%;
 }
 
-#ujFajl{
-  background-color: #009688;
-  border-radius: 5px;
-  border: none;
-  width: 150px;
-  height: 30px;
-  color: white;
-  display: inline-block;
-  margin: 10px;
-}
-
 #ujFajl:active{
    border: 2px solid #c4c4c4;
-}
-
-#keresesInput{
-  width: 50%;
-  height: 30px;
-  border-color: none;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  margin: 5px;
-  display: inline-block;
 }
 
 #keresesInput:focus{
