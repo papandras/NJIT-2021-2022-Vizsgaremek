@@ -9,7 +9,7 @@
                 <li>
                     <div class="profpic">
                         <img src="#" alt="">
-                        <p id="sziaNev">Szia {{ "store.user.name" }}</p>
+                        <p id="sziaNev">Szia {{ store.user.name }}</p>
                         <p>(<LogOutCounter></LogOutCounter>)</p>
                     </div>
                 </li>
@@ -39,7 +39,7 @@
                     <RouterLink to="#" class="routerLink"><input type="button" value="Beállítások" class="Beállítások"></RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/" @click="logout" class="routerLink"><input type="button" value="Kijelentkezés" class="Kijelentkezés"></RouterLink>
+                    <RouterLink to="/logout" @click="logout" class="routerLink"><input type="button" value="Kijelentkezés" class="Kijelentkezés"></RouterLink>
                 </li>
               </div>
             </div>
@@ -139,7 +139,12 @@ export default {
     };
   },
   mounted(){
-    axios.get("http://localhost:8881/api/getNewCookie",{ withCredentials: true })
+    const store = useAuth();
+    axios.get("http://localhost:8881/api/getNewCookie",{ withCredentials: true });
+    axios.get("http://localhost:8881/api/user",{ withCredentials: true })
+    .then(response => {
+      store.user = response.data;
+    })
   }
 };
 </script>
