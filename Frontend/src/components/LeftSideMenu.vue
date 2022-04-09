@@ -27,6 +27,9 @@
                 <li>
                     <RouterLink to="#" class="routerLink"><input type="button" value="Törölt elemek" class="TöröltElemek"></RouterLink>
                 </li>
+                <li>
+                    <RouterLink to="/users" class="routerLink"><input type="button" value="Felhasználók" class="TöröltElemek"></RouterLink>
+                </li>
               </div>
               <div>
                 <li>

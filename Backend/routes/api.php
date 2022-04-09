@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [AuthController::class, 'user'])->name('user');
     Route::get('getNewCookie', [AuthController::class, 'getNewCookie'])->name('getNewCookie');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('users', [UserController::class, 'getAllUsers'])->name('getAllUsers');
 });
