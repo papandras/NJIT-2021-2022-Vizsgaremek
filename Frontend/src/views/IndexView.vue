@@ -5,7 +5,9 @@
       <p @click="newTab" id="newTab">+</p>
     </ul>
     <div id="indexpage">
-      <IndexPage></IndexPage>
+      <template v-for="tab in tabsCount" :key="tab">
+        <IndexPage v-if="tab == displayedIndex" :vmi="tab"></IndexPage>
+      </template>
     </div>
   </div>
 </template>
@@ -21,27 +23,36 @@ export default {
     PagerListItem,
   },
   mounted(){
+    const tabinfo = {
+      "tabscount": 1,
+      "tabinfo": {
+
+      }
+    }
   },
   setup() {
-    let tabsCount = ref(1);
+    let displayedIndex = ref(JSON.parse(localStorage.getItem("selectedtab")));
+    let tabsCount = ref(JSON.parse(localStorage.getItem("tabscount")));
     const newTab = () => {
       if(tabsCount.value < 6){
         tabsCount.value += 1;
+        displayedIndex.value += 1;
+        localStorage.setItem("tabscount", JSON.stringify(displayedIndex.value));
       }else{
         alert("Maximum 6 ablakot lehet megnyitni!");
       }
     };
 
-
-
     const changePage = (id) => {
-      alert(id);
+      displayedIndex.value = id;
+      localStorage.setItem("selectedtab", JSON.stringify(displayedIndex.value));
     }
 
     return {
       newTab,
       tabsCount,
-      changePage
+      changePage,
+      displayedIndex,
     };
   },
 };
@@ -50,7 +61,7 @@ export default {
 <style scoped>
 #main {
   display: grid;
-  grid-template-rows: 1fr 19fr;
+  grid-template-rows: 0fr 20fr;
   grid-template-areas:
     "pager"
     "content";
@@ -60,6 +71,7 @@ export default {
   grid-area: pager;
   user-select: none;
   line-height: 38px;
+  display: none;
 }
 
 #indexpage {
