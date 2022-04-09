@@ -33,11 +33,31 @@ const router = createRouter({
       }
     },
     {
+      path: "/users",
+      name: "users",
+      component: () => import("../views/UsersView.vue"),
+      meta: {
+        title: "5File | Felhasználók",
+        requiresAuth: true,
+        requiredRole: "none"
+      }
+    },
+    {
       path: "/unauthorized",
       name: "unauthorized",
       component: () => import("../views/UnAuthorized.vue"),
       meta: {
         title: "5File | Nem jelenzkeztél be",
+        requiresAuth: false,
+        requiredRole: "none"
+      }
+    },
+    {
+      path: "/logout",
+      name: "logout",
+      component: () => import("../views/LogoutPage.vue"),
+      meta: {
+        title: "5File | Kijelentkezés",
         requiresAuth: false,
         requiredRole: "none"
       }
