@@ -8,11 +8,6 @@
 <style scoped>
 li {
   display: inline-block;
-  /*border: 2px solid black;
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-right-radius: 5px;
-  border-bottom-left-radius: 5px;*/
   border-right: 1px solid black;
   border-left: 1px solid black;
   border-bottom: 2px solid black;
