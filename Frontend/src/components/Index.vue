@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <Menu id="menu"></Menu>
+    <Menu id="menu" activepage="index"></Menu>
     <div id="content">
       <div id="search">
         <form>

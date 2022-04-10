@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
+aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>Block User</title>
+  <desc>A solid styled icon from Orion Icon Library.</desc>
+  <path data-name="layer2"
+  d="M38.6 54.2c-8.1-1.6-8.1-4-8.1-5.6V47a14.6 14.6 0 0 0 4.2-7c2.5 0 3-5.1 3-5.8s.1-3.8-2.4-3.8c5.4-14.4-8.8-20.2-19.5-12.8-4.4 0-4.8 6.4-3.1 12.8-2.5 0-2.4 3-2.4 3.8s.6 5.8 3 5.8a14.6 14.6 0 0 0 4.2 7v1.6c0 1.6 0 4-8.1 5.6S0 63 0 63h48s0-6.9-9.4-8.8z"
+  fill="#202020"></path>
+  <path data-name="layer1" d="M52 1a12 12 0 1 0 12 12A12 12 0 0 0 52 1zm0 4a7.9 7.9 0 0 1 4.1 1.1l-11 11A8 8 0 0 1 52 5zm0 16a7.9 7.9 0 0 1-4.1-1.1l11-11A7.9 7.9 0 0 1 60 13a8 8 0 0 1-8 8z"
+  fill="#202020"></path>
+</svg>

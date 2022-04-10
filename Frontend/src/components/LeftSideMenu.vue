@@ -7,8 +7,8 @@
           <li>
             <div>
               <div id="picturegrid">
-                <img src="#" alt="" />
-                <label id="sziaNev">Szia {{ store.user.name }}</label>
+                <img src="src/assets/default_user.svg" alt="" />
+                <label id="sziaNev" :title="store.user.name">Szia {{ store.user.name.substring(0, 12) }}<span v-if="store.user.name.length > 7">...</span></label>
                 <p id="counter">(<LogOutCounter></LogOutCounter>)</p>
               </div>
             </div>
@@ -17,7 +17,7 @@
         <div>
           <li>
             <RouterLink to="/index" class="routerLink"
-              ><input type="button" value="Főoldal" class="Főoldal"
+              ><input type="button" value="Főoldal" id="index"
             /></RouterLink>
           </li>
           <li>
@@ -25,39 +25,39 @@
               ><input
                 type="button"
                 value="Megosztott fájlok"
-                class="MegosztottFájlok"
+                id="shared"
             /></RouterLink>
           </li>
           <li>
             <RouterLink to="#" class="routerLink"
-              ><input type="button" value="Kedvencek" class="Kedvencek"
+              ><input type="button" value="Kedvencek" id="stared"
             /></RouterLink>
           </li>
           <li>
             <RouterLink to="#" class="routerLink"
-              ><input type="button" value="Törölt elemek" class="TöröltElemek"
+              ><input type="button" value="Törölt elemek" id="deleted"
             /></RouterLink>
           </li>
           <li>
             <RouterLink to="/users" class="routerLink"
-              ><input type="button" value="Felhasználók" class="TöröltElemek"
+              ><input type="button" value="Felhasználók" id="users"
             /></RouterLink>
           </li>
         </div>
         <div>
           <li>
             <RouterLink to="#" class="routerLink"
-              ><input type="button" value="Statisztika" class="Statisztika"
+              ><input type="button" value="Statisztika" id="stat"
             /></RouterLink>
           </li>
           <li>
             <RouterLink to="#" class="routerLink"
-              ><input type="button" value="Beállítások" class="Beállítások"
+              ><input type="button" value="Beállítások" id="settings"
             /></RouterLink>
           </li>
           <li>
             <RouterLink to="/logout" @click="logout" class="routerLink"
-              ><input type="button" value="Kijelentkezés" class="Kijelentkezés"
+              ><input type="button" value="Kijelentkezés" id="logout"
             /></RouterLink>
           </li>
         </div>
@@ -98,12 +98,22 @@ li input, #sziaNev, label {
   border: none;
 }
 
+#sziaNev{
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 li input:active {
   background-color: #009688;
 }
 
 .routerLink {
   text-decoration: none;
+}
+
+.routerLink > input:active{
+  border: 2px solid #E9D8A6;
 }
 
 #picturegrid > img {
@@ -129,6 +139,9 @@ export default {
   components: {
     LogOutCounter,
   },
+  props:{
+    activepage: String
+  },
   setup() {
     const store = useAuth();
     const router = useRouter();
@@ -148,6 +161,9 @@ export default {
     };
   },
   mounted() {
+    this.$nextTick(function() {
+      document.getElementById(this.activepage).style.backgroundColor = "#009688";
+    })
     const store = useAuth();
     axios.get("http://localhost:8881/api/getNewCookie", {
       withCredentials: true,
