@@ -1,0 +1,116 @@
+.users {
+    display: grid;
+    grid-template-columns: 10% 90%;
+    grid-template-rows: 100%;
+    grid-template-areas: "menu content";
+  }
+  
+  #menu {
+    grid-area: menu;
+  }
+  
+  #content {
+    grid-area: content;
+    display: grid;
+    grid-template-rows: 2fr 8fr;
+    grid-template-columns: 5fr 1fr 5fr;
+    grid-template-areas:
+      "search search search"
+      "users users users"
+      "friends . requests";
+    padding: 30px;
+  }
+  
+  .friendrequests{
+    grid-area: requests;
+  }
+  
+  #search {
+    grid-area: search;
+    background-color: #c4c4c4;
+    border-radius: 5px;
+    margin: auto;
+    display: block;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  
+  #keresesInput{
+      width: 800px;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+  }
+  
+  #keresesInput:focus {
+    border: 2px solid #009688;
+  }
+  
+  #userlistDiv {
+    grid-area: users;
+    margin-bottom: 30px;
+  }
+  
+  .relationblock, #userlistDiv {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: center;
+  }
+  
+  .friends {
+    grid-area: friends;
+  }
+  
+  .blockedUsers {
+    grid-area: blocked;
+    display: none;
+  }
+  
+  #userlist {
+    list-style-type: none;
+    user-select: none;
+  }
+  
+  .userListItem {
+    background-color: #E9D8A6;
+    border-radius: 10px;
+    padding: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 300px;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .friendicon {
+    height: 30px;
+    position: absolute;
+    right: 30px;
+    bottom: 15px;
+  }
+  
+  .blockicon{
+    height: 30px;
+    position: absolute;
+    right: 80px;
+    bottom: 15px;
+  }
+  
+  img{
+    display: none;
+  }
+  
+  .userListItem:hover img{
+    display: inline-block;
+  }
