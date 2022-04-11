@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FriendController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('users', [UserController::class, 'getAllUsers'])->name('getAllUsers');
     Route::get('users/{username}', [UserController::class, 'getUser'])->name('getUser');
+
+    Route::get('user/friends', [FriendController::class, 'getFriends'])->name('friends');
+    Route::post('user/friends/add/', [FriendController::class, 'addFriend'])->name('addfriend');
+    Route::post('user/friends/remove/', [FriendController::class, 'removeFriend'])->name('removeFriend');
 });

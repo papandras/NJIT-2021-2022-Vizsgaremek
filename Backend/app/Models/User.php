@@ -20,4 +20,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password'
     ];
+
+    public function friends()
+{
+    return $this->belongsToMany(User::class, 'friends', 'user_id_sender', 'user_id_addressee');
+}
 }

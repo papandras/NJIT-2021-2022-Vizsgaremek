@@ -9,10 +9,12 @@
             name=""
             id="keresesInput"
             v-model="searchvalue"
+            required
           />
           <button id="keresesGomb">Keresés</button>
         </form>
       </div>
+      <img src="https://i.gifer.com/origin/c0/c0bf6e330c9d364e65b6549271806932_w200.gif" alt="">
       <div id="userlistDiv">
         <div v-if="submitted">
           Találat a következő keresésre: {{ searchvalue }}
@@ -20,12 +22,12 @@
         <ul id="userlist">
           <li v-for="user in users" :key="user.id" class="userListItem">
             <div class="username">{{ user.nev }}</div>
-            <img
+            <!--<img
               src="src/assets/block_user_icon.svg"
               alt="block_user_icon"
               class="blockicon"
-              @click="addfriend(user.id)"
-            />
+              @click="blockuser(user.id)"
+            />-->
             <img
               src="src/assets/add_friend_icon.svg"
               alt="add_friend_icon"
@@ -38,21 +40,24 @@
       <div class="friends relationblock">
         <h1>Barátok</h1>
         <hr />
-        <li v-for="user in users" :key="user.id" class="userListItem relationitem" :title="user.nev">
-          {{ user.nev.substring(0, 8) }}<span v-if="user.nev.length > 7">...</span>
-          <img
+        <div v-if="friends == null || friends.length == 0">Jelenleg nincs egy barátod sem!</div>
+        <ul id="friendlist">
+          <li v-for="friend in friends" :key="friend.id" class="userListItem relationitem" :title="friend.nev">
+          {{ friend.nev/*.substring(0, 8)*/ }}<!--<span v-if="friend.nev.length > 7">...</span>-->
+          <!--<img
               src="src/assets/block_user_icon.svg"
               alt="block_user_icon"
               class="blockicon"
-              @click="addfriend(user.id)"
-            />
+              @click="addfriend(friend.id)"
+            />-->
           <img
             src="src/assets/remove_friend_icon.svg"
             alt="add_friend_icon"
             class="friendicon"
-            @click="addfriend(user.id)"
+            @click="removefriend(friend.id)"
           />
         </li>
+        </ul>
       </div>
       <div class="blockedUsers relationblock">
         <h1>Blokkolt felhasználók</h1>
@@ -81,18 +86,34 @@ export default {
   data() {
     return {
       users: null,
+      friends: null,
       searchvalue: null,
       submitted: false,
     };
   },
   mounted() {
-    axios
+    this.getUsers();
+    this.getFriends();
+  },
+  methods: {
+    getUsers(){
+      axios
       .get("http://localhost:8881/api/users", { withCredentials: true })
       .then((response) => {
         this.users = response.data.data;
+        for(let user of this.users){
+          console.log(user);
+
+        }
       });
-  },
-  methods: {
+    },
+    getFriends(){
+      axios
+      .get("http://localhost:8881/api/user/friends", { withCredentials: true })
+      .then((response) => {
+        this.friends = response.data.data;
+      });
+    },
     findUsers() {
       axios
         .get(`http://localhost:8881/api/users/${this.searchvalue}`, {
@@ -106,15 +127,20 @@ export default {
           }, 5000);
         });
     },
-  },
-  setup() {
-    const addfriend = (id) => {
-      alert("friend added " + id);
-    };
-
-    return {
-      addfriend,
-    };
+    addfriend(id) {
+      axios.post("http://localhost:8881/api/user/friends/add/", {"id": id}, {withCredentials: true, mode: "no-cors"})
+        .then(response => {
+          console.log(response.data);
+          this.getFriends();
+        })
+    },
+    removefriend(id){
+      axios.post("http://localhost:8881/api/user/friends/remove/", {"id": id}, {withCredentials: true, mode: "no-cors"})
+        .then(response => {
+          console.log(response.data);
+          this.getFriends();
+        })
+    }
   },
 };
 </script>
@@ -139,7 +165,7 @@ export default {
   grid-template-areas:
     "search search search"
     "users users users"
-    "friends .  blocked";
+    "friends friends friends";
   padding: 30px;
 }
 
@@ -186,6 +212,7 @@ export default {
 
 .blockedUsers {
   grid-area: blocked;
+  display: none;
 }
 
 #userlist {
@@ -199,12 +226,13 @@ export default {
   padding: 20px;
   padding-left: 50px;
   padding-right: 50px;
-  min-width: 200px;
-  max-width: 300px;
-  display: block;
-  margin: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 300px;
+  display: inline-block;
   position: relative;
 }
 
@@ -222,22 +250,8 @@ export default {
   bottom: 15px;
 }
 
-.relationitem{
-  display: inline-block;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  min-width: 100px;
-  max-width: 200px;
-}
-
 img{
   display: none;
-}
-
-.userListItem:hover{
-  width: 120%;
 }
 
 .userListItem:hover img{
