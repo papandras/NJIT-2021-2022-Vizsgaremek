@@ -8,7 +8,7 @@
             <div>
               <div id="picturegrid">
                 <img src="src/assets/default_user.svg" alt="" />
-                <label id="sziaNev" :title="store.user.name">Szia {{ store.user.name.substring(0, 12) }}<span v-if="store.user.name.length > 7">...</span></label>
+                <label id="sziaNev" :title="store.user.name">Szia {{ store.user.name.substring(0, 12) }}<span v-if="store.user.name.length > 11">...</span></label>
                 <p id="counter">(<LogOutCounter></LogOutCounter>)</p>
               </div>
             </div>
@@ -18,6 +18,10 @@
           <li>
             <RouterLink to="/index" class="routerLink"
               ><input type="button" value="Főoldal" id="index"
+            /></RouterLink>
+          </li><li>
+            <RouterLink to="#" class="routerLink"
+              ><input type="button" value="Saját fájlok" id="owned"
             /></RouterLink>
           </li>
           <li>
@@ -51,7 +55,7 @@
             /></RouterLink>
           </li>
           <li>
-            <RouterLink to="#" class="routerLink"
+            <RouterLink to="/settings" class="routerLink"
               ><input type="button" value="Beállítások" id="settings"
             /></RouterLink>
           </li>
@@ -67,6 +71,9 @@
 </template>
 
 <style scoped>
+.menu{
+  z-index: 999;
+}
 ul {
   list-style-type: none;
   margin: 0;

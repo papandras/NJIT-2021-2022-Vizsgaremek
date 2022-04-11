@@ -43,6 +43,16 @@ const router = createRouter({
       }
     },
     {
+      path: "/settings",
+      name: "settings",
+      component: () => import("../views/SettingView.vue"),
+      meta: {
+        title: "5File | Beállítások",
+        requiresAuth: true,
+        requiredRole: "none"
+      }
+    },
+    {
       path: "/unauthorized",
       name: "unauthorized",
       component: () => import("../views/UnAuthorized.vue"),
