@@ -26,14 +26,6 @@
           </li>
           <li>
             <RouterLink to="#" class="routerLink"
-              ><input
-                type="button"
-                value="Megosztott fájlok"
-                id="shared"
-            /></RouterLink>
-          </li>
-          <li>
-            <RouterLink to="#" class="routerLink"
               ><input type="button" value="Kedvencek" id="stared"
             /></RouterLink>
           </li>
