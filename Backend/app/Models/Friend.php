@@ -10,4 +10,8 @@ class Friend extends Model
     use HasFactory;
 
     protected $table = "friends";
+
+    protected $fillable = [
+        "user_id_sender"
+    ];
 }

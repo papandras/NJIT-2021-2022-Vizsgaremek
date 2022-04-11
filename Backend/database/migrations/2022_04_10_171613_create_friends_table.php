@@ -15,13 +15,13 @@ class CreateFriendsTable extends Migration
     {
         Schema::create('friends', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id_sender');
+            $table->unsignedBigInteger('user_id_sender')->nullable();
             $table->foreign('user_id_sender')
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('user_id_addressee');
+            $table->unsignedBigInteger('user_id_addressee')->nullable();
             $table->foreign('user_id_addressee')
                 ->references('id')
                 ->on('users')
