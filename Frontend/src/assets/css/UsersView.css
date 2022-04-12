@@ -17,10 +17,16 @@
     grid-template-areas:
       "search search search"
       "users users users"
-      "friends . requests";
+      "friends . requests"
+      "sentrequests . requests";
     padding: 30px;
   }
   
+  .sentrequests{
+    grid-area: sentrequests;
+    margin-top: 10px;
+  }
+
   .friendrequests{
     grid-area: requests;
   }

@@ -32,4 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('user/friends/remove/', [FriendController::class, 'removeFriend'])->name('removeFriend');
     Route::get('user/friends/friendrequests', [FriendController::class, 'friendrequests'])->name('friendrequests');
     Route::post('user/friends/accept/', [FriendController::class, 'acceptrequest'])->name('acceptrequest');
+    Route::get('user/friends/sentrequests/', [FriendController::class, 'sentrequests'])->name('sentrequests');
+    Route::post('user/friends/cancelrequest/', [FriendController::class, 'cancelrequest'])->name('cancelrequest');
+    Route::post('user/friends/rejectrequest/', [FriendController::class, 'rejectrequest'])->name('rejectrequest');
 });

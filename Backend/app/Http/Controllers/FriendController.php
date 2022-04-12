@@ -64,4 +64,27 @@ class FriendController extends Controller
 
         return "Sikeresen elfogadtad a jelölést!";
     }
+
+    public function sentrequests(){
+        $ids = Friend::where([['user_id_sender', Auth::user()->id],['status', 'requested']])->select('user_id_addressee')->get();
+        $requestedusers = [];
+        for($i = 0; $i < count($ids); $i++){
+            array_push($requestedusers, UserResource::collection(User::where("id", "LIKE", $ids[$i]["user_id_addressee"])->get()));
+        }
+        return $requestedusers;
+    }
+
+    public function cancelrequest(Request $id){
+        $validated  = $id->validate(["id" => "required|min:1"])["id"];
+        Friend::where([['user_id_sender', Auth::user()->id],['user_id_addressee', $validated],['status', 'requested']])->delete();
+
+        return "Jelölés sikeresen visszavonva!";
+    }
+
+    public function rejectrequest(Request $id){
+        $validated  = $id->validate(["id" => "required|min:1"])["id"];
+        Friend::where([['user_id_sender', $validated],['user_id_addressee', Auth::user()->id],['status', 'requested']])->delete();
+
+        return "Elutasítottad a jelölést!";
+    }
 }

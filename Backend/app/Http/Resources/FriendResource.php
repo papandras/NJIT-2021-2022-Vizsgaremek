@@ -19,7 +19,6 @@ class FriendResource extends JsonResource
             "nev" => $this->name,
             "email" => $this->email,
             "regisztralt" => $this->created_at,
-            "pivot" => $this->pivot,
         ];
     }
 }
