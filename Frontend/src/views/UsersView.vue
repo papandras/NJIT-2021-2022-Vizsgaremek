@@ -4,6 +4,7 @@
     <div id="content">
       <div id="search">
         <!-- Section: Felhasználó keresés -->
+        <p>Felhasználó keresése</p>
         <form @submit.prevent="findUsers">
           <input
             type="search"
@@ -14,13 +15,19 @@
           />
           <button id="keresesGomb">Keresés</button>
         </form>
+        <footer>
+          <ul id="lettersearch">
+            <li v-for="letter in letters" :key="letter">[<a @click="searchbyletter(letter)">{{letter.toUpperCase()}}</a>]</li>
+          </ul>
+        </footer>
         <!-- Section vége -->
       </div>
-      <div id="userlistDiv">
+      <div id="userlistDiv" v-if="users != null">
         <div v-if="submitted">
           Találat a következő keresésre: {{ searchvalue }}
         </div>
         <!-- Section: Felhasználók kilistázása -->
+        <div v-if="users == null || users.length == 0">Nincs találat</div>
         <ul id="userlist">
           <li v-for="user in users" :key="user.id" class="userListItem">
             <div class="username">{{ user.nev }}</div>
@@ -138,15 +145,14 @@ export default {
       searchvalue: null,
       sentrequests: null,
       submitted: false,
-      store: useAuth()
+      store: useAuth(),
+      letters: "abcdefghijklmnopqrstuvwxyz",
     };
   },
   mounted() {
-    this.getUsers();
     this.getFriends();
     this.getFriendRequests();
     this.getSentrequests();
-    console.log(this.store.user);
   },
   methods: {
     getUsers() {
@@ -250,6 +256,20 @@ export default {
         )
         .then((response) => {
           this.getFriendRequests();
+        });
+    },
+    searchbyletter(value){
+      axios
+        .get(`http://localhost:8881/api/users/letter/${value}`, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          this.searchvalue = value;
+          this.users = response.data.data;
+          this.submitted = true;
+          setTimeout(() => {
+            this.submitted = false;
+          }, 5000);
         });
     }
   },

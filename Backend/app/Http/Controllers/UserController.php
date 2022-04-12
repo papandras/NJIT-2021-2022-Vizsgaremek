@@ -16,4 +16,8 @@ class UserController extends Controller
     public function getUser($username){
         return UserResource::collection(User::where("name", "LIKE", "%$username%")->get());
     }
+
+    public function getUserByStartLetter($startletter){
+        return UserResource::collection(User::where("name", "LIKE", "$startletter%")->get());
+    }
 }

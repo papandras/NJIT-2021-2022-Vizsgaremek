@@ -12,7 +12,7 @@
   #content {
     grid-area: content;
     display: grid;
-    grid-template-rows: 2fr 8fr;
+    grid-template-rows: 2fr fit-content(3fr) fit-content(3fr) fit-content(3fr);
     grid-template-columns: 5fr 1fr 5fr;
     grid-template-areas:
       "search search search"
@@ -119,4 +119,18 @@
   
   .userListItem:hover img{
     display: inline-block;
+  }
+
+  footer{
+    margin-top: 30px;
+  }
+
+  #lettersearch > li{
+    cursor: pointer;
+    list-style-type: none;
+  }
+
+  #lettersearch{
+    display: flex;
+    justify-content: space-between;
   }

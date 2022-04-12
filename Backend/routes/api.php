@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('users', [UserController::class, 'getAllUsers'])->name('getAllUsers');
     Route::get('users/{username}', [UserController::class, 'getUser'])->name('getUser');
+    Route::get('users/letter/{startletter}', [UserController::class, 'getUserByStartLetter'])->name('getUserByStartLetter');
 
     Route::get('user/friends', [FriendController::class, 'getFriends'])->name('friends');
     Route::post('user/friends/add/', [FriendController::class, 'addFriend'])->name('addfriend');
