@@ -25,6 +25,7 @@
           <li v-for="user in users" :key="user.id" class="userListItem">
             <div class="username">{{ user.nev }}</div>
             <img
+            v-if="store.user.name != user.nev"
               src="src/assets/add_friend_icon.svg"
               alt="add_friend_icon"
               class="friendicon"
@@ -124,6 +125,7 @@
 <script>
 import Menu from "../components/LeftSideMenu.vue";
 import axios from "axios";
+import { useAuth } from "../store/auth.js";
 export default {
   components: {
     Menu,
@@ -136,6 +138,7 @@ export default {
       searchvalue: null,
       sentrequests: null,
       submitted: false,
+      store: useAuth()
     };
   },
   mounted() {
@@ -143,6 +146,7 @@ export default {
     this.getFriends();
     this.getFriendRequests();
     this.getSentrequests();
+    console.log(this.store.user);
   },
   methods: {
     getUsers() {
