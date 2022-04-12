@@ -4,65 +4,75 @@
     <LoginOrRegister></LoginOrRegister>
     <div id="invalidconfirm">A jelszavak nem egyeznek!</div>
     <form @submit.prevent="submit">
-      <input v-model="data.name" type="text" placeholder="Felhasználónév" minlength="3" maxlength="20" required class="input"/>
+      <input v-model="data.name" type="text" placeholder="Felhasználónév" minlength="3" maxlength="20" required
+        class="input" />
+      <div v-for="name in errors.name" class="failed_login">{{ name }}</div>
       <sub>{{ nameLenght }}/20</sub>
-      <div>{{ name }}</div>
-      <input v-model="data.email" type="email" placeholder="E-mail cím" minlength="10" maxlength="50" required class="input"/>
+      <input v-model="data.email" type="email" placeholder="E-mail cím" minlength="10" maxlength="50" required
+        class="input" />
+      <div v-for="email in errors.email" class="failed_login">{{ email }}</div>
       <sub>{{ emailLenght }}/50</sub>
-      <div>{{ mail }}</div>
-      <input v-model="data.password" type="password" placeholder="Jelszó" minlength="8" maxlength="20" required class="input" id="password"/>
+      <input v-model="data.password" type="password" placeholder="Jelszó" minlength="8" maxlength="20" required
+        class="input" id="password" />
+      <div v-for="password in errors.password" class="failed_login">{{ password }}</div>
       <sub>{{ passwordLenght }}/20</sub>
-      <input v-model="data.passwordConfirm" type="password" placeholder="Jelszó megerősítés" minlength="8" maxlength="20" required class="input" id="confirm"/>
+      <input v-model="data.passwordConfirm" type="password" placeholder="Jelszó megerősítés" minlength="8"
+        maxlength="20" required class="input" id="confirm" />
       <sub>{{ passwordConfirmLenght }}/20</sub>
       <input type="submit" value="Regisztrálok" id="regisztracio" />
-    </form>
-    <p>vagy</p>
-    <button class="googleButton">
-      <div class="google">
-        <div id="googleImg">
-          <img src="@/assets/google_icon.svg" style="height: 20px" alt="Google icon"/>
+      <p>vagy</p>
+      <button class="googleButton">
+        <div class="google">
+          <div id="googleImg">
+            <img src="@/assets/google_icon.svg" style="height: 20px" alt="Google icon" />
+          </div>
+          <div id="googleText">Regisztráció Google fiókkal</div>
         </div>
-        <div id="googleText">Regisztráció Google fiókkal</div>
-      </div>
-    </button>
+      </button>
+    </form>
   </div>
 </template>
 
 <script lang="ts">
 import LoginOrRegister from "./LoginOrRegister.vue";
 import { reactive } from "vue";
+import axios from "axios";
 import { useRouter } from "vue-router";
 export default {
   components: {
     LoginOrRegister,
   },
-  mounted() {},
-  setup() {
-    const data = reactive({
-      name: "",
-      email: "",
-      password: "",
-      passwordConfirm: "",
-    });
-    const router = useRouter();
-    const submit = async () => {
-      if (data.password == data.passwordConfirm) {
-        await fetch("http://localhost:8881/api/register", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((response) => {
-            if (response.status < 300) {
-              router.push("/");
-            }
-          })
-          .catch((error) => {
-            console.log(error.errors);
-          });
+  data() {
+    return {
+      errors: {
+        name: "",
+        email: "",
+        password: "",
+      },
+      data: {
+        name: "",
+        email: "",
+        password: "",
+        passwordConfirm: "",
+      },
+      router: useRouter()
+    };
+  },
+  mounted() { },
+  methods: {
+    async submit() {
+      if (this.data.password == this.data.passwordConfirm) {
+        try {
+          await axios.post("http://localhost:8881/api/register", this.data)
+          document.getElementsByTagName("form")[0].innerHTML = "Sikeres regisztráció!";
+          setTimeout(() => {
+            this.router.push("/");
+          }, 5000);
+        }
+        catch (e) {
+          console.log(e.response.data.errors);
+          this.errors = e.response.data.errors;
+        }
       } else {
         document.getElementById("confirm").style.border = "2px solid #842029";
         document.getElementById("confirm").classList.add("invalid");
@@ -76,11 +86,7 @@ export default {
           document.getElementById("invalidconfirm").style.display = "none";
         }, 5000);
       }
-    };
-    return {
-      data,
-      submit,
-    };
+    },
   },
   computed: {
     nameLenght() {
@@ -100,7 +106,11 @@ export default {
 </script>
 
 <style scoped>
-#invalidconfirm{
+.failed_login {
+  color: red;
+}
+
+#invalidconfirm {
   width: 300px;
   color: #842029;
   background-color: #f8d7da;
@@ -115,33 +125,45 @@ export default {
   display: none;
 }
 
-.invalid{
+.invalid {
   animation: shake 300ms;
 }
-@keyframes shake{
-  25% { transform: translateX(4px);}
-  50% { transform: translateX(-4px);}
-  75% { transform: translateX(4px);}
+
+@keyframes shake {
+  25% {
+    transform: translateX(4px);
+  }
+
+  50% {
+    transform: translateX(-4px);
+  }
+
+  75% {
+    transform: translateX(4px);
+  }
 }
+
 #whitediv {
   width: 400px;
-  height: 800px;
+  height: fit-content;
   background-color: white;
   border-radius: 5px;
   vertical-align: center;
   text-align: center;
   margin: auto;
   margin-top: 50px;
+  margin-bottom: 20px;
   padding-top: 0px;
+  padding-bottom: 20px;
   border: none;
 }
 
-form > input {
+form>input {
   display: block;
   margin: auto;
 }
 
-form > sub {
+form>sub {
   position: relative;
   left: 30%;
   user-select: none;

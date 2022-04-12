@@ -6,35 +6,17 @@
       Hibás felhasználónév vagy jelszó!
     </div>
     <form @submit.prevent="submit">
-      <input
-        v-model="data.name"
-        type="text"
-        placeholder="Felhasználónév"
-        class="input"
-        required
-        minlength="3"
-        maxlength="20"
-      />
-      <input
-        v-model="data.password"
-        type="password"
-        placeholder="Jelszó"
-        class="input"
-        required
-        minlength="8"
-        maxlength="20"
-      />
+      <input v-model="data.name" type="text" placeholder="Felhasználónév" class="input" required minlength="3"
+        maxlength="20" />
+      <input v-model="data.password" type="password" placeholder="Jelszó" class="input" required minlength="8"
+        maxlength="20" />
       <input type="submit" value="Belépek" id="bejelentkezes" />
     </form>
     <p>vagy</p>
     <button class="googleButton">
       <div class="google">
         <div id="googleImg">
-          <img
-            src="@/assets/google_icon.svg"
-            style="height: 20px"
-            alt="Google icon"
-          />
+          <img src="@/assets/google_icon.svg" style="height: 20px" alt="Google icon" />
         </div>
         <div id="googleText">Bejelentkezés Google fiókkal</div>
       </div>
@@ -83,7 +65,7 @@ export default {
       store,
     };
   },
-  mounted() {},
+  mounted() { },
 };
 </script>
 
@@ -101,6 +83,7 @@ export default {
   margin: auto;
   border-radius: 5px;
 }
+
 #whitediv {
   width: 400px;
   height: 600px;
@@ -113,10 +96,12 @@ export default {
   padding-top: 0px;
   border: none;
 }
-form > input {
+
+form>input {
   display: block;
   margin: auto;
 }
+
 #bejelentkezes {
   background-color: #009688;
   color: white;
