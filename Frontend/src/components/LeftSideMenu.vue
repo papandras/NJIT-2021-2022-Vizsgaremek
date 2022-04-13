@@ -1,14 +1,13 @@
 <template>
   <div class="menu">
     <ul>
-      <div id="menucontent">
         <div>
-          <li></li>
           <li>
             <div>
               <div id="picturegrid">
                 <img src="src/assets/default_user.svg" alt="" />
-                <label id="sziaNev" :title="store.user.name">Szia {{ store.user.name.substring(0, 12) }}<span v-if="store.user.name.length > 11">...</span></label>
+                <label id="sziaNev" :title="store.user.name">Szia {{ store.user.name.substring(0, 12) }}<span
+                    v-if="store.user.name.length > 11">...</span></label>
                 <p id="counter">(<LogOutCounter></LogOutCounter>)</p>
               </div>
             </div>
@@ -16,79 +15,69 @@
         </div>
         <div>
           <li>
-            <RouterLink to="/index" class="routerLink"
-              ><input type="button" value="Főoldal" id="index"
-            /></RouterLink>
-          </li><li>
-            <RouterLink to="#" class="routerLink"
-              ><input type="button" value="Saját fájlok" id="owned"
-            /></RouterLink>
+            <RouterLink to="/index" class="routerLink"><input type="button" value="Főoldal" id="index" /></RouterLink>
           </li>
           <li>
-            <RouterLink to="#" class="routerLink"
-              ><input type="button" value="Kedvencek" id="stared"
-            /></RouterLink>
+            <RouterLink to="#" class="routerLink"><input type="button" value="Saját fájlok" id="owned" /></RouterLink>
           </li>
           <li>
-            <RouterLink to="#" class="routerLink"
-              ><input type="button" value="Törölt elemek" id="deleted"
-            /></RouterLink>
+            <RouterLink to="#" class="routerLink"><input type="button" value="Kedvencek" id="stared" /></RouterLink>
           </li>
           <li>
-            <RouterLink to="/users" class="routerLink"
-              ><input type="button" value="Felhasználók" id="users"
-            /></RouterLink>
+            <RouterLink to="#" class="routerLink"><input type="button" value="Törölt elemek" id="deleted" />
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/users" class="routerLink"><input type="button" value="Felhasználók" id="users" />
+            </RouterLink>
           </li>
         </div>
         <div>
           <li>
-            <RouterLink to="#" class="routerLink"
-              ><input type="button" value="Statisztika" id="stat"
-            /></RouterLink>
+            <RouterLink to="#" class="routerLink"><input type="button" value="Statisztika" id="stat" /></RouterLink>
           </li>
           <li>
-            <RouterLink to="/settings" class="routerLink"
-              ><input type="button" value="Beállítások" id="settings"
-            /></RouterLink>
+            <RouterLink to="/settings" class="routerLink"><input type="button" value="Beállítások" id="settings" />
+            </RouterLink>
           </li>
           <li>
-            <RouterLink to="/logout" @click="logout" class="routerLink"
-              ><input type="button" value="Kijelentkezés" id="logout"
-            /></RouterLink>
+            <RouterLink to="/logout" @click="logout" class="routerLink"><input type="button" value="Kijelentkezés"
+                id="logout" /></RouterLink>
           </li>
         </div>
-      </div>
     </ul>
   </div>
 </template>
 
 <style scoped>
-.menu{
+.menu {
   z-index: 999;
+  width: fit-content;
+  height: 100vh;
+  background-color: #c4c4c4;
 }
+
 ul {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   background-color: #c4c4c4;
-  height: 100%;
-  position: fixed;
+  width: fit-content;
   overflow: auto;
   border-radius: 5px;
-}
-
-#menucontent {
   display: flex;
+  padding: 20px;
   flex-direction: column;
   justify-content: space-between;
-  height: 70%;
 }
 
-li input, #sziaNev, label {
+li input,
+#sziaNev,
+label {
   display: block;
+  margin: auto;
   width: 150px;
   height: 30px;
-  margin: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   text-decoration: none;
   text-align: center;
   background-color: white;
@@ -97,7 +86,7 @@ li input, #sziaNev, label {
   border: none;
 }
 
-#sziaNev{
+#sziaNev {
   height: auto;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -111,11 +100,11 @@ li input:active {
   text-decoration: none;
 }
 
-.routerLink > input:active{
+.routerLink>input:active {
   border: 2px solid #E9D8A6;
 }
 
-#picturegrid > img {
+#picturegrid>img {
   height: 50px;
   width: 50px;
   background-color: white;
@@ -124,7 +113,7 @@ li input:active {
   display: block;
 }
 
-#counter{
+#counter {
   text-align: center;
 }
 </style>
@@ -138,7 +127,7 @@ export default {
   components: {
     LogOutCounter,
   },
-  props:{
+  props: {
     activepage: String
   },
   setup() {
@@ -160,7 +149,7 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       document.getElementById(this.activepage).style.backgroundColor = "#009688";
     })
     const store = useAuth();

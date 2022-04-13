@@ -1,38 +1,31 @@
 .users {
     display: grid;
-    grid-template-columns: 10% 90%;
-    grid-template-rows: 100%;
+    grid-template-columns: 1fr 9fr;
     grid-template-areas: "menu content";
   }
-  
-  #menu {
+
+  #menu{
     grid-area: menu;
+    position: fixed;
   }
   
   #content {
     grid-area: content;
-    display: grid;
-    grid-template-rows: 2fr fit-content(3fr) fit-content(3fr) fit-content(3fr);
-    grid-template-columns: 5fr 1fr 5fr;
-    grid-template-areas:
-      "search search search"
-      "users users users"
-      "friends . requests"
-      "sentrequests . requests";
+    display: flex;
+    flex-direction: column;
     padding: 30px;
   }
-  
-  .sentrequests{
-    grid-area: sentrequests;
-    margin-top: 10px;
+
+  #friendblock{
+    display: flex;
+    flex-wrap: wrap;
   }
 
-  .friendrequests{
-    grid-area: requests;
+  #leftblock, #rightblock{
+    width: 50%;
   }
   
   #search {
-    grid-area: search;
     background-color: #c4c4c4;
     border-radius: 5px;
     margin: auto;
@@ -67,20 +60,16 @@
     padding-left: 50px;
     padding-right: 50px;
     text-align: center;
-  }
-  
-  .friends {
-    grid-area: friends;
-  }
-  
-  .blockedUsers {
-    grid-area: blocked;
-    display: none;
+    margin: 10px;
   }
   
   #userlist {
     list-style-type: none;
     user-select: none;
+    display: flex;
+    flex-wrap: wrap;
+    /*align-content: center;*/
+    justify-content: space-around;
   }
   
   .userListItem {
@@ -90,12 +79,9 @@
     padding-left: 50px;
     padding-right: 50px;
     display: inline-block;
-    margin-left: 20px;
-    margin-right: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
     width: 300px;
-    display: inline-block;
     position: relative;
   }
   
@@ -133,4 +119,8 @@
   #lettersearch{
     display: flex;
     justify-content: space-between;
+  }
+
+  label{
+    display: block;
   }
