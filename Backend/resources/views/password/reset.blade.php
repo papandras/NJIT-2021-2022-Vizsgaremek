@@ -94,10 +94,10 @@
                 </span>
             @enderror
             @error('email')
-            <span class="invalid">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
+                <span class="invalid">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
             <label for="email">Email cím</label>
             <input type="email" name="email" id="email">
             <label for="password">Új jelszó</label>
