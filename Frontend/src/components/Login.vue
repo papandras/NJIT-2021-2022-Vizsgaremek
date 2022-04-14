@@ -21,6 +21,16 @@
         <div id="googleText">Bejelentkezés Google fiókkal</div>
       </div>
     </button>
+    <a href="#" @click="displayreminder">Elfelejtett jelszó</a>
+    <div id="reminder" v-if="remindershow.status">
+      <p>Kérjük, add meg az e-mail címed, amellyel oldalunkra regisztráltál. A megadott címre küldünk egy linket,
+        amelyre kattintva jelszavad módosíthatod!</p>
+        <form @submit.prevent="reminder" method="post">
+          <input v-model="passwordreminder.email" type="email" placeholder="E-mail cím" minlength="10" maxlength="50" required class="input" />
+          <input type="submit" value="Küldés" id="bejelentkezes">
+        </form>
+        <p v-if="mailsent.status" id="mailsent">Email sikeresen elküldve!</p>
+    </div>
   </div>
 </template>
 
@@ -41,6 +51,11 @@ export default {
       password: "",
       failed: false,
     });
+    let mailsent = reactive({status: false});
+    let remindershow = reactive({status: false});;
+    const passwordreminder = reactive({
+      email: "",
+    });
     const router = useRouter();
     const submit = () => {
       axios
@@ -59,10 +74,29 @@ export default {
         });
     };
 
+    const displayreminder = () => {
+      remindershow.status = !remindershow.status;
+    }
+
+    const reminder = () => {
+      axios.post("http://localhost:8881/api/forgot-password", passwordreminder, {
+          withCredentials: true,
+        }).then(response => {
+          if(response.status < 300){
+            mailsent.status = true;
+          }
+        })
+    }
+
     return {
       data,
       submit,
       store,
+      passwordreminder,
+      mailsent,
+      remindershow,
+      displayreminder,
+      reminder
     };
   },
   mounted() { },
@@ -70,6 +104,20 @@ export default {
 </script>
 
 <style scoped>
+a{
+  display: block;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+#reminder{
+  margin-top: 20px;
+}
+
+#mailsent{
+  margin-top: 20px;
+}
+
 #failed_login {
   width: 300px;
   color: #842029;
@@ -86,7 +134,7 @@ export default {
 
 #whitediv {
   width: 400px;
-  height: 600px;
+  height: fit-content;
   background-color: white;
   border-radius: 5px;
   vertical-align: center;
@@ -94,6 +142,7 @@ export default {
   margin: auto;
   margin-top: 50px;
   padding-top: 0px;
+  padding-bottom: 50px;
   border: none;
 }
 
@@ -129,6 +178,7 @@ form>input {
   border: none;
   margin-top: 10px;
   margin-bottom: 10px;
+  outline: none;
 }
 
 .googleButton {
@@ -168,10 +218,6 @@ form>input {
 
 p {
   user-select: none;
-}
-
-input {
-  outline: none;
 }
 
 input:focus {

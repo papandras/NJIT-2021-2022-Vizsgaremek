@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('reset-password/{token}', [AuthController::class, 'resetpassword'])->middleware('guest')->name('password.reset');
+Route::post('update-password', [AuthController::class, 'updatepassword'])->middleware('guest')->name('password.update');

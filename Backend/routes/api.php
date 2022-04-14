@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 
+Route::post('forgot-password', [AuthController::class, 'forgotpassword'])->middleware('guest')->name('password.request');
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [AuthController::class, 'user'])->name('user');
     Route::get('getNewCookie', [AuthController::class, 'getNewCookie'])->name('getNewCookie');
