@@ -3,11 +3,11 @@
     <Menu id="menu" activepage="index"></Menu>
     <div id="content">
       <div id="search">
-        <form>
-          <input type="search" name="" id="keresesInput">
-          <button id="keresesGomb">Új fájl létrehozása</button>
+        <form method="post" @submit.prevent="uploadfile" enctype="multipart/form-data">
+          <input type="file" name="file" id="keresesInput">
+          <button id="keresesGomb">Új fájl feltöltése</button>
         </form>
-        
+
       </div>
       <div id="last_file">
         <h1>Legutóbbi fájlok</h1>
@@ -28,6 +28,7 @@
 import Menu from "../components/LeftSideMenu.vue";
 import LastFilesTable from "./LastFilesTable.vue";
 import StatElement from "./StatElement.vue";
+import axios from "axios";
 export default {
   name: "Index",
   components: {
@@ -35,12 +36,31 @@ export default {
     LastFilesTable,
     StatElement
   },
+  methods: {
+    async uploadfile() {
+      let input = document.querySelector("input[type=file]");
+      let data = new FormData()
+      data.append('file', input.files[0]);
+      console.log(data.get('file'));
+      try {
+        axios
+          .post(
+            "http://localhost:8881/api/file/upload",
+            data,
+            { withCredentials: true, mode: "no-cors", Accept: "application/json" }
+          )
+          .then((response) => {
+            console.log(response);
+          });
+
+      }
+      catch (e) {
+        console.log(e.response.data.errors);
+      }
+    }
+  }
 };
 </script>
-
-<style>
-
-</style>
 
 <style scoped>
 .index {
@@ -98,17 +118,16 @@ export default {
   grid-area: upload;
 }
 
-form{
+form {
   display: inline-block;
   width: 80%;
 }
 
-#ujFajl:active{
-   border: 2px solid #c4c4c4;
+#ujFajl:active {
+  border: 2px solid #c4c4c4;
 }
 
-#keresesInput:focus{
-  border:2px solid #009688;
+#keresesInput:focus {
+  border: 2px solid #009688;
 }
-
 </style>
