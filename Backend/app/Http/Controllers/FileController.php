@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FileResource;
 use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,5 +38,21 @@ class FileController extends Controller
         return response([
             "error" => "A fájl már létezik!"
         ]);
+    }
+
+    public function getFiles($limit = null){
+
+        if(is_null($limit)){
+            return FileResource::collection(File::where('user_id', Auth::user()->id)->get());
+        }
+
+        $data = FileResource::collection(File::where('user_id', Auth::user()->id)->limit($limit)->get());
+
+        if(count($data) == 0){
+            return response([
+                "message" => "Nincs feltöltött fájlod!"
+            ]);
+        }
+        return $data;
     }
 }
