@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupMemberController;
@@ -52,4 +53,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user/groups', [UserController::class, 'getownedgroups'])->name('user.owngroups'); //ahol ő a tulajdonos
     Route::delete('/group/{id}/delete', [GroupController::class, 'deletegroup'])->name('group.delete');
     Route::delete('/group/{group}/member/{user}/delete', [GroupController::class, 'deletememberfromgroup'])->name('group.delete.member');
+
+    //Files
+    Route::post('file/upload', [FileController::class, 'upload'])->name('file.upload');
 });
