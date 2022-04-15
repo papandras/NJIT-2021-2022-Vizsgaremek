@@ -1,6 +1,7 @@
 <template>
   <table v-if="lastfiles != null">
-    <tr>
+    <div>
+      <tr>
       <th>
         <input type="checkbox" name="" id="" />
       </th>
@@ -9,9 +10,10 @@
       <th>Méret</th>
       <th>Legutóbbi módosítás</th>
       <th>Tagok</th>
-      <th></th>
+      <th>#</th>
     </tr>
-    <TableRow v-if="lastfiles != null && lastfiles.message == null" v-for="file in lastfiles" :key="file.name"
+    </div>
+    <TableRow class="tablerow" v-if="lastfiles != null && lastfiles.message == null" v-for="file in lastfiles" :key="file.name"
       :type="file.type" :title="file.name" :size="file.size" :lastedited="file.updated" :group="file.shared_group_id"></TableRow>
   </table>
   <div v-if="nofilemessage != null">
@@ -56,3 +58,17 @@ export default {
   }
 };
 </script>
+
+<style row>
+  .tablerow:nth-child(2n){
+    background-color: white;
+  }
+
+  th {
+    width: 20%;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+</style>
