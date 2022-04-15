@@ -43,10 +43,10 @@ class FileController extends Controller
     public function getFiles($limit = null){
 
         if(is_null($limit)){
-            return FileResource::collection(File::where('user_id', Auth::user()->id)->get());
+            return FileResource::collection(File::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->get());
         }
 
-        $data = FileResource::collection(File::where('user_id', Auth::user()->id)->limit($limit)->get());
+        $data = FileResource::collection(File::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->limit($limit)->get());
 
         if(count($data) == 0){
             return response([
