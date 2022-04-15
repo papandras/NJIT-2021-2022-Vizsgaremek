@@ -1,5 +1,5 @@
 <template>
-  <table>
+  <table v-if="lastfiles != null">
     <tr>
       <th>
         <input type="checkbox" name="" id="" />
@@ -11,20 +11,48 @@
       <th>Tagok</th>
       <th></th>
     </tr>
-    <TableRow type="doc" title="Cim" size="3 mb" lastedited="2023"></TableRow>
-    <TableRow type="jpeg" title="Pelda" size="5 mb" lastedited="2023"></TableRow>
-    <TableRow type="txt" title="Új szöveges dokumentum" size="23 kb" lastedited="2023"></TableRow>
+    <TableRow v-if="lastfiles != null && lastfiles.message == null" v-for="file in lastfiles" :key="file.name"
+      :type="file.type" :title="file.name" :size="file.size" :lastedited="file.updated" :group="file.shared_group_id"></TableRow>
   </table>
+  <div v-if="nofilemessage != null">
+    {{ nofilemessage }}
+  </div>
 </template>
 
 <script>
 import TableRow from "./LastFilesTableRow.vue";
+import axios from "axios";
 export default {
   components: {
     TableRow,
   },
-  setup() {
-
+  data() {
+    return {
+      lastfiles: null,
+      nofilemessage: null
+    }
   },
+  methods: {
+    getlastfiles() {
+      try {
+        axios
+          .get("http://localhost:8881/api/file/get/3", {
+            withCredentials: true,
+          })
+          .then((response) => {
+            console.log(response.data)
+            this.nofilemessage = response.data.message
+            this.lastfiles = response.data.data;
+            console.log(this.lastfiles);
+          });
+      }
+      catch (e) {
+        console.log(e.response.data.errors);
+      }
+    }
+  },
+  mounted() {
+    this.getlastfiles();
+  }
 };
 </script>

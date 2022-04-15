@@ -9,7 +9,7 @@
     <td>{{ title }}</td>
     <td>{{ size }}</td>
     <td>{{ lastedited }}</td>
-    <td></td>
+    <td>{{ group ?? "Nincs megosztva senkivel" }}</td>
     <td>
       <img src="@/assets/doticon.svg" alt="menu" />
     </td>
@@ -24,10 +24,11 @@ export default {
     type: String, 
     title: String,
     size: String,
-    lastedited: String
+    lastedited: String,
+    group: Number
   },
     setup(props){
-        const { checkboxname, type, title, size, lastedited } = toRefs(props)
+        const { checkboxname, type, title, size, lastedited, group } = toRefs(props)
     }
 }
 </script>

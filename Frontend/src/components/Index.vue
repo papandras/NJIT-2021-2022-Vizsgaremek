@@ -41,7 +41,6 @@ export default {
       let input = document.querySelector("input[type=file]");
       let data = new FormData()
       data.append('file', input.files[0]);
-      console.log(data.get('file'));
       try {
         axios
           .post(
