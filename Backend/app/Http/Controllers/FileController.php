@@ -20,7 +20,7 @@ class FileController extends Controller
         $filename = Auth::user()->name . "-" . $data['file']->getClientOriginalName();
         
         if (count(File::where('title', $filename)->get()) == 0) {
-            $request->file("file")->storeAs("storage", $data['file']->getClientOriginalName());
+            $request->file("file")->storeAs("storage", $filename);
 
             $file = new File();
             $file->user_id = Auth::user()->id;
