@@ -55,4 +55,8 @@ class FileController extends Controller
         }
         return $data;
     }
+
+    public function download($filename){
+        return Storage::download("storage/".$filename);
+    }
 }

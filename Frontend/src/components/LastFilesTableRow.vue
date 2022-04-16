@@ -16,7 +16,7 @@
       </td>
     </tr>
     <tr class="menurow" v-if="minimenu">
-      <td colspan="2">Letöltés <img src="src/assets/download_icon.svg" alt="Letöltés"
+      <td colspan="2" @click="download(type, title)">Letöltés <img src="src/assets/download_icon.svg" alt="Letöltés"
           id="downloadicon"><br></td>
       <td colspan="2">
         <p>Megosztás</p>
@@ -32,6 +32,8 @@
 
 <script>
 import { toRefs } from "vue";
+import { useAuth } from "../store/auth.js";
+import axios from "axios";
 export default {
   props: {
     checkboxname: String,
@@ -43,7 +45,8 @@ export default {
   },
   data() {
     return {
-      minimenu: true
+      minimenu: true,
+      store: useAuth()
     }
   },
   setup(props) {
@@ -58,6 +61,17 @@ export default {
         default:
           document.getElementById("minimenu").style.display = "none";
       }
+    },
+    download(type, title) {
+      let filename = `${this.store.user.name}-${title}.${type}`;
+      axios.get(`http://localhost:8881/api/file/download/${filename}`, { withCredentials: true, responseType: 'arraybuffer' })
+        .then(response => {
+          let blob = new Blob([response.data])
+          let link = document.createElement('a')
+          link.href = window.URL.createObjectURL(blob)
+          link.download = `${title}.${type}`
+          link.click()
+        })
     }
   },
 }

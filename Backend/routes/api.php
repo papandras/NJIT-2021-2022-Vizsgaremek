@@ -57,4 +57,5 @@ Route::middleware('auth:sanctum')->group(function () {
     //Files
     Route::post('file/upload', [FileController::class, 'upload'])->name('file.upload');
     Route::get('file/get/{limit?}', [FileController::class, 'getFiles'])->name('file.get');
+    Route::get('file/download/{filename}', [FileController::class, 'download'])->name('file.download');
 });
