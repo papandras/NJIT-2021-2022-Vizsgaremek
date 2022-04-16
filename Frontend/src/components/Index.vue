@@ -11,7 +11,7 @@
       </div>
       <div id="last_file">
         <h1>Legutóbbi fájlok</h1>
-        <LastFilesTable></LastFilesTable>
+        <LastFilesTable :lastfilesobject="lastfiles"></LastFilesTable>
       </div>
       <div id="stat">
         <StatElement icon="media.png" typeName="Media file" size="15" progress="80" color="#03a0c2"></StatElement>
@@ -36,8 +36,13 @@ export default {
     LastFilesTable,
     StatElement
   },
+  data(){
+    return{
+      lastfiles: null,
+    }
+  },
   methods: {
-    async uploadfile() {
+    uploadfile() {
       let input = document.querySelector("input[type=file]");
       let data = new FormData()
       data.append('file', input.files[0]);
@@ -49,14 +54,32 @@ export default {
             { withCredentials: true, mode: "no-cors", Accept: "application/json" }
           )
           .then((response) => {
-            console.log(response);
+            this.getlastfiles();
           });
 
       }
       catch (e) {
         console.log(e.response.data.errors);
       }
+    },
+    getlastfiles() {
+      try {
+        axios
+          .get("http://localhost:8881/api/file/get/3", {
+            withCredentials: true,
+          })
+          .then((response) => {
+            console.log(response.data);
+            this.lastfiles = response.data;
+          });
+      }
+      catch (e) {
+        console.log(e.response.data.errors);
+      }
     }
+  },
+  mounted(){
+    this.getlastfiles();
   }
 };
 </script>

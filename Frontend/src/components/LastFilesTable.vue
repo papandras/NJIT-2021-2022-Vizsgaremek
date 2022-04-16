@@ -34,28 +34,22 @@ export default {
       nofilemessage: null
     }
   },
-  methods: {
-    getlastfiles() {
-      try {
-        axios
-          .get("http://localhost:8881/api/file/get/3", {
-            withCredentials: true,
-          })
-          .then((response) => {
-            console.log(response.data)
-            this.nofilemessage = response.data.message
-            this.lastfiles = response.data.data;
-            console.log(this.lastfiles);
-          });
-      }
-      catch (e) {
-        console.log(e.response.data.errors);
+  props:{
+    lastfilesobject: Object
+  },
+  async mounted() {
+    //this.getlastfiles();
+    console.log(this.nofilemessage);
+  },
+  watch: {
+    lastfilesobject(newfiledata, oldfiledata) {
+      if (newfiledata != null) {
+        console.log("nemnull")
+        this.lastfiles = newfiledata.data;
+        this.nofilemessage = newfiledata.message;
       }
     }
   },
-  mounted() {
-    this.getlastfiles();
-  }
 };
 </script>
 
