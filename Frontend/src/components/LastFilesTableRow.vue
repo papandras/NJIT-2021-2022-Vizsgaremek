@@ -25,7 +25,7 @@
           <option value="">Válassz csoportot</option>
         </select>
       </td>
-      <td colspan="2">Törlés <img src="src/assets/delete_icon.svg" alt="Törlés" id="deleteicon"><br></td>
+      <td colspan="2" @click="deletefile(type, title)">Törlés <img src="src/assets/delete_icon.svg" alt="Törlés" id="deleteicon"><br></td>
     </tr>
   </div>
 </template>
@@ -71,6 +71,13 @@ export default {
           link.href = window.URL.createObjectURL(blob)
           link.download = `${title}.${type}`
           link.click()
+        })
+    },
+    deletefile(type, title) {
+      let filename = `${this.store.user.name}-${title}.${type}`;
+      axios.delete(`http://localhost:8881/api/file/delete/${filename}`, { withCredentials: true })
+        .then(response => {
+          console.log(response.data)
         })
     }
   },

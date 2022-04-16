@@ -59,4 +59,12 @@ class FileController extends Controller
     public function download($filename){
         return Storage::download("storage/".$filename);
     }
+
+    public function delete($filename){
+        Storage::delete("storage/".$filename);
+        File::where('title', $filename)->delete();
+        return response([
+            "message" => "A fájl sikeresen törölve"
+        ]);
+    }
 }
