@@ -39,9 +39,10 @@ export default {
     checkboxname: String,
     type: String,
     title: String,
-    size: String,
+    size: Number,
     lastedited: String,
-    group: Number
+    group: Number,
+    refresh: Function
   },
   data() {
     return {

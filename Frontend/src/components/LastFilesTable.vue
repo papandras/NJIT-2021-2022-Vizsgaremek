@@ -14,7 +14,7 @@
     </tr>
     </div>
     <TableRow class="tablerow" v-if="lastfiles != null && lastfiles.message == null" v-for="file in lastfiles" :key="file.name"
-      :type="file.type" :title="file.name" :size="file.size" :lastedited="file.updated" :group="file.shared_group_id"></TableRow>
+      :type="file.type" :title="file.name" :size="file.size" :lastedited="file.updated" :group="file.shared_group_id" :refresh="refresh"></TableRow>
   </table>
   <div v-if="nofilemessage != null">
     {{ nofilemessage }}
@@ -35,11 +35,11 @@ export default {
     }
   },
   props:{
-    lastfilesobject: Object
+    lastfilesobject: Object,
+    refresh: Function
   },
   async mounted() {
     //this.getlastfiles();
-    console.log(this.nofilemessage);
   },
   watch: {
     lastfilesobject(newfiledata, oldfiledata) {
@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style row>
+<style>
   .tablerow:nth-child(2n){
     background-color: white;
   }

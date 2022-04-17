@@ -55,6 +55,7 @@
   width: fit-content;
   height: 100vh;
   background-color: #c4c4c4;
+  position: fixed;
 }
 
 ul {

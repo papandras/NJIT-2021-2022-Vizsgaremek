@@ -8,26 +8,14 @@
 </template>
 
 <script>
-import { toRefs } from "vue";
 import ProgressBar from "./ProgressBar.vue";
 export default {
-  data() {
-    return {
-      icon: null,
-      typeName: null,
-      size: null,
-      progress: null,
-    };
-  },
   props: {
     icon: String,
     typeName: String,
     size: Number,
     progress: Number,
     color: String,
-  },
-  setup(props) {
-    const { icon, typeName, size, progress } = toRefs(props);
   },
   components: {
       ProgressBar,

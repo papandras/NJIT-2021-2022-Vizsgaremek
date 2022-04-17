@@ -4,7 +4,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\GroupController;
-use App\Http\Controllers\GroupMemberController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 

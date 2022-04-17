@@ -11,7 +11,7 @@
       </div>
       <div id="last_file">
         <h1>Legutóbbi fájlok</h1>
-        <LastFilesTable :lastfilesobject="lastfiles"></LastFilesTable>
+        <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles"></LastFilesTable>
       </div>
       <div id="stat">
         <StatElement icon="media.png" typeName="Media file" size="15" progress="80" color="#03a0c2"></StatElement>
