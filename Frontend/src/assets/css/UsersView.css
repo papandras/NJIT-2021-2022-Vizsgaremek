@@ -24,6 +24,12 @@
   #leftblock, #rightblock{
     width: 50%;
   }
+
+  .friends, .groups, .sentrequests, .friendrequests{
+    height: 400px;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
   
   #search {
     background-color: #c4c4c4;
@@ -68,7 +74,6 @@
     user-select: none;
     display: flex;
     flex-wrap: wrap;
-    /*align-content: center;*/
     justify-content: space-around;
   }
   
@@ -124,3 +129,25 @@
   label{
     display: block;
   }
+
+  /* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #009688; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #009688; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #009688; 
+}

@@ -38,7 +38,7 @@
           <div class="friends relationblock">
             <!-- Section: Elküldött és visszaigazolt barát kérések -->
             <h1>Barátok</h1>
-            <p>(visszaigazolt kérések)</p>
+            <p>visszaigazolt kérések</p>
             <hr />
             <div v-if="friends == null || friends.length == 0">
               Jelenleg nincs egy barátod sem!
@@ -52,12 +52,17 @@
             </ul>
             <!-- Section vége -->
           </div>
+          <div class="groups relationblock">
+            <!-- Section: Csoportok -->
+            <Groups/>
+            <!-- Section vége -->
+          </div>
         </div>
         <div id="rightblock">
           <div class="sentrequests relationblock">
             <!-- Section: Elküldött de még nem visszaigazolt barát kérések -->
             <h1>Függőben lévő jelöléseid</h1>
-            <p>(visszaigazolatlan kérések)</p>
+            <p>visszaigazolatlan kérések</p>
             <hr>
             <div v-if="sentrequests == null || sentrequests.length == 0">
               Nincs elküldött kérésed!
@@ -75,7 +80,7 @@
           <div class="friendrequests relationblock">
             <!-- Section: Beérkezett barát kérések -->
             <h1>Bejelöltek barátnak</h1>
-            <p>(ezek a kérések visszaigazolásra várnak)</p>
+            <p>ezek a kérések visszaigazolásra várnak</p>
             <hr />
             <div v-if="friendrequests == null || friendrequests.length == 0">
               Nincs függőben lévő jelölésed!
@@ -97,151 +102,8 @@
   </div>
 </template>
 
-<script>
-import Menu from "../components/LeftSideMenu.vue";
-import axios from "axios";
-import { useAuth } from "../store/auth.js";
-export default {
-  components: {
-    Menu,
-  },
-  data() {
-    return {
-      users: null,
-      friends: null,
-      friendrequests: null,
-      searchvalue: null,
-      sentrequests: null,
-      submitted: false,
-      store: useAuth(),
-      letters: "abcdefghijklmnopqrstuvwxyz",
-    };
-  },
-  mounted() {
-    this.getFriends();
-    this.getFriendRequests();
-    this.getSentrequests();
-  },
-  methods: {
-    getUsers() {
-      axios
-        .get("http://localhost:8881/api/users", { withCredentials: true })
-        .then((response) => {
-          this.users = response.data.data;
-        });
-    },
-    getFriends() {
-      axios
-        .get("http://localhost:8881/api/user/friends", {
-          withCredentials: true,
-        })
-        .then((response) => {
-          this.friends = response.data;
-        });
-    },
-    getFriendRequests() {
-      axios
-        .get("http://localhost:8881/api/user/friends/friendrequests", {
-          withCredentials: true,
-        })
-        .then((response) => {
-          this.friendrequests = response.data;
-        });
-    },
-    findUsers() {
-      axios
-        .get(`http://localhost:8881/api/users/${this.searchvalue}`, {
-          withCredentials: true,
-        })
-        .then((response) => {
-          this.users = response.data.data;
-          this.submitted = true;
-          setTimeout(() => {
-            this.submitted = false;
-          }, 5000);
-        });
-    },
-    addfriend(id) {
-      axios
-        .post(
-          "http://localhost:8881/api/user/friends/add/",
-          { id: id },
-          { withCredentials: true, mode: "no-cors" }
-        )
-        .then((response) => {
-          this.getSentrequests();
-        });
-    },
-    removefriend(id) {
-      axios
-        .post(
-          "http://localhost:8881/api/user/friends/remove/",
-          { id: id },
-          { withCredentials: true, mode: "no-cors" }
-        )
-        .then((response) => {
-          this.getFriends();
-        });
-    },
-    acceptfriend(id) {
-      axios
-        .post(
-          "http://localhost:8881/api/user/friends/accept/",
-          { id: id },
-          { withCredentials: true, mode: "no-cors" }
-        )
-        .then((response) => {
-          this.getFriends();
-          this.getFriendRequests();
-        });
-    },
-    getSentrequests() {
-      axios
-        .get("http://localhost:8881/api/user/friends/sentrequests", {
-          withCredentials: true,
-        })
-        .then((response) => {
-          this.sentrequests = response.data;
-        });
-    },
-    cancelrequest(id) {
-      axios
-        .post(
-          "http://localhost:8881/api/user/friends/cancelrequest/",
-          { id: id },
-          { withCredentials: true, mode: "no-cors" }
-        )
-        .then((response) => {
-          this.getSentrequests();
-        });
-    },
-    reject(id) {
-      axios
-        .post(
-          "http://localhost:8881/api/user/friends/rejectrequest/",
-          { id: id },
-          { withCredentials: true, mode: "no-cors" }
-        )
-        .then((response) => {
-          this.getFriendRequests();
-        });
-    },
-    searchbyletter(value) {
-      axios
-        .get(`http://localhost:8881/api/users/letter/${value}`, {
-          withCredentials: true,
-        })
-        .then((response) => {
-          this.searchvalue = value;
-          this.users = response.data.data;
-          this.submitted = true;
-          setTimeout(() => {
-            this.submitted = false;
-          }, 5000);
-        });
-    }
-  },
-};
+<script src="../assets/js/UsersView.js">
+
 </script>
 
 <style scoped>

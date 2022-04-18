@@ -1,9 +1,11 @@
 import Menu from "../../components/LeftSideMenu.vue";
 import axios from "axios";
 import { useAuth } from "../../store/auth.js";
+import Groups from "../../components/Groups.vue";
 export default {
   components: {
     Menu,
+    Groups
   },
   data() {
     return {

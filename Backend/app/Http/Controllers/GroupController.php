@@ -17,6 +17,12 @@ class GroupController extends Controller
 
         $data["owner_id"] = Auth::user()->id;
 
+        if(Group::where([['owner_id', $data['owner_id']],['name', $data["name"]]])->first() != ""){
+            return response([
+                'message' => 'A csoport már létezik!'
+            ]);
+        }
+
         Group::create($data);
 
         return response([

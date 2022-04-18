@@ -47,7 +47,7 @@ class UserController extends Controller
     public function getownedgroups(){
         $user = Auth::user();
 
-        $groups = Group::where('id', $user->id)->get();
+        $groups = Group::where('owner_id', $user->id)->get();
 
         if(count($groups) == 0){
             return response([
