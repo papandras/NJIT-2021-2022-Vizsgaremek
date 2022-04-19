@@ -39,7 +39,7 @@ export default {
                 this.groupmembers = response.data
             })
         },
-        async cremovemember(id) {
+        async removemember(id) {
             let conf = confirm("Biztosan eltávolítja?");
             if (conf) {
                 await axios.delete(`http://localhost:8881/api/group/${this.id}/member/${id}/delete`, { withCredentials: true, mode: "no-cors" })

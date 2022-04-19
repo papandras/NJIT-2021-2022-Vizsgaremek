@@ -69,7 +69,6 @@ export default {
             withCredentials: true,
           })
           .then((response) => {
-            console.log(response.data);
             this.lastfiles = response.data;
           });
       }

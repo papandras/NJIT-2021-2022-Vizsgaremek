@@ -21,11 +21,15 @@
       <td colspan="2">
         <p>Megosztás</p>
         <img src="src/assets/share_icon.svg" alt="Megosztás" id="shareicon">
-        <select name="" id="">
-          <option value="">Válassz csoportot</option>
+        <select>
+          <option v-for="group in groups" :value="group.id">{{
+            group.name
+          }}
+          </option>
         </select>
       </td>
-      <td colspan="2" @click="deletefile(type, title)">Törlés <img src="src/assets/delete_icon.svg" alt="Törlés" id="deleteicon"><br></td>
+      <td colspan="2" @click="deletefile(type, title)">Törlés <img src="src/assets/delete_icon.svg" alt="Törlés"
+          id="deleteicon"><br></td>
     </tr>
   </div>
 </template>
@@ -47,7 +51,8 @@ export default {
   data() {
     return {
       minimenu: true,
-      store: useAuth()
+      store: useAuth(),
+      groups: null
     }
   },
   setup(props) {
@@ -76,12 +81,19 @@ export default {
     },
     deletefile(type, title) {
       let filename = `${this.store.user.name}-${title}.${type}`;
-      axios.delete(`http://localhost:8881/api/file/delete/${filename}`, { withCredentials: true })
-        .then(response => {
-          console.log(response.data)
-        })
-    }
+      axios.delete(`http://localhost:8881/api/file/delete/${filename}`, { withCredentials: true });
+    },
+    async getgroups() {
+            await axios.get("http://localhost:8881/api/user/groups", {
+                withCredentials: true,
+            }).then(response => {
+                this.groups = response.data
+            })
+        },
   },
+  mounted() {
+    this.getgroups()
+  }
 }
 </script>
 

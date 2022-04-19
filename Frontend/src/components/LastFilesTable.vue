@@ -44,7 +44,6 @@ export default {
   watch: {
     lastfilesobject(newfiledata, oldfiledata) {
       if (newfiledata != null) {
-        console.log("nemnull")
         this.lastfiles = newfiledata.data;
         this.nofilemessage = newfiledata.message;
       }

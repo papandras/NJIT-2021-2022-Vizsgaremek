@@ -13,8 +13,8 @@ export default {
   props: {
     icon: String,
     typeName: String,
-    size: Number,
-    progress: Number,
+    size: String,
+    progress: String,
     color: String,
   },
   components: {

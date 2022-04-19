@@ -34,9 +34,9 @@
 <script>
 export default {
   props: {
-    maxsize: Number,
-    filled: Number,
-    width: Number,
+    maxsize: String,
+    filled: String,
+    width: String,
     color: String,
   },
   mounted() {},
