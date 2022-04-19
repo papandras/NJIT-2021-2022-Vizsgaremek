@@ -24,19 +24,25 @@
             {{ group.name }}
             <img src="src/assets/delete_icon.svg" alt="delete_friend_icon" class="deletegroup"
                 @click="deletegroup(group.id)" />
+            
+            <Groupmember :id="group.id"/>
         </li>
     </ul>
 </template>
 
 <script>
 import axios from "axios";
+import Groupmember from "../components/Groupmembers.vue"
 export default {
     data() {
         return {
             groups: null,
             showform: false,
-            newgroupname: ""
+            newgroupname: "",
         }
+    },
+    components:{
+        Groupmember
     },
     methods: {
         createGroup() {
@@ -59,7 +65,7 @@ export default {
                 .then(response => {
                     this.getGroups()
                 })
-        }
+        },
     },
     mounted() {
         this.getGroups()
@@ -68,6 +74,9 @@ export default {
 </script>
 
 <style scoped>
+p{
+    width: 95%;
+}
 #submit {
     background-color: #009688;
     color: white;

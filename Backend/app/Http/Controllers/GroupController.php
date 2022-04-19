@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\Group;
 use App\Models\GroupMember;
@@ -63,7 +64,13 @@ class GroupController extends Controller
             ]);
         }
 
-        return $id->members;
+        $members = [];
+
+        for($i = 0; $i < count($id->members); $i++){
+            array_push($members, UserResource::collection(User::where("id", $id->members[$i]["group_member"])->get()));
+        }
+
+        return $members;
     }
 
     public function deletegroup(Group $id){
