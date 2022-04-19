@@ -14,18 +14,18 @@
                 <div id="createText">Csoport létrehozása</div>
             </div>
         </button>
-        <form @submit.prevent="createGroup" v-if="showform">
+        <form @submit.prevent="createGroup" v-if="showform" id="addgroup">
             <input type="text" id="name" placeholder="Csoport neve" required v-model="newgroupname">
             <input type="submit" value="Létrehozás" id="submit">
         </form>
     </div>
     <ul id="grouplist">
         <li v-for="group in groups" :key="group.id" class="groupListItem" :title="group.name">
-            {{ group.name }}
+            <strong class="groupname">{{ group.name }}</strong>
             <img src="src/assets/delete_icon.svg" alt="delete_friend_icon" class="deletegroup"
                 @click="deletegroup(group.id)" />
             
-            <Groupmember :id="group.id"/>
+            <Groupmember :id="group.id" :name="group.name"/>
         </li>
     </ul>
 </template>
@@ -173,5 +173,24 @@ label {
     right: 30px;
     bottom: 15px;
     display: none;
+}
+
+.groupname{
+    font-size: 120%;
+    margin-bottom: 20px;
+}
+
+#addgroup{
+    margin: auto;
+    margin-top: 20px;
+    border-top: 1px solid rgba(0,150,136, 0.8);
+    border-left: 1px solid rgba(0,150,136, 0.4);
+    border-right: 1px solid rgba(0,150,136, 0.4);
+    border-bottom: 1px solid rgba(0,150,136, 0.5);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 50%;
+    display: block;
+    background-color: rgba(0,150,136, 0.1);
 }
 </style>
