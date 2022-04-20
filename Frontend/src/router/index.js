@@ -73,6 +73,16 @@ const router = createRouter({
       }
     },
     {
+      path: "/myfiles",
+      name: "myfiles",
+      component: () => import("../views/MyFilesView.vue"),
+      meta: {
+        title: "5File | Saját fájlok",
+        requiresAuth: true,
+        requiredRole: "none"
+      }
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "notfound",
       component: () => import("../views/NotFoundPage.vue"),

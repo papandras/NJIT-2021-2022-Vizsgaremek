@@ -18,7 +18,7 @@
             <RouterLink to="/index" class="routerLink"><input type="button" value="Főoldal" id="index" /></RouterLink>
           </li>
           <li>
-            <RouterLink to="#" class="routerLink"><input type="button" value="Saját fájlok" id="owned" /></RouterLink>
+            <RouterLink to="/myfiles" class="routerLink"><input type="button" value="Saját fájlok" id="owned" /></RouterLink>
           </li>
           <li>
             <RouterLink to="#" class="routerLink"><input type="button" value="Kedvencek" id="stared" /></RouterLink>

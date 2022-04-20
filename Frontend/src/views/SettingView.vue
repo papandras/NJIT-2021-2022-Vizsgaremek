@@ -2,6 +2,7 @@
   <div class="settings">
     <Menu id="menu" activepage="index"></Menu>
     <div id="content">
+      
     </div>
   </div>
 </template>
