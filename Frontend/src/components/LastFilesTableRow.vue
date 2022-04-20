@@ -18,11 +18,11 @@
     <tr class="menurow" v-if="minimenu">
       <td></td>
       <td></td>
-      <td @click="download(type, title)" class="menuitem">Letöltés <img src="src/assets/download_icon.svg"
+      <td @click="download(type, title)" class="menuitem">Letöltés <img src="@/assets/download_icon.svg"
           alt="Letöltés" id="downloadicon"><br></td>
       <td class="menuitem">
         <p>Megosztás</p>
-        <img src="src/assets/share_icon.svg" alt="Megosztás" id="shareicon">
+        <img src="@/assets/share_icon.svg" alt="Megosztás" id="shareicon">
         <div v-if="group == null">
           <select :id="title">
             <option v-for="group in groups" :value="group.id">{{
@@ -34,7 +34,7 @@
         </div>
         <span v-if="group != null" class="removegroup" @click="unshare(id)">[Megosztás visszavonása]</span>
       </td>
-      <td @click="deletefile(type, title)" class="menuitem">Törlés <img src="src/assets/delete_icon.svg" alt="Törlés"
+      <td @click="deletefile(type, title)" class="menuitem">Törlés <img src="@/assets/delete_icon.svg" alt="Törlés"
           id="deleteicon"><br></td>
       <td></td>
       <td></td>

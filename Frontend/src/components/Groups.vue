@@ -9,7 +9,7 @@
         <button class="createButton" @click="showform = !showform">
             <div class="create">
                 <div id="createImg">
-                    <img src="src/assets/add_icon.svg" style="height: 20px" alt="addicon" />
+                    <img src="@/assets/add_icon.svg" style="height: 20px" alt="addicon" />
                 </div>
                 <div id="createText">Csoport létrehozása</div>
             </div>
@@ -22,7 +22,7 @@
     <ul id="grouplist">
         <li v-for="group in groups" :key="group.id" class="groupListItem" :title="group.name">
             <strong class="groupname">{{ group.name }}</strong>
-            <img src="src/assets/delete_icon.svg" alt="delete_friend_icon" class="deletegroup"
+            <img src="@/assets/delete_icon.svg" alt="delete_friend_icon" class="deletegroup"
                 @click="deletegroup(group.id)" />
             
             <Groupmember :id="group.id" :name="group.name"/>

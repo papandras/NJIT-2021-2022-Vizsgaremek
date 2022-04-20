@@ -27,7 +27,7 @@
         <ul id="userlist">
           <li v-for="user in users" :key="user.id" class="userListItem">
             <div class="username">{{ user.nev }}</div>
-            <img v-if="store.user.name != user.nev" src="src/assets/add_friend_icon.svg" alt="add_friend_icon"
+            <img v-if="store.user.name != user.nev" src="@/assets/add_friend_icon.svg" alt="add_friend_icon"
               class="friendicon" @click="addfriend(user.id)" />
           </li>
         </ul>
@@ -46,7 +46,7 @@
             <ul id="friendlist">
               <li v-for="friend in friends" :key="friend.id" class="userListItem relationitem" :title="friend.nev">
                 {{ friend[0].nev }}
-                <img src="src/assets/remove_friend_icon.svg" alt="add_friend_icon" class="friendicon"
+                <img src="@/assets/remove_friend_icon.svg" alt="add_friend_icon" class="friendicon"
                   @click="removefriend(friend[0].id)" />
               </li>
             </ul>
@@ -71,7 +71,7 @@
               <li v-for="friend in sentrequests" :key="friend[0].id" class="userListItem relationitem"
                 :title="friend[0].nev">
                 {{ friend[0].nev }}
-                <img src="src/assets/remove_friend_icon.svg" alt="add_friend_icon" class="friendicon"
+                <img src="@/assets/remove_friend_icon.svg" alt="add_friend_icon" class="friendicon"
                   @click="cancelrequest(friend[0].id)" />
               </li>
             </ul>
@@ -88,9 +88,9 @@
             <ul>
               <li v-for="user in friendrequests" :key="user.id" class="userListItem relationitem">
                 {{ user[0].nev }}
-                <img src="src/assets/block_user_icon.svg" alt="block_user_icon" class="blockicon"
+                <img src="@/assets/block_user_icon.svg" alt="block_user_icon" class="blockicon"
                   @click="reject(user[0].id)" />
-                <img src="src/assets/accept_friend_icon.svg" alt="add_friend_icon" class="friendicon"
+                <img src="@/assets/accept_friend_icon.svg" alt="add_friend_icon" class="friendicon"
                   @click="acceptfriend(user[0].id)" />
               </li>
             </ul>

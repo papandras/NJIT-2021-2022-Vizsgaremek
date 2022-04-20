@@ -5,7 +5,7 @@
           <li>
             <div>
               <div id="picturegrid">
-                <img src="src/assets/default_user.svg" alt="" />
+                <img src="@/assets/default_user.svg" alt="" />
                 <label id="sziaNev" :title="store.user.name">Szia {{ store.user.name.substring(0, 12) }}<span
                     v-if="store.user.name.length > 11">...</span></label>
                 <p id="counter">(<LogOutCounter></LogOutCounter>)</p>
