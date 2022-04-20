@@ -4,7 +4,7 @@
       <td>
         <input type="checkbox" :name="checkboxname" />
       </td>
-      <td>
+      <td class="imgtd">
         <img :src="imgsrc" :alt="type" />
       </td>
       <td>{{ title }}</td>
@@ -68,7 +68,7 @@ export default {
     const { checkboxname, type, title, size, lastedited, group } = toRefs(props)
   },
   computed: {
-    imgsrc(){
+    imgsrc() {
       return `@/assets/format_icons/${this.type}.svg`;
     }
   },
@@ -184,5 +184,15 @@ table td:nth-child(7) {
   border-left: 1px solid rgba(62, 76, 121, 0.4);
   border-right: 1px solid rgba(62, 76, 121, 0.4);
   border-bottom: 1px solid rgba(62, 76, 121, 0.5);
+}
+
+.imgtd{
+  position: relative;
+  height: 30px;
+}
+
+.imgtd > img {
+  height: 30px;
+  vertical-align: top;
 }
 </style>
