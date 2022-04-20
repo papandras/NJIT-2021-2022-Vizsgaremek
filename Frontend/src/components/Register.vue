@@ -20,7 +20,8 @@
         maxlength="20" required class="input" id="confirm" />
       <sub>{{ passwordConfirmLenght }}/20</sub>
       <input type="submit" value="Regisztrálok" id="regisztracio" />
-      <p>vagy</p>
+    </form>
+    <p>vagy</p>
       <button class="googleButton">
         <div class="google">
           <div id="googleImg">
@@ -29,7 +30,6 @@
           <div id="googleText">Regisztráció Google fiókkal</div>
         </div>
       </button>
-    </form>
   </div>
 </template>
 
@@ -209,7 +209,12 @@ input:focus {
   border: 2px solid #009688;
 }
 
+form + p {
+  display: none;
+}
+
 .googleButton {
+  display: none;
   border: none;
   border-radius: 5px;
   background-color: white;

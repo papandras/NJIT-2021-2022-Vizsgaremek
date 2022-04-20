@@ -181,7 +181,12 @@ form>input {
   outline: none;
 }
 
+form + p {
+  display: none;
+}
+
 .googleButton {
+  display: none;
   border: none;
   border-radius: 5px;
   background-color: white;
