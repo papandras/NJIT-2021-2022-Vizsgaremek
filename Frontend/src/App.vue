@@ -6,6 +6,7 @@
 *{
     padding:0;
     margin:0;
+    user-select: none;
 }
   body{
     background-color: #E9D8A6;
@@ -52,5 +53,20 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #009688; 
+}
+
+.sectionheader {
+  background-color: #009688;
+  color: rgb(245, 246, 249);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.sectioncontent {
+  padding: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 </style>

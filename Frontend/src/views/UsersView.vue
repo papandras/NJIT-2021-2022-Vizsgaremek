@@ -19,11 +19,11 @@
         <!-- Section vége -->
       </div>
       <div id="userlistDiv" v-if="users != null">
-        <div v-if="submitted">
+        <div v-if="submitted" class="sectionheader">
           Találat a következő keresésre: {{ searchvalue }}
         </div>
         <!-- Section: Felhasználók kilistázása -->
-        <div v-if="users == null || users.length == 0">Nincs találat</div>
+        <div v-if="users == null || users.length == 0" class="nocontentmessage result">Nincs találat</div>
         <ul id="userlist">
           <li v-for="user in users" :key="user.id" class="userListItem">
             <div class="username">{{ user.nev }}</div>
@@ -37,63 +37,69 @@
         <div id="leftblock">
           <div class="friends relationblock">
             <!-- Section: Elküldött és visszaigazolt barát kérések -->
-            <h1>Barátok</h1>
-            <p>visszaigazolt kérések</p>
-            <hr />
-            <div v-if="friends == null || friends.length == 0">
-              Jelenleg nincs egy barátod sem!
+            <div class="sectionheader">
+              <h1>Barátok</h1>
             </div>
-            <ul id="friendlist">
-              <li v-for="friend in friends" :key="friend.id" class="userListItem relationitem" :title="friend.nev">
-                {{ friend[0].nev }}
-                <img src="@/assets/remove_friend_icon.svg" alt="add_friend_icon" class="friendicon"
-                  @click="removefriend(friend[0].id)" />
-              </li>
-            </ul>
+            <div class="sectioncontent">
+              <div v-if="friends == null || friends.length == 0" class="nocontentmessage">
+                Jelenleg nincs egy barátod sem!
+              </div>
+              <ul id="friendlist">
+                <li v-for="friend in friends" :key="friend.id" class="userListItem relationitem" :title="friend.nev">
+                  {{ friend[0].nev }}
+                  <img src="@/assets/remove_friend_icon.svg" alt="add_friend_icon" class="friendicon"
+                    @click="removefriend(friend[0].id)" />
+                </li>
+              </ul>
+            </div>
             <!-- Section vége -->
           </div>
           <div class="groups relationblock">
             <!-- Section: Csoportok -->
-            <Groups/>
+            <Groups />
             <!-- Section vége -->
           </div>
         </div>
         <div id="rightblock">
           <div class="sentrequests relationblock">
             <!-- Section: Elküldött de még nem visszaigazolt barát kérések -->
-            <h1>Függőben lévő jelöléseid</h1>
-            <p>visszaigazolatlan kérések</p>
-            <hr>
-            <div v-if="sentrequests == null || sentrequests.length == 0">
-              Nincs elküldött kérésed!
+            <div class="sectionheader">
+              <h1>Függőben lévő jelöléseid</h1>
             </div>
-            <ul id="friendlist">
-              <li v-for="friend in sentrequests" :key="friend[0].id" class="userListItem relationitem"
-                :title="friend[0].nev">
-                {{ friend[0].nev }}
-                <img src="@/assets/remove_friend_icon.svg" alt="add_friend_icon" class="friendicon"
-                  @click="cancelrequest(friend[0].id)" />
-              </li>
-            </ul>
+            <div class="sectioncontent">
+              <div v-if="sentrequests == null || sentrequests.length == 0" class="nocontentmessage">
+                Nincs elküldött kérésed!
+              </div>
+              <ul id="friendlist">
+                <li v-for="friend in sentrequests" :key="friend[0].id" class="userListItem relationitem"
+                  :title="friend[0].nev">
+                  {{ friend[0].nev }}
+                  <img src="@/assets/remove_friend_icon.svg" alt="add_friend_icon" class="friendicon"
+                    @click="cancelrequest(friend[0].id)" />
+                </li>
+              </ul>
+            </div>
             <!-- Section vége -->
           </div>
           <div class="friendrequests relationblock">
             <!-- Section: Beérkezett barát kérések -->
-            <h1>Bejelöltek barátnak</h1>
-            <p>ezek a kérések visszaigazolásra várnak</p>
-            <hr />
-            <div v-if="friendrequests == null || friendrequests.length == 0">
-              Nincs függőben lévő jelölésed!
+            <div class="sectionheader">
+              <h1>Bejelöltek barátnak</h1>
             </div>
-            <ul>
-              <li v-for="user in friendrequests" :key="user.id" class="userListItem relationitem">
-                {{ user[0].nev }}
-                <img src="@/assets/block_user_icon.svg" alt="block_user_icon" class="blockicon"
-                  @click="reject(user[0].id)" />
-                <img src="@/assets/accept_friend_icon.svg" alt="add_friend_icon" class="friendicon"
-                  @click="acceptfriend(user[0].id)" />
-              </li>
-            </ul>
+            <div class="sectioncontent">
+              <div v-if="friendrequests == null || friendrequests.length == 0" class="nocontentmessage">
+                Nincs függőben lévő jelölésed!
+              </div>
+              <ul>
+                <li v-for="user in friendrequests" :key="user.id" class="userListItem relationitem">
+                  {{ user[0].nev }}
+                  <img src="@/assets/block_user_icon.svg" alt="block_user_icon" class="blockicon"
+                    @click="reject(user[0].id)" />
+                  <img src="@/assets/accept_friend_icon.svg" alt="add_friend_icon" class="friendicon"
+                    @click="acceptfriend(user[0].id)" />
+                </li>
+              </ul>
+            </div>
             <!-- Section vége -->
           </div>
         </div>

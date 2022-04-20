@@ -7,13 +7,14 @@
         <p v-if="groupmembers == null || groupmembers.length == 0">Nincs tag hozzárendelve!</p>
         <div id="addfield">
             <p>Tag hozzáadása</p>
-            <select :id="name">
+            <select :id="name" v-if="friendnames != null && friendnames.length > 0">
                 <option v-for="friend in friendnames" :value="friend[0].id" :id="name + '-' + friend[0].nev">{{
                     friend[0].nev
                 }}
                 </option>
             </select>
-            <button @click="addmember()">Hozzáadás</button>
+            <button @click="addmember()" v-if="friendnames != null && friendnames.length > 0">Hozzáadás</button>
+            <div v-if="friendnames == null || friendnames.length == 0" class="noresultmessage">Nincsen barátod</div>
         </div>
     </div>
 </template>
@@ -146,5 +147,15 @@ button:active {
     padding-top: 10px;
     padding-bottom: 10px;
     width: 90%;
+}
+
+.noresultmessage {
+    text-align: center;
+    font-size: 120%;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    opacity: 0.3;
 }
 </style>

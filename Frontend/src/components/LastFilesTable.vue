@@ -1,11 +1,11 @@
 <template>
   <div class="table">
-    <h1>{{title}}</h1>
+    <h1>{{ title }}</h1>
     <table v-if="lastfiles != null">
       <div class="thead">
         <tr>
           <th>
-            <input type="checkbox" name="" id="" />
+            <input type="checkbox" name="" id="" @click="checkall" />
           </th>
           <th>Típus</th>
           <th>Dokumentum neve</th>
@@ -17,9 +17,9 @@
       </div>
       <TableRow class="tablerow" v-if="lastfiles != null && lastfiles.message == null" v-for="file in lastfiles"
         :key="file.name" :type="file.type" :title="file.name" :size="file.size" :lastedited="file.updated"
-        :group="file.shared_group_id" :refresh="refresh" :id="file.id"></TableRow>
+        :group="file.shared_group_id" :refresh="refresh" :id="file.id"/>
     </table>
-    <div v-if="nofilemessage != null">
+    <div v-if="nofilemessage != null" class="nofilemessage">
       {{ nofilemessage }}
     </div>
   </div>
@@ -35,7 +35,8 @@ export default {
   data() {
     return {
       lastfiles: null,
-      nofilemessage: null
+      nofilemessage: null,
+      checked: false
     }
   },
   props: {
@@ -45,6 +46,15 @@ export default {
   },
   async mounted() {
     //this.getlastfiles();
+  },
+  methods: {
+    checkall() {
+      let checkboxes = document.getElementById("lastfiles").querySelectorAll("input[type=checkbox]")
+      this.checked = !this.checked
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = this.checked;
+      }
+    }
   },
   watch: {
     lastfilesobject(newfiledata, oldfiledata) {
@@ -105,5 +115,14 @@ th:last-child {
 
 .thead {
   color: rgb(179, 187, 198);
+}
+
+.nofilemessage {
+  text-align: center;
+  font-size: 120%;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding-bottom: 50px;
+  opacity: 0.3;
 }
 </style>

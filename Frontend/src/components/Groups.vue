@@ -1,33 +1,35 @@
 <template>
-    <h1>Csoportjaid</h1>
-    <p>a fájlokat csoportokkal lehet megosztani</p>
-    <hr />
-    <div v-if="groups == null || groups.length == 0">
-        Jelenleg nincs egy csoportod sem!
+    <div class="sectionheader">
+        <h1>Csoportjaid</h1>
     </div>
-    <div>
-        <button class="createButton" @click="showform = !showform">
-            <div class="create">
-                <div id="createImg">
-                    <img src="@/assets/add_icon.svg" style="height: 20px" alt="addicon" />
+    <div class="sectioncontent">
+        <div>
+            <button class="createButton" @click="showform = !showform">
+                <div class="create">
+                    <div id="createImg">
+                        <img src="@/assets/add_icon.svg" style="height: 20px" alt="addicon" />
+                    </div>
+                    <div id="createText">Csoport létrehozása</div>
                 </div>
-                <div id="createText">Csoport létrehozása</div>
-            </div>
-        </button>
-        <form @submit.prevent="createGroup" v-if="showform" id="addgroup">
-            <input type="text" id="name" placeholder="Csoport neve" required v-model="newgroupname">
-            <input type="submit" value="Létrehozás" id="submit">
-        </form>
+            </button>
+            <form @submit.prevent="createGroup" v-if="showform" id="addgroup">
+                <input type="text" id="name" placeholder="Csoport neve" required v-model="newgroupname">
+                <input type="submit" value="Létrehozás" id="submit">
+            </form>
+        </div>
+        <ul id="grouplist" v-if="groups != null && groups.length > 0">
+            <li v-for="group in groups" :key="group.id" class="groupListItem" :title="group.name">
+                <strong class="groupname">{{ group.name }}</strong>
+                <img src="@/assets/delete_icon.svg" alt="delete_friend_icon" class="deletegroup"
+                    @click="deletegroup(group.id)" />
+
+                <Groupmember :id="group.id" :name="group.name" />
+            </li>
+        </ul>
+        <div v-if="groups == null || groups.length == 0" class="noresultmessage">
+            Jelenleg nincs egy csoportod sem!
+        </div>
     </div>
-    <ul id="grouplist">
-        <li v-for="group in groups" :key="group.id" class="groupListItem" :title="group.name">
-            <strong class="groupname">{{ group.name }}</strong>
-            <img src="@/assets/delete_icon.svg" alt="delete_friend_icon" class="deletegroup"
-                @click="deletegroup(group.id)" />
-            
-            <Groupmember :id="group.id" :name="group.name"/>
-        </li>
-    </ul>
 </template>
 
 <script>
@@ -41,7 +43,7 @@ export default {
             newgroupname: "",
         }
     },
-    components:{
+    components: {
         Groupmember
     },
     methods: {
@@ -57,14 +59,20 @@ export default {
             axios.get("http://localhost:8881/api/user/groups", {
                 withCredentials: true,
             }).then(response => {
-                this.groups = response.data
+                if (response.data.message == null) {
+                    this.groups = response.data
+                }
             })
         },
         deletegroup(id) {
-            axios.delete(`http://localhost:8881/api/group/${id}/delete`, { withCredentials: true, mode: "no-cors" })
-                .then(response => {
-                    this.getGroups()
-                })
+            let conf = confirm("Biztosan törölni akarod?")
+            if (conf) {
+                axios.delete(`http://localhost:8881/api/group/${id}/delete`, { withCredentials: true, mode: "no-cors" })
+                    .then(response => {
+                        this.getGroups()
+                    })
+            }
+
         },
     },
     mounted() {
@@ -74,9 +82,10 @@ export default {
 </script>
 
 <style scoped>
-p{
+p {
     width: 95%;
 }
+
 #submit {
     background-color: #009688;
     color: white;
@@ -175,22 +184,32 @@ label {
     display: none;
 }
 
-.groupname{
+.groupname {
     font-size: 120%;
     margin-bottom: 20px;
 }
 
-#addgroup{
+#addgroup {
     margin: auto;
     margin-top: 20px;
-    border-top: 1px solid rgba(0,150,136, 0.8);
-    border-left: 1px solid rgba(0,150,136, 0.4);
-    border-right: 1px solid rgba(0,150,136, 0.4);
-    border-bottom: 1px solid rgba(0,150,136, 0.5);
+    border-top: 1px solid rgba(0, 150, 136, 0.8);
+    border-left: 1px solid rgba(0, 150, 136, 0.4);
+    border-right: 1px solid rgba(0, 150, 136, 0.4);
+    border-bottom: 1px solid rgba(0, 150, 136, 0.5);
     padding-top: 10px;
     padding-bottom: 10px;
     width: 50%;
     display: block;
-    background-color: rgba(0,150,136, 0.1);
+    background-color: rgba(0, 150, 136, 0.1);
+}
+
+.noresultmessage {
+    text-align: center;
+    font-size: 120%;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    opacity: 0.3;
 }
 </style>

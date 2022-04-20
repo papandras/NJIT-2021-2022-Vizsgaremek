@@ -27,7 +27,7 @@
 
   .friends, .groups, .sentrequests, .friendrequests{
     height: 400px;
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
   }
   
@@ -53,6 +53,10 @@
   #keresesInput:focus {
     border: 2px solid #009688;
   }
+
+  #keresesGomb:active {
+    border: 2px solid #E9D8A6;
+  }
   
   #userlistDiv {
     grid-area: users;
@@ -62,9 +66,6 @@
   .relationblock, #userlistDiv {
     background-color: white;
     border-radius: 10px;
-    padding: 20px;
-    padding-left: 50px;
-    padding-right: 50px;
     text-align: center;
     margin: 10px;
   }
@@ -150,4 +151,18 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #009688; 
+}
+
+.nocontentmessage {
+  text-align: center;
+  font-size: 120%;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding-top: 150px;
+  opacity: 0.3;
+}
+
+.result {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="settings">
-        <Menu id="menu" activepage="index"></Menu>
+        <Menu id="menu" activepage="owned"></Menu>
         <div id="content">
             <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles" title="Saját fájlok"/>
         </div>

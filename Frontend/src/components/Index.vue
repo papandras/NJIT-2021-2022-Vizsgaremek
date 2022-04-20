@@ -3,19 +3,28 @@
     <Menu id="menu" activepage="index"></Menu>
     <div id="content">
       <div id="last_file">
-        <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles" title="Legutóbbi fájlok"></LastFilesTable>
+        <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles" title="Legutóbbi fájlok" id="lastfiles" />
       </div>
       <div id="stat">
-        <StatElement icon="media.png" typeName="Media file" size="15" progress="80" color="#03a0c2"></StatElement>
-        <StatElement icon="image.png" typeName="Images" size="10" progress="60" color="#1cc842"></StatElement>
-        <StatElement icon="document.png" typeName="Documents" size="7" progress="40" color="#ffc720"></StatElement>
-        <StatElement icon="other.png" typeName="Other files" size="5" progress="30" color="#9a45ee"></StatElement>
+        <h1>Statisztika</h1>
+        <div>
+          <StatElement class="statelement" icon="media.png" typeName="Média fájlok" size="15" progress="80"
+            color="#03a0c2" />
+          <StatElement class="statelement" icon="image.png" typeName="Képek" size="10" progress="60" color="#1cc842" />
+          <StatElement class="statelement" icon="document.png" typeName="Dokumentumok" size="7" progress="40"
+            color="#ffc720" />
+          <StatElement class="statelement" icon="other.png" typeName="Egyéb fájlok" size="5" progress="30"
+            color="#9a45ee" />
+        </div>
       </div>
       <div id="upload">
-        <form method="post" @submit.prevent="uploadfile" enctype="multipart/form-data">
-          <input type="file" name="file" id="keresesInput">
-          <button id="keresesGomb">Új fájl feltöltése</button>
-        </form>
+        <h1>Fájl feltöltése</h1>
+        <div>
+          <form method="post" @submit.prevent="uploadfile" enctype="multipart/form-data">
+            <input type="file" name="file" id="selectfile">
+            <button id="keresesGomb">Feltöltés</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -41,22 +50,27 @@ export default {
   methods: {
     uploadfile() {
       let input = document.querySelector("input[type=file]");
-      let data = new FormData()
-      data.append('file', input.files[0]);
-      try {
-        axios
-          .post(
-            "http://localhost:8881/api/file/upload",
-            data,
-            { withCredentials: true, mode: "no-cors", Accept: "application/json" }
-          )
-          .then((response) => {
-            this.getlastfiles();
-          });
-
+      if (input.files[0] == null) {
+        alert("Nem választottál ki fájlt!")
       }
-      catch (e) {
-        console.log(e.response.data.errors);
+      else {
+        let data = new FormData()
+        data.append('file', input.files[0]);
+        try {
+          axios
+            .post(
+              "http://localhost:8881/api/file/upload",
+              data,
+              { withCredentials: true, mode: "no-cors", Accept: "application/json" }
+            )
+            .then((response) => {
+              this.getlastfiles();
+            });
+
+        }
+        catch (e) {
+          console.log(e.response.data.errors);
+        }
       }
     },
     getlastfiles() {
@@ -95,20 +109,21 @@ export default {
 #content {
   grid-area: content;
   display: grid;
-  grid-template-columns: 5fr 5fr;
-  grid-template-rows: 4fr 4fr;
+  grid-template-columns: repeat(2, minmax(300px, 1fr));
+  grid-template-rows: repeat(2, minmax(300px, 1fr));
   grid-template-areas:
     "lastfiles lastfiles"
     "stat upload";
+  width: 90%;
+  margin: auto;
+  position: relative;
 }
 
 #last_file {
   grid-area: lastfiles;
   background-color: #C4C4C4;
-  width: 90%;
+  width: 100%;
   border-radius: 5px;
-  margin: auto;
-  display: block;
   margin-top: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -117,26 +132,47 @@ export default {
 #stat {
   grid-area: stat;
   background-color: #C4C4C4;
-  width: 90%;
+  width: 99%;
+  height: 50%;
   border-radius: 5px;
-  margin: auto;
-  display: block;
-  margin-left: 85px;
   margin-top: 20px;
+  position: absolute;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#stat>h1 {
+  position: absolute;
+  left: 10px;
 }
 
 #upload {
   grid-area: upload;
   background-color: #C4C4C4;
+  width: 99%;
+  height: 50%;
   border-radius: 5px;
-  width: 90%;
   margin: auto;
   display: block;
+  margin-top: 20px;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#upload>h1 {
+  position: absolute;
+  left: 10px;
 }
 
 form {
   display: inline-block;
-  width: 80%;
+  width: fit-content;
+  text-align: center;
 }
 
 #keresesGomb:active {
@@ -145,5 +181,17 @@ form {
 
 #keresesInput:focus {
   border: 2px solid #009688;
+}
+
+.statelement {
+  display: block;
+}
+
+#selectfile {
+  display: block;
+}
+
+h1 {
+  color: rgb(132, 148, 165);
 }
 </style>

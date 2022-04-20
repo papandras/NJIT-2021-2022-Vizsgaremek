@@ -5,7 +5,7 @@
         <input type="checkbox" :name="checkboxname" />
       </td>
       <td>
-        <img src="#" :alt="type" />
+        <img :src="imgsrc" :alt="type" />
       </td>
       <td>{{ title }}</td>
       <td>{{ size }}</td>
@@ -18,8 +18,8 @@
     <tr class="menurow" v-if="minimenu">
       <td></td>
       <td></td>
-      <td @click="download(type, title)" class="menuitem">Letöltés <img src="@/assets/download_icon.svg"
-          alt="Letöltés" id="downloadicon"><br></td>
+      <td @click="download(type, title)" class="menuitem">Letöltés <img src="@/assets/download_icon.svg" alt="Letöltés"
+          id="downloadicon"><br></td>
       <td class="menuitem">
         <p>Megosztás</p>
         <img src="@/assets/share_icon.svg" alt="Megosztás" id="shareicon">
@@ -67,15 +67,14 @@ export default {
   setup(props) {
     const { checkboxname, type, title, size, lastedited, group } = toRefs(props)
   },
+  computed: {
+    imgsrc(){
+      return `@/assets/format_icons/${this.type}.svg`;
+    }
+  },
   methods: {
     showmenu() {
       this.minimenu = !this.minimenu;
-      switch (this.minimenu) {
-        case true:
-          document.getElementById("minimenu").style.display = "block";
-        default:
-          document.getElementById("minimenu").style.display = "none";
-      }
     },
     download(type, title) {
       let filename = `${this.store.user.name}-${title}.${type}`;

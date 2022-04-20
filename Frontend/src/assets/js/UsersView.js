@@ -58,9 +58,6 @@ export default {
         .then((response) => {
           this.users = response.data.data;
           this.submitted = true;
-          setTimeout(() => {
-            this.submitted = false;
-          }, 5000);
         });
     },
     addfriend(id) {
@@ -137,9 +134,6 @@ export default {
           this.searchvalue = value;
           this.users = response.data.data;
           this.submitted = true;
-          setTimeout(() => {
-            this.submitted = false;
-          }, 5000);
         });
     }
   },
