@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <tr>
       <td>
         <input type="checkbox" :name="checkboxname" />
@@ -16,9 +16,11 @@
       </td>
     </tr>
     <tr class="menurow" v-if="minimenu">
-      <td colspan="2" @click="download(type, title)">Letöltés <img src="src/assets/download_icon.svg" alt="Letöltés"
-          id="downloadicon"><br></td>
-      <td colspan="2">
+      <td></td>
+      <td></td>
+      <td @click="download(type, title)" class="menuitem">Letöltés <img src="src/assets/download_icon.svg"
+          alt="Letöltés" id="downloadicon"><br></td>
+      <td class="menuitem">
         <p>Megosztás</p>
         <img src="src/assets/share_icon.svg" alt="Megosztás" id="shareicon">
         <div v-if="group == null">
@@ -32,8 +34,10 @@
         </div>
         <span v-if="group != null" class="removegroup" @click="unshare(id)">[Megosztás visszavonása]</span>
       </td>
-      <td colspan="2" @click="deletefile(type, title)">Törlés <img src="src/assets/delete_icon.svg" alt="Törlés"
+      <td @click="deletefile(type, title)" class="menuitem">Törlés <img src="src/assets/delete_icon.svg" alt="Törlés"
           id="deleteicon"><br></td>
+      <td></td>
+      <td></td>
     </tr>
   </div>
 </template>
@@ -55,7 +59,7 @@ export default {
   },
   data() {
     return {
-      minimenu: true,
+      minimenu: false,
       store: useAuth(),
       groups: null,
     }
@@ -140,18 +144,8 @@ export default {
 }
 
 tr:nth-child(2n+1)>td {
-  padding-top: 10px;
   text-align: center;
   width: 20%;
-}
-
-tr:nth-child(2n)>td {
-  text-align: center;
-  border-top: 2px solid black;
-}
-
-tr:nth-child(2n) {
-  padding-bottom: 10px;
 }
 
 .removegroup {
@@ -164,5 +158,32 @@ tr:nth-child(2n) {
 
 .removegroup:active {
   color: blue
+}
+
+table td:nth-child(1),
+table td:nth-child(2),
+table td:nth-child(7) {
+  width: 10%;
+}
+
+.row {
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+}
+
+.menurow {
+  text-align: center;
+}
+
+.menuitem {
+  border: 2px solid black;
+  border-radius: 5px;
+  border-top: 1px solid rgba(62, 76, 121, 0.8);
+  border-left: 1px solid rgba(62, 76, 121, 0.4);
+  border-right: 1px solid rgba(62, 76, 121, 0.4);
+  border-bottom: 1px solid rgba(62, 76, 121, 0.5);
 }
 </style>

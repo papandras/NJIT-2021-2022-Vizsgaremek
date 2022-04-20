@@ -2,16 +2,8 @@
   <div class="index">
     <Menu id="menu" activepage="index"></Menu>
     <div id="content">
-      <div id="search">
-        <form method="post" @submit.prevent="uploadfile" enctype="multipart/form-data">
-          <input type="file" name="file" id="keresesInput">
-          <button id="keresesGomb">Új fájl feltöltése</button>
-        </form>
-
-      </div>
       <div id="last_file">
-        <h1>Legutóbbi fájlok</h1>
-        <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles"></LastFilesTable>
+        <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles" title="Legutóbbi fájlok"></LastFilesTable>
       </div>
       <div id="stat">
         <StatElement icon="media.png" typeName="Media file" size="15" progress="80" color="#03a0c2"></StatElement>
@@ -19,7 +11,12 @@
         <StatElement icon="document.png" typeName="Documents" size="7" progress="40" color="#ffc720"></StatElement>
         <StatElement icon="other.png" typeName="Other files" size="5" progress="30" color="#9a45ee"></StatElement>
       </div>
-      <div id="upload"></div>
+      <div id="upload">
+        <form method="post" @submit.prevent="uploadfile" enctype="multipart/form-data">
+          <input type="file" name="file" id="keresesInput">
+          <button id="keresesGomb">Új fájl feltöltése</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -36,8 +33,8 @@ export default {
     LastFilesTable,
     StatElement
   },
-  data(){
-    return{
+  data() {
+    return {
       lastfiles: null,
     }
   },
@@ -77,7 +74,7 @@ export default {
       }
     }
   },
-  mounted(){
+  mounted() {
     this.getlastfiles();
   }
 };
@@ -99,20 +96,10 @@ export default {
   grid-area: content;
   display: grid;
   grid-template-columns: 5fr 5fr;
-  grid-template-rows: 2fr 4fr 4fr;
+  grid-template-rows: 4fr 4fr;
   grid-template-areas:
-    "search search"
     "lastfiles lastfiles"
     "stat upload";
-}
-
-#search {
-  grid-area: search;
-  background-color: #C4C4C4;
-  border-radius: 5px;
-  width: 90%;
-  margin: auto;
-  display: block;
 }
 
 #last_file {
@@ -122,6 +109,9 @@ export default {
   border-radius: 5px;
   margin: auto;
   display: block;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #stat {
@@ -137,6 +127,11 @@ export default {
 
 #upload {
   grid-area: upload;
+  background-color: #C4C4C4;
+  border-radius: 5px;
+  width: 90%;
+  margin: auto;
+  display: block;
 }
 
 form {
