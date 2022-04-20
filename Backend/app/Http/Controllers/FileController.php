@@ -84,4 +84,14 @@ class FileController extends Controller
             "message" => "A fájl sikeresen megosztva!"
         ]);
     }
+
+    public function unshare(File $id)
+    {
+        $id->group_id = null;
+        $id->update();
+
+        return response([
+            "message" => "Megosztás sikeresen visszavonva!"
+        ]);
+    }
 }

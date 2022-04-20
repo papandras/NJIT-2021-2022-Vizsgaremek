@@ -30,7 +30,7 @@
           </select>
           <button @click="share(id)">Megosztom</button>
         </div>
-        <span v-if="group != null">[Megosztás visszavonása]</span>
+        <span v-if="group != null" class="removegroup" @click="unshare(id)">[Megosztás visszavonása]</span>
       </td>
       <td colspan="2" @click="deletefile(type, title)">Törlés <img src="src/assets/delete_icon.svg" alt="Törlés"
           id="deleteicon"><br></td>
@@ -107,6 +107,15 @@ export default {
         .then(response => {
           this.refresh()
         })
+    },
+    unshare(id) {
+      let conf = confirm("Biztosan visszavonod a megosztást?")
+      if (conf) {
+        axios.put(`http://localhost:8881/api/file/${id}/unshare`, {}, { withCredentials: true })
+          .then(response => {
+            this.refresh()
+          })
+      }
     }
   },
   mounted() {
@@ -143,5 +152,17 @@ tr:nth-child(2n)>td {
 
 tr:nth-child(2n) {
   padding-bottom: 10px;
+}
+
+.removegroup {
+  cursor: pointer;
+}
+
+.removegroup:hover {
+  color: red
+}
+
+.removegroup:active {
+  color: blue
 }
 </style>
