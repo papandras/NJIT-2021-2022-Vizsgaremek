@@ -22,6 +22,7 @@ class FileResource extends JsonResource
         $filename = substr($filename, 0, strlen($filename)-$typelength);
         
         return [
+            "id" => $this->id,
             "owner_id" => $this->user_id,
             "type" => $this->type,
             "name" => $filename,

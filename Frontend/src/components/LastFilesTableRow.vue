@@ -21,12 +21,16 @@
       <td colspan="2">
         <p>Megosztás</p>
         <img src="src/assets/share_icon.svg" alt="Megosztás" id="shareicon">
-        <select>
-          <option v-for="group in groups" :value="group.id">{{
-            group.name
-          }}
-          </option>
-        </select>
+        <div v-if="group == null">
+          <select :id="title">
+            <option v-for="group in groups" :value="group.id">{{
+              group.name
+            }}
+            </option>
+          </select>
+          <button @click="share(id)">Megosztom</button>
+        </div>
+        <span v-if="group != null">[Megosztás visszavonása]</span>
       </td>
       <td colspan="2" @click="deletefile(type, title)">Törlés <img src="src/assets/delete_icon.svg" alt="Törlés"
           id="deleteicon"><br></td>
@@ -40,6 +44,7 @@ import { useAuth } from "../store/auth.js";
 import axios from "axios";
 export default {
   props: {
+    id: Number,
     checkboxname: String,
     type: String,
     title: String,
@@ -52,7 +57,7 @@ export default {
     return {
       minimenu: true,
       store: useAuth(),
-      groups: null
+      groups: null,
     }
   },
   setup(props) {
@@ -80,16 +85,29 @@ export default {
         })
     },
     deletefile(type, title) {
-      let filename = `${this.store.user.name}-${title}.${type}`;
-      axios.delete(`http://localhost:8881/api/file/delete/${filename}`, { withCredentials: true });
+      let conf = confirm("Biztosan törli?")
+      if (conf) {
+        let filename = `${this.store.user.name}-${title}.${type}`;
+        axios.delete(`http://localhost:8881/api/file/delete/${filename}`, { withCredentials: true })
+          .then(response => {
+            this.refresh()
+          })
+      }
     },
     async getgroups() {
-            await axios.get("http://localhost:8881/api/user/groups", {
-                withCredentials: true,
-            }).then(response => {
-                this.groups = response.data
-            })
-        },
+      await axios.get("http://localhost:8881/api/user/groups", {
+        withCredentials: true,
+      }).then(response => {
+        this.groups = response.data
+      })
+    },
+    share(id) {
+      let group = document.getElementById(this.title).value
+      axios.put(`http://localhost:8881/api/file/${id}`, { group_id: group }, { withCredentials: true })
+        .then(response => {
+          this.refresh()
+        })
+    }
   },
   mounted() {
     this.getgroups()

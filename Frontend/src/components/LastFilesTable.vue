@@ -14,7 +14,7 @@
     </tr>
     </div>
     <TableRow class="tablerow" v-if="lastfiles != null && lastfiles.message == null" v-for="file in lastfiles" :key="file.name"
-      :type="file.type" :title="file.name" :size="file.size" :lastedited="file.updated" :group="file.shared_group_id" :refresh="refresh"></TableRow>
+      :type="file.type" :title="file.name" :size="file.size" :lastedited="file.updated" :group="file.shared_group_id" :refresh="refresh" :id="file.id"></TableRow>
   </table>
   <div v-if="nofilemessage != null">
     {{ nofilemessage }}

@@ -18,7 +18,7 @@ class FileController extends Controller
         ]);
 
         $filename = Auth::user()->name . "-" . $data['file']->getClientOriginalName();
-        
+
         if (count(File::where('title', $filename)->get()) == 0) {
             $request->file("file")->storeAs("storage", $filename);
 
@@ -40,15 +40,16 @@ class FileController extends Controller
         ]);
     }
 
-    public function getFiles($limit = null){
+    public function getFiles($limit = null)
+    {
 
-        if(is_null($limit)){
+        if (is_null($limit)) {
             return FileResource::collection(File::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->get());
         }
 
         $data = FileResource::collection(File::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->limit($limit)->get());
 
-        if(count($data) == 0){
+        if (count($data) == 0) {
             return response([
                 "message" => "Nincs feltöltött fájlod!"
             ]);
@@ -56,15 +57,31 @@ class FileController extends Controller
         return $data;
     }
 
-    public function download($filename){
-        return Storage::download("storage/".$filename);
+    public function download($filename)
+    {
+        return Storage::download("storage/" . $filename);
     }
 
-    public function delete($filename){
-        Storage::delete("storage/".$filename);
+    public function delete($filename)
+    {
+        Storage::delete("storage/" . $filename);
         File::where('title', $filename)->delete();
         return response([
             "message" => "A fájl sikeresen törölve"
+        ]);
+    }
+
+    public function sharewithgroup(Request $request, File $id)
+    {
+        $groupid = $request->validate([
+            "group_id" => "required|exists:groups,id",
+        ]);
+
+        File::where("title", $id->title)->update($groupid);
+
+        return $id;
+        return response([
+            "message" => "A fájl sikeresen megosztva!"
         ]);
     }
 }

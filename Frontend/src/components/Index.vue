@@ -144,7 +144,7 @@ form {
   width: 80%;
 }
 
-#ujFajl:active {
+#keresesGomb:active {
   border: 2px solid #c4c4c4;
 }
 
