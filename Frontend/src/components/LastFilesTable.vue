@@ -17,10 +17,15 @@
       </div>
       <TableRow class="tablerow" v-if="lastfiles != null && lastfiles.message == null" v-for="file in lastfiles"
         :key="file.name" :type="file.type" :title="file.name" :size="file.size" :lastedited="file.updated"
-        :group="file.shared_group_id" :refresh="refresh" :id="file.id"/>
+        :group="file.shared_group_id" :refresh="refresh" :id="file.id" />
     </table>
     <div v-if="nofilemessage != null" class="nofilemessage">
       {{ nofilemessage }}
+    </div>
+    <div class="buttons">
+      <button class="button downloadbutton">Letöltés</button>
+      <button class="button sharebutton">Megosztás</button>
+      <button class="button deletebutton">Törlés</button>
     </div>
   </div>
 </template>
@@ -42,14 +47,15 @@ export default {
   props: {
     lastfilesobject: Object,
     refresh: Function,
-    title: String
+    title: String,
+    name: String
   },
   async mounted() {
     //this.getlastfiles();
   },
   methods: {
     checkall() {
-      let checkboxes = document.getElementById("lastfiles").querySelectorAll("input[type=checkbox]")
+      let checkboxes = document.getElementById(this.name).querySelectorAll("input[type=checkbox]")
       this.checked = !this.checked
       for (let i = 0; i < checkboxes.length; i++) {
         checkboxes[i].checked = this.checked;
@@ -124,5 +130,32 @@ th:last-child {
   text-transform: uppercase;
   padding-bottom: 50px;
   opacity: 0.3;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  border-radius: 5px;
+  border: none;
+  width: 150px;
+  height: 30px;
+  color: white;
+  display: inline-block;
+  margin: 10px;
+}
+
+.deletebutton {
+  background-color: #DC143C;
+}
+
+.sharebutton {
+  background-color: #0f52ba
+}
+
+.downloadbutton {
+  background-color: #35b14a;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="statelement">
-    <img :src="'@src/'+icon" alt="Type" />
+    <img :src="icon" :alt="typeName" />
     <span id="type" v-text="typeName"></span>
     <span id="size" v-text="size + ' GB'"></span>
     <ProgressBar :filled="progress" :color="color" maxsize="100" width="300" class="progress"></ProgressBar>
@@ -46,5 +46,9 @@ export default {
   display: block;
   width: 300px;
   grid-area: progress;
+}
+
+img {
+  height: 20px;
 }
 </style>

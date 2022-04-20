@@ -2,7 +2,7 @@
     <div class="settings">
         <Menu id="menu" activepage="owned"></Menu>
         <div id="content">
-            <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles" title="Saját fájlok"/>
+            <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles" title="Saját fájlok" id="myfiles" name="myfiles"/>
         </div>
     </div>
 </template>
@@ -26,7 +26,7 @@ export default {
         getlastfiles() {
             try {
                 axios
-                    .get("http://localhost:8881/api/file/get/3", {
+                    .get("http://localhost:8881/api/file/get", {
                         withCredentials: true,
                     })
                     .then((response) => {

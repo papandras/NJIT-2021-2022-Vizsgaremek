@@ -3,17 +3,17 @@
     <Menu id="menu" activepage="index"></Menu>
     <div id="content">
       <div id="last_file">
-        <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles" title="Legutóbbi fájlok" id="lastfiles" />
+        <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles" title="Legutóbbi fájlok" id="lastfiles" name="lastfiles" />
       </div>
       <div id="stat">
         <h1>Statisztika</h1>
         <div>
-          <StatElement class="statelement" icon="media.png" typeName="Média fájlok" size="15" progress="80"
+          <StatElement class="statelement" icon="@/assets/category_icons/music-file.svg" typeName="Média fájlok" size="15" progress="80"
             color="#03a0c2" />
-          <StatElement class="statelement" icon="image.png" typeName="Képek" size="10" progress="60" color="#1cc842" />
-          <StatElement class="statelement" icon="document.png" typeName="Dokumentumok" size="7" progress="40"
+          <StatElement class="statelement" icon="@/assets/category_icons/image-file.svg" typeName="Képek" size="10" progress="60" color="#1cc842" />
+          <StatElement class="statelement" icon="@/assets/category_icons/text-file.svg" typeName="Dokumentumok" size="7" progress="40"
             color="#ffc720" />
-          <StatElement class="statelement" icon="other.png" typeName="Egyéb fájlok" size="5" progress="30"
+          <StatElement class="statelement" icon="@/assets/category_icons/blank-file.svg" typeName="Egyéb fájlok" size="5" progress="30"
             color="#9a45ee" />
         </div>
       </div>
