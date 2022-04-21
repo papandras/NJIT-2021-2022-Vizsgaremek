@@ -1,6 +1,6 @@
 <template>
   <div class="settings">
-    <Menu id="menu" activepage=""></Menu>
+    <Menu id="menu" activepage="settings"></Menu>
     <div id="content">
       <div id="contentButtons">
         <div id="whiteBackground">
