@@ -21,11 +21,7 @@
             <RouterLink to="/myfiles" class="routerLink"><input type="button" value="Saját fájlok" id="owned" /></RouterLink>
           </li>
           <li>
-            <RouterLink to="#" class="routerLink"><input type="button" value="Kedvencek" id="stared" /></RouterLink>
-          </li>
-          <li>
-            <RouterLink to="#" class="routerLink"><input type="button" value="Törölt elemek" id="deleted" />
-            </RouterLink>
+            <RouterLink to="/shared" class="routerLink"><input type="button" value="Velem megosztva" id="shared" /></RouterLink>
           </li>
           <li>
             <RouterLink to="/users" class="routerLink"><input type="button" value="Felhasználók" id="users" />

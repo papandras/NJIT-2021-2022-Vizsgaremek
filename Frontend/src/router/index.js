@@ -33,6 +33,26 @@ const router = createRouter({
       }
     },
     {
+      path: "/myfiles",
+      name: "myfiles",
+      component: () => import("../views/MyFilesView.vue"),
+      meta: {
+        title: "5File | Saját fájlok",
+        requiresAuth: true,
+        requiredRole: "none"
+      }
+    },
+    {
+      path: "/shared",
+      name: "shared",
+      component: () => import("../views/SharedView.vue"),
+      meta: {
+        title: "5File | Velem megosztott fájlok",
+        requiresAuth: true,
+        requiredRole: "none"
+      }
+    },
+    {
       path: "/users",
       name: "users",
       component: () => import("../views/UsersView.vue"),
@@ -69,16 +89,6 @@ const router = createRouter({
       meta: {
         title: "5File | Kijelentkezés",
         requiresAuth: false,
-        requiredRole: "none"
-      }
-    },
-    {
-      path: "/myfiles",
-      name: "myfiles",
-      component: () => import("../views/MyFilesView.vue"),
-      meta: {
-        title: "5File | Saját fájlok",
-        requiresAuth: true,
         requiredRole: "none"
       }
     },
