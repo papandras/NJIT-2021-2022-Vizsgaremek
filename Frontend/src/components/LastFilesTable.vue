@@ -51,9 +51,6 @@ export default {
     title: String,
     name: String,
   },
-  async mounted() {
-    //this.getlastfiles();
-  },
   methods: {
     checkall() {
       let checkboxes = document.getElementById(this.name).querySelectorAll("input[type=checkbox]")

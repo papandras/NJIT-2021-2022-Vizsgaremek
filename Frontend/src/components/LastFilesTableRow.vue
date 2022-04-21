@@ -2,7 +2,7 @@
   <div class="row" :id="id">
     <tr>
       <td>
-        <input type="checkbox" :name="checkboxname" @click="additem(id, title, type)" />
+        <input type="checkbox" :name="checkboxname" @click="additem(id, title, type)" :id="`checkbox-${id}`" />
       </td>
       <td class="imgtd">
         <img :src="'src/assets/format_icons/'+type+'.svg'" :alt="type" :title="type" />
@@ -44,7 +44,6 @@
 </template>
 
 <script>
-import { toRefs } from "vue";
 import { useAuth } from "../store/auth.js";
 import axios from "axios";
 export default {
@@ -116,21 +115,20 @@ export default {
           })
       }
     },
-    additem(id, title, type) {
+    additem() {
       this.ischecked = !this.ischecked
-      /*this.checkedboxdata[id] = {
-        "id": id,
-        "title": title,
-        "type": type
-      }*/
-      console.log(this.ischecked)
     }
   },
   mounted() {
     this.getgroups()
+    this.ischecked = document.getElementById(`checkbox-${this.id}`).checked
   },
   watch: {
+    checked(newval, oldval){
+      this.ischecked = newval
+    },
     ischecked(newval, oldval){
+      document.getElementById(`checkbox-${this.id}`).checked = newval
       if(newval == true){
         this.checkedboxdata[this.id] = {
         "id": this.id,
