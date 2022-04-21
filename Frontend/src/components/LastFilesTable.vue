@@ -17,12 +17,12 @@
       </div>
       <TableRow class="tablerow" v-if="lastfiles != null && lastfiles.message == null" v-for="file in lastfiles"
         :key="file.name" :type="file.type" :title="file.name" :size="file.size" :lastedited="file.updated"
-        :group="file.shared_group_id" :refresh="refresh" :id="file.id" />
+        :group="file.shared_group_id" :refresh="refresh" :id="file.id + '-' + file.name" />
     </table>
     <div v-if="nofilemessage != null" class="nofilemessage">
       {{ nofilemessage }}
     </div>
-    <div class="buttons">
+    <div class="buttons" v-if="lastfiles != null">
       <button class="button downloadbutton">Letöltés</button>
       <button class="button sharebutton">Megosztás</button>
       <button class="button deletebutton">Törlés</button>
