@@ -146,15 +146,15 @@ export default {
       store,
     };
   },
-  mounted() {
+  async mounted() {
     this.$nextTick(function () {
       document.getElementById(this.activepage).style.backgroundColor = "#009688";
     })
     const store = useAuth();
-    axios.get("http://localhost:8881/api/getNewCookie", {
+    await axios.get("http://localhost:8881/api/getNewCookie", {
       withCredentials: true,
     });
-    axios
+    await axios
       .get("http://localhost:8881/api/user", { withCredentials: true })
       .then((response) => {
         store.user = response.data;
