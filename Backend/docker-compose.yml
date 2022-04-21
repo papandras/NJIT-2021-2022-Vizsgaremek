@@ -39,3 +39,14 @@ services:
         - "./docker/mysql/var/lib/mysql:/var/lib/mysql:rw"
     networks:
         - webapp
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "${PORT_PHPMYADMIN}:80"
+    environment:
+      # - PMA_ARBITRARY=1 # csatlakozás tetszőleges szerverhez
+      - PMA_HOST=db # A megadot szerverhez kapcsolódjon
+      # - PMA_USER=${DB_USERNAME}
+      # - PMA_PASSWORD=${DB_PASSWORD}
+    networks:
+      - webapp
