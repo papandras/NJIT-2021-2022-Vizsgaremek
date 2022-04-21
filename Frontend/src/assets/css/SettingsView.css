@@ -39,6 +39,7 @@
 #contentButtons{
     background-color: #C4C4C4;
     height: 500px;
+    border-radius: 5px;
 }
 
 #whiteBackground{
@@ -50,6 +51,7 @@
     margin-top: 50px; 
     height: 300px;
     width: 80%;
+    border-radius: 5px;
 }
 
 #left{
@@ -102,8 +104,4 @@
     border-radius: 50%;
     margin: auto;
     display: block;
-  }
-
-  #picturegrid{
-      grid-area: ;
   }
