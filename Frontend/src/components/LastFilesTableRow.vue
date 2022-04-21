@@ -1,11 +1,11 @@
 <template>
-  <div class="row">
+  <div class="row" :id="id">
     <tr>
       <td>
         <input type="checkbox" :name="checkboxname" />
       </td>
       <td class="imgtd">
-        <img :src="imgsrc" :alt="type" />
+        <img :src="'src/assets/format_icons/'+type+'.svg'" :alt="type" :title="type" />
       </td>
       <td>{{ title }}</td>
       <td>{{ size }}</td>
@@ -23,7 +23,8 @@
       <td class="menuitem">
         <p>Megosztás</p>
         <img src="@/assets/share_icon.svg" alt="Megosztás" id="shareicon">
-        <div v-if="group == null">
+        <p v-if="groups.message != null">Hozz létre csoportot a megosztáshoz!</p>
+        <div v-if="groups.message == null">
           <select :id="title">
             <option v-for="group in groups" :value="group.id">{{
               group.name
@@ -66,11 +67,6 @@ export default {
   },
   setup(props) {
     const { checkboxname, type, title, size, lastedited, group } = toRefs(props)
-  },
-  computed: {
-    imgsrc() {
-      return `@/assets/format_icons/${this.type}.svg`;
-    }
   },
   methods: {
     showmenu() {

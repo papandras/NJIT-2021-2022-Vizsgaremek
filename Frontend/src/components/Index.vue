@@ -8,12 +8,12 @@
       <div id="stat">
         <h1>Statisztika</h1>
         <div>
-          <StatElement class="statelement" icon="@/assets/category_icons/music-file.svg" typeName="Média fájlok" size="15" progress="80"
+          <StatElement class="statelement" icon="src/assets/category_icons/music-file.svg" typeName="Média fájlok" size="15" progress="80"
             color="#03a0c2" />
-          <StatElement class="statelement" icon="@/assets/category_icons/image-file.svg" typeName="Képek" size="10" progress="60" color="#1cc842" />
-          <StatElement class="statelement" icon="@/assets/category_icons/text-file.svg" typeName="Dokumentumok" size="7" progress="40"
+          <StatElement class="statelement" icon="src/assets/category_icons/image-file.svg" typeName="Képek" size="10" progress="60" color="#1cc842" />
+          <StatElement class="statelement" icon="src/assets/category_icons/text-file.svg" typeName="Dokumentumok" size="7" progress="40"
             color="#ffc720" />
-          <StatElement class="statelement" icon="@/assets/category_icons/blank-file.svg" typeName="Egyéb fájlok" size="5" progress="30"
+          <StatElement class="statelement" icon="src/assets/category_icons/blank-file.svg" typeName="Egyéb fájlok" size="5" progress="30"
             color="#9a45ee" />
         </div>
       </div>
@@ -110,7 +110,7 @@ export default {
   grid-area: content;
   display: grid;
   grid-template-columns: repeat(2, minmax(300px, 1fr));
-  grid-template-rows: repeat(2, minmax(300px, 1fr));
+  grid-template-rows: repeat(2, minmax(400px, 1fr));
   grid-template-areas:
     "lastfiles lastfiles"
     "stat upload";
@@ -127,6 +127,8 @@ export default {
   margin-top: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
+  display: flex;
+  align-content: center;
 }
 
 #stat {
