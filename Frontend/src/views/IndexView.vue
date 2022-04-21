@@ -5,9 +5,7 @@
       <p @click="newTab" id="newTab">+</p>
     </ul>
     <div id="indexpage">
-      <template v-for="tab in tabsCount" :key="tab">
-        <IndexPage v-if="tab == displayedIndex" :vmi="tab"></IndexPage>
-      </template>
+      <IndexPage />
     </div>
   </div>
 </template>
