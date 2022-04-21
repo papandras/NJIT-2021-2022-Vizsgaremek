@@ -1,0 +1,107 @@
+.users {
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+    grid-template-areas: "menu content";
+  }
+
+  #menu{
+    grid-area: menu;
+    position: fixed;
+  }
+  
+  #content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+  }
+
+#adatokGomb:active, #ertesitesekGomb:active, #biztonsagGomb:active, #rolunkGomb:active {
+    border: 2px solid #AAA5A5;
+    background-color: #AAA5A5;
+}
+
+#adatokGomb, #ertesitesekGomb, #biztonsagGomb, #rolunkGomb {
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+    width: 150px;
+    height: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    background-color: #C4C4C4;
+    color: black;
+    border: none;
+    opacity: 60%;
+}
+
+#contentButtons{
+    background-color: #C4C4C4;
+    height: 500px;
+    border-radius: 5px;
+}
+
+#whiteBackground{
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+    grid-template-areas: "left right image";
+    background-color: white;
+    margin: auto;
+    margin-top: 50px; 
+    height: 300px;
+    width: 80%;
+    border-radius: 5px;
+}
+
+#left{
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+#profilKepModositasGomb, #fiokTorleskGomb, #jelszoModositasGomb, #regiJelszoGomb, #ujJelszoGomb{
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+    width: 150px;
+    height: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    background-color: #C4C4C4;
+    color: black;
+    border: none;
+    opacity: 60%;
+}
+
+#profilKepModositasGomb:active, #fiokTorleskGomb:active, #jelszoModositasGomb:active, #regiJelszoGomb:active, #ujJelszoGomb:active{
+    border: 2px solid #AAA5A5;
+    background-color: #AAA5A5;
+}
+
+#right{
+    padding-top: 20px;
+}
+
+#modositasMentesGomb{
+    background-color: #009688;
+    color: white;
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    box-shadow: none;
+    border: none;
+}
+
+#modositasMentesGomb:active{
+    border: 2px solid #c4c4c4;
+}
+
+#picturegrid>img {
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    border-radius: 50%;
+    margin: auto;
+    display: block;
+  }
