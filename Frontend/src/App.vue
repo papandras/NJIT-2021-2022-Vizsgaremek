@@ -11,7 +11,7 @@
   body{
     background-color: #E9D8A6;
   }
-  #keresesInput{
+  #keresesInput, .input{
   width: 50%;
   height: 30px;
   border-color: none;
@@ -22,7 +22,7 @@
   display: inline-block;
 }
 
-#keresesGomb{
+#keresesGomb, .button{
   background-color: #009688;
   border-radius: 5px;
   border: none;
