@@ -5,7 +5,7 @@
         <input type="checkbox" :name="checkboxname" @click="additem(id, title, type)" :id="`checkbox-${id}`" />
       </td>
       <td class="imgtd">
-        <img :src="'src/assets/format_icons/'+type+'.svg'" :alt="type" :title="type" />
+        <img :src="'src/assets/format_icons/' + type + '.svg'" :alt="type" :title="type" />
       </td>
       <td>{{ title }}</td>
       <td>{{ size }}</td>
@@ -19,7 +19,9 @@
       <td></td>
       <td></td>
       <td @click="download(type, title)" class="menuitem">Letöltés <img src="@/assets/download_icon.svg" alt="Letöltés"
-          id="downloadicon"><br></td>
+          id="downloadicon"><br>
+        <button class="button downloadbutton" @click="downloadselected">Letöltés</button>
+      </td>
       <td class="menuitem">
         <p>Megosztás</p>
         <img src="@/assets/share_icon.svg" alt="Megosztás" id="shareicon">
@@ -31,12 +33,12 @@
             }}
             </option>
           </select>
-          <button @click="share(id)">Megosztom</button>
+          <button @click="share(id)" class="button sharebutton">Megosztom</button>
         </div>
         <span v-if="group != null" class="removegroup" @click="unshare(id)">[Megosztás visszavonása]</span>
       </td>
       <td @click="deletefile(type, title)" class="menuitem">Törlés <img src="@/assets/delete_icon.svg" alt="Törlés"
-          id="deleteicon"><br></td>
+          id="deleteicon"><br><button class="button deletebutton" @click="deleteselected">Törlés</button></td>
       <td></td>
       <td></td>
     </tr>
@@ -75,6 +77,7 @@ export default {
       let filename = `${this.store.user.name}-${title}.${type}`;
       axios.get(`http://localhost:8881/api/file/download/${filename}`, { withCredentials: true, responseType: 'arraybuffer' })
         .then(response => {
+          console.log(response.data)
           let blob = new Blob([response.data])
           let link = document.createElement('a')
           link.href = window.URL.createObjectURL(blob)
@@ -124,19 +127,19 @@ export default {
     this.ischecked = document.getElementById(`checkbox-${this.id}`).checked
   },
   watch: {
-    checked(newval, oldval){
+    checked(newval, oldval) {
       this.ischecked = newval
     },
-    ischecked(newval, oldval){
+    ischecked(newval, oldval) {
       document.getElementById(`checkbox-${this.id}`).checked = newval
-      if(newval == true){
+      if (newval == true) {
         this.checkedboxdata[this.id] = {
-        "id": this.id,
-        "title": this.title,
-        "type": this.type
+          "id": this.id,
+          "title": this.title,
+          "type": this.type
         }
       }
-      if(newval == false){
+      if (newval == false) {
         delete this.checkedboxdata[this.id]
       }
     }
@@ -203,13 +206,35 @@ table td:nth-child(7) {
   border-bottom: 1px solid rgba(62, 76, 121, 0.5);
 }
 
-.imgtd{
+.imgtd {
   position: relative;
   height: 30px;
 }
 
-.imgtd > img {
+.imgtd>img {
   height: 30px;
   vertical-align: top;
+}
+
+.button {
+  border-radius: 5px;
+  border: none;
+  width: 150px;
+  height: 30px;
+  color: white;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.deletebutton {
+  background-color: #DC143C;
+}
+
+.sharebutton {
+  background-color: #0f52ba;
+}
+
+.downloadbutton {
+  background-color: #35b14a;
 }
 </style>
