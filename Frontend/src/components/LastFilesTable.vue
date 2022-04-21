@@ -28,8 +28,8 @@
 
       <div class="sharemanybuttondiv">
         <button class="button sharebutton" @click="shareselected">Megosztás</button>
-        <p v-if="groups.message != null">Hozz létre csoportot a megosztáshoz!</p>
-        <div v-if="groups.message == null">
+        <p v-if="groups != null && groups.message != null">Hozz létre csoportot a megosztáshoz!</p>
+        <div v-if="groups == null && groups.message == null">
           <select id="sharemany">
             <option v-for="group in groups" :value="group.id">{{
               group.name
@@ -62,9 +62,9 @@ export default {
     }
   },
   props: {
-    lastfilesobject: Object,
-    refresh: Function,
-    title: String,
+    lastfilesobject: Object, //the object of the files to display
+    refresh: Function, //the function what is refreshing the files
+    title: String, //the title of the component
     name: String,
   },
   methods: {
