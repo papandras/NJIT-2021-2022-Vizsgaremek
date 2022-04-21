@@ -1,7 +1,8 @@
 <template>
   <div class="index">
-    <Menu id="menu" activepage="index"></Menu>
+    <Menu id="menu" activepage="index" v-if="showmenu"></Menu>
     <div id="content">
+    <img src="https://icon-library.com/images/menu-icon-button/menu-icon-button-25.jpg" class="closebtn" @click="closemenu">
       <div id="last_file">
         <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles" title="Legutóbbi fájlok" id="lastfiles" name="lastfiles" />
       </div>
@@ -45,6 +46,7 @@ export default {
   data() {
     return {
       lastfiles: null,
+      showmenu: true
     }
   },
   methods: {
@@ -86,10 +88,26 @@ export default {
       catch (e) {
         console.log(e.response.data.errors);
       }
+    },
+    closemenu() {
+      this.showmenu = !this.showmenu
+      if(!this.showmenu){
+        document.getElementsByClassName("index")[0].style.gridTemplateColumns = "0fr 1fr"
+      }
+      else{
+        if(window.innerWidth < 768){
+          document.getElementsByClassName("index")[0].style.gridTemplateColumns = "80% 20%"
+          this.showmenu = false
+        }
+        document.getElementsByClassName("index")[0].style.gridTemplateColumns = "10% 90%"
+      }
     }
   },
   mounted() {
     this.getlastfiles();
+    if(window.innerWidth < 768){
+        this.showmenu = false
+    }
   }
 };
 </script>
@@ -104,6 +122,7 @@ export default {
 
 #menu {
   grid-area: menu;
+  transition: 500ms ease;
 }
 
 #content {
@@ -195,5 +214,12 @@ form {
 
 h1 {
   color: rgb(132, 148, 165);
+}
+
+@media (max-width: 768px) {
+  .closebtn {
+    position: absolute;
+    left: 0
+  }
 }
 </style>

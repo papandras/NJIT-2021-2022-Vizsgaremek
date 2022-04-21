@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <ul>
+    <ul v-if="showmenu">
         <div>
           <li>
             <div>
@@ -56,6 +56,7 @@
   height: 100vh;
   background-color: #c4c4c4;
   position: fixed;
+  transition: 0.5s;
 }
 
 ul {
@@ -68,6 +69,7 @@ ul {
   padding: 20px;
   flex-direction: column;
   justify-content: space-between;
+  transition: 0.5s;
 }
 
 li input,
@@ -117,6 +119,47 @@ li input:active {
 #counter {
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .menu {
+    z-index: 999;
+    height: 100vh;
+    background-color: #c4c4c4;
+    position: fixed;
+    transition: 0.5s;
+    display: flex;
+    justify-content: center;
+  }
+
+  ul {
+    list-style-type: none;
+    background-color: #c4c4c4;
+    width: fit-content;
+    overflow: auto;
+    border-radius: 5px;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    transition: 0.5s;
+  }
+
+  li input,
+#sziaNev,
+label {
+  display: block;
+  margin: auto;
+  width: 200px;
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  text-align: center;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  border: none;
+}
+}
 </style>
 <script>
 import axios from "axios";
@@ -130,6 +173,16 @@ export default {
   },
   props: {
     activepage: String
+  },
+  data() {
+    return {
+      showmenu: true
+    }
+  },
+  methods:{
+    closemenu() {
+      this.showmenu = !this.showmenu
+    }
   },
   setup() {
     const store = useAuth();

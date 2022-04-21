@@ -69,4 +69,12 @@
   padding-left: 50px;
   padding-right: 50px;
 }
+
+.closebtn {
+  height: 50px;
+  position: absolute;
+  top: 0;
+  left: -5rem;
+  z-index: 999
+}
 </style>
