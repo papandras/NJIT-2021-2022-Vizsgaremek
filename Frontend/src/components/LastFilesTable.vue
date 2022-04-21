@@ -17,13 +17,13 @@
       </div>
       <TableRow class="tablerow" v-if="lastfiles != null && lastfiles.message == null" v-for="file in lastfiles"
         :key="file.name" :type="file.type" :title="file.name" :size="file.size" :lastedited="file.updated"
-        :group="file.shared_group_id" :refresh="refresh" :id="file.id + '-' + file.name" />
+        :group="file.shared_group_id" :refresh="refresh" :id="file.id + '-' + file.name" :checkedboxdata="checkedBoxesData" :checked="checked" />
     </table>
     <div v-if="nofilemessage != null" class="nofilemessage">
       {{ nofilemessage }}
     </div>
     <div class="buttons" v-if="lastfiles != null">
-      <button class="button downloadbutton">Letöltés</button>
+      <button class="button downloadbutton" @click="downloadselected">Letöltés</button>
       <button class="button sharebutton">Megosztás</button>
       <button class="button deletebutton">Törlés</button>
     </div>
@@ -41,14 +41,15 @@ export default {
     return {
       lastfiles: null,
       nofilemessage: null,
-      checked: false
+      checked: false,
+      checkedBoxesData: new Object()
     }
   },
   props: {
     lastfilesobject: Object,
     refresh: Function,
     title: String,
-    name: String
+    name: String,
   },
   async mounted() {
     //this.getlastfiles();
@@ -60,6 +61,9 @@ export default {
       for (let i = 0; i < checkboxes.length; i++) {
         checkboxes[i].checked = this.checked;
       }
+    },
+    downloadselected() {
+      console.log(this.checkedBoxesData);
     }
   },
   watch: {

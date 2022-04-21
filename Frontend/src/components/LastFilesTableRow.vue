@@ -2,7 +2,7 @@
   <div class="row" :id="id">
     <tr>
       <td>
-        <input type="checkbox" :name="checkboxname" />
+        <input type="checkbox" :name="checkboxname" @click="additem(id, title, type)" />
       </td>
       <td class="imgtd">
         <img :src="'src/assets/format_icons/'+type+'.svg'" :alt="type" :title="type" />
@@ -49,24 +49,24 @@ import { useAuth } from "../store/auth.js";
 import axios from "axios";
 export default {
   props: {
-    id: Number,
+    id: String,
     checkboxname: String,
     type: String,
     title: String,
     size: Number,
     lastedited: String,
     group: Number,
-    refresh: Function
+    refresh: Function,
+    checkedboxdata: Object,
+    checked: Boolean
   },
   data() {
     return {
       minimenu: false,
       store: useAuth(),
       groups: null,
+      ischecked: this.checked
     }
-  },
-  setup(props) {
-    const { checkboxname, type, title, size, lastedited, group } = toRefs(props)
   },
   methods: {
     showmenu() {
@@ -115,10 +115,33 @@ export default {
             this.refresh()
           })
       }
+    },
+    additem(id, title, type) {
+      this.ischecked = !this.ischecked
+      /*this.checkedboxdata[id] = {
+        "id": id,
+        "title": title,
+        "type": type
+      }*/
+      console.log(this.ischecked)
     }
   },
   mounted() {
     this.getgroups()
+  },
+  watch: {
+    ischecked(newval, oldval){
+      if(newval == true){
+        this.checkedboxdata[this.id] = {
+        "id": this.id,
+        "title": this.title,
+        "type": this.type
+        }
+      }
+      if(newval == false){
+        delete this.checkedboxdata[this.id]
+      }
+    }
   }
 }
 </script>
