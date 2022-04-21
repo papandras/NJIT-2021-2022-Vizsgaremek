@@ -17,21 +17,35 @@
       </div>
       <TableRow class="tablerow" v-if="lastfiles != null && lastfiles.message == null" v-for="file in lastfiles"
         :key="file.name" :type="file.type" :title="file.name" :size="file.size" :lastedited="file.updated"
-        :group="file.shared_group_id" :refresh="refresh" :id="file.id + '-' + file.name" :checkedboxdata="checkedBoxesData" :checked="checked" />
+        :group="file.shared_group_id" :refresh="refresh" :id="file.id + '-' + file.name"
+        :checkedboxdata="checkedBoxesData" :checked="checked" />
     </table>
     <div v-if="nofilemessage != null" class="nofilemessage">
       {{ nofilemessage }}
     </div>
     <div class="buttons" v-if="lastfiles != null">
       <button class="button downloadbutton" @click="downloadselected">Letöltés</button>
-      <button class="button sharebutton">Megosztás</button>
-      <button class="button deletebutton">Törlés</button>
+
+      <div class="sharemanybuttondiv">
+        <button class="button sharebutton" @click="shareselected">Megosztás</button>
+        <p v-if="groups.message != null">Hozz létre csoportot a megosztáshoz!</p>
+        <div v-if="groups.message == null">
+          <select id="sharemany">
+            <option v-for="group in groups" :value="group.id">{{
+              group.name
+            }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <button class="button deletebutton" @click="deleteselected">Törlés</button>
     </div>
   </div>
 </template>
 
 <script>
 import TableRow from "./LastFilesTableRow.vue";
+import { useAuth } from "../store/auth.js";
 import axios from "axios";
 export default {
   components: {
@@ -42,7 +56,9 @@ export default {
       lastfiles: null,
       nofilemessage: null,
       checked: false,
-      checkedBoxesData: new Object()
+      checkedBoxesData: new Object(),
+      store: useAuth(),
+      groups: null,
     }
   },
   props: {
@@ -52,6 +68,13 @@ export default {
     name: String,
   },
   methods: {
+    async getgroups() {
+      await axios.get("http://localhost:8881/api/user/groups", {
+        withCredentials: true,
+      }).then(response => {
+        this.groups = response.data
+      })
+    },
     checkall() {
       let checkboxes = document.getElementById(this.name).querySelectorAll("input[type=checkbox]")
       this.checked = !this.checked
@@ -59,8 +82,54 @@ export default {
         checkboxes[i].checked = this.checked;
       }
     },
+    download(type, title) {
+      let filename = `${this.store.user.name}-${title}.${type}`;
+      axios.get(`http://localhost:8881/api/file/download/${filename}`, { withCredentials: true, responseType: 'arraybuffer' })
+        .then(response => {
+          let blob = new Blob([response.data])
+          let link = document.createElement('a')
+          link.href = window.URL.createObjectURL(blob)
+          link.download = `${title}.${type}`
+          link.click()
+        })
+    },
+    deletefile(type, title) {
+      let filename = `${this.store.user.name}-${title}.${type}`;
+      axios.delete(`http://localhost:8881/api/file/delete/${filename}`, { withCredentials: true })
+        .then(response => {
+          this.refresh()
+        })
+    },
+    share(id) {
+      let group = document.getElementById("sharemany").value
+      axios.put(`http://localhost:8881/api/file/${id}`, { group_id: group }, { withCredentials: true })
+        .then(response => {
+          this.refresh()
+        })
+    },
     downloadselected() {
-      console.log(this.checkedBoxesData);
+      let conf = confirm("Biztosan letölti a kiválasztott elemeket?")
+      if (conf) {
+        for (let [key, value] of Object.entries(this.checkedBoxesData)) {
+          this.download(value.type, value.title)
+        }
+      }
+    },
+    deleteselected() {
+      let conf = confirm("Biztosan törli a kiválasztott elemeket?")
+      if (conf) {
+        for (let [key, value] of Object.entries(this.checkedBoxesData)) {
+          this.deletefile(value.type, value.title)
+        }
+      }
+    },
+    shareselected() {
+      let conf = confirm("Biztosan megosztja a kiválasztott elemeket?")
+      if (conf) {
+        for (let [key, value] of Object.entries(this.checkedBoxesData)) {
+          this.share(value.id)
+        }
+      }
     }
   },
   watch: {
@@ -71,6 +140,9 @@ export default {
       }
     }
   },
+  mounted() {
+    this.getgroups()
+  }
 };
 </script>
 
@@ -153,10 +225,34 @@ th:last-child {
 }
 
 .sharebutton {
-  background-color: #0f52ba
+  background-color: #0f52ba;
 }
 
 .downloadbutton {
   background-color: #35b14a;
+}
+
+select {
+  background-color: #c4c4c4;
+  opacity: 80%;
+  border-radius: 5px;
+  border-color: none;
+  width: 150px;
+  height: 30px;
+  text-align: center;
+  border: none;
+  margin-top: 10px;
+  outline: none;
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.sharemanybuttondiv {
+  display: inline-block;
+}
+
+#sharemany {
+  margin-bottom: 20px;
 }
 </style>
