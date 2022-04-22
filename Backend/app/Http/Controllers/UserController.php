@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\GroupFileResource;
 use App\Http\Resources\UserResource;
 use App\Models\Group;
 use App\Models\GroupMember;
 use App\Models\User;
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +44,10 @@ class UserController extends Controller
             ]);
         }
         return $groups;
+    }
+
+    public function getFilesInGroup($groupid) {
+        return GroupFileResource::collection(File::where('group_id', $groupid)->get());
     }
 
     public function getownedgroups(){
