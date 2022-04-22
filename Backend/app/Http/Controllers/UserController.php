@@ -38,7 +38,7 @@ class UserController extends Controller
 
         if(count($groups) == 0){
             return response([
-                "erros" => "Nem vagy tagja egyik csoportnak sem!"
+                "errors" => "Nem vagy tagja egyik csoportnak sem!"
             ]);
         }
         return $groups;

@@ -2,7 +2,34 @@
   <div class="shared">
     <Menu id="menu" activepage="shared"></Menu>
     <div id="content">
-      <LastFilesTable v-for="group in groups" :key="group.id" :lastfilesobject="ngdfgsdull" :refresh="nusgddll" :title="group.name" id="groups" name="groups" />
+      <div v-if="groups != null">
+        <div
+          class="group"
+          v-for="group in groups"
+          :key="group.id"
+        >
+          <h1>{{ group.name }}</h1>
+          <table v-if="!nofilemessage">
+            <tr>
+              <th>
+                <input type="checkbox" name="" id="" @click="checkall" />
+              </th>
+              <th>Típus</th>
+              <th>Dokumentum neve</th>
+              <th>Méret</th>
+              <th>Legutóbbi módosítás</th>
+              <th>Tagok</th>
+              <th width="200px">#</th>
+            </tr>
+          </table>
+          <div v-if="nofilemessage" class="nofilemessage">
+            A csoportban nem található fájl!
+          </div>
+        </div>
+      </div>
+      <div v-if="groups == null" class="nofilemessage">
+        Nem vagy tagja egy csoportnak sem!
+      </div>
     </div>
   </div>
 </template>
@@ -11,28 +38,31 @@
 import Menu from "../components/LeftSideMenu.vue";
 import axios from "axios";
 import { useAuth } from "../store/auth.js";
-import LastFilesTable from "../components/LastFilesTable.vue";
 
 export default {
   components: {
     Menu,
-    LastFilesTable
   },
   data() {
     return {
       store: useAuth(),
       groups: null,
-    }
+      nofilemessage: true,
+    };
   },
   methods: {
     async loadgroups() {
       await axios
-        .get(`http://localhost:8881/api/user/${this.store.user.id}/groups`, { withCredentials: true })
-        .then((response) => {
-          this.groups = response.data.data;
-          console.log(response.data)
+        .get(`http://localhost:8881/api/user/${this.store.user.id}/groups`, {
+          withCredentials: true,
         })
-    }
+        .then((response) => {
+          if (Object.keys(response.data) == "errors") {
+            this.groups = null;
+          }
+          this.groups = response.data;
+        });
+    },
   },
   async mounted() {
     await axios
@@ -40,16 +70,16 @@ export default {
       .then((response) => {
         this.store.user = response.data;
       });
-    await this.loadgroups()
-  }
+    await this.loadgroups();
+  },
 };
 </script>
 
 <style scoped>
-.settings {
+.shared {
   display: grid;
-  grid-template-columns: 10% 90%;
-  grid-template-rows: 100%;
+  grid-template-columns: 1fr 9fr;
+  grid-template-rows: 1fr;
   grid-template-areas: "menu content";
 }
 
@@ -60,5 +90,37 @@ export default {
 #content {
   padding: 20px;
   grid-area: content;
+}
+
+.group {
+  background-color: rgb(245, 246, 249);
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 90%;
+  display: block;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.group > h1 {
+  text-align: left;
+  margin-bottom: 20px;
+  color: rgb(132, 148, 165);
+  padding-left: 10rem;
+  padding-top: 1rem;
+}
+
+tr {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.nofilemessage {
+  text-align: center;
+  font-size: 120%;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding-bottom: 50px;
+  opacity: 0.3;
 }
 </style>
