@@ -29,8 +29,8 @@
           </li>
         </div>
         <div>
-          <li>
-            <RouterLink to="#" class="routerLink"><input type="button" value="Statisztika" id="stat" /></RouterLink>
+          <li v-if="store.user.role == 'admin'">
+            <RouterLink to="/admin" class="routerLink"><input type="button" value="Admin" id="admin" /></RouterLink>
           </li>
           <li>
             <RouterLink to="/settings" class="routerLink"><input type="button" value="Beállítások" id="settings" />

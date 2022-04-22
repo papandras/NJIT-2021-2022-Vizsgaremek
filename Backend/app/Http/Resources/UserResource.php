@@ -19,6 +19,7 @@ class UserResource extends JsonResource
             "nev" => $this->name,
             "email" => $this->email,
             "regisztralt" => $this->created_at,
+            "rang" => $this->role,
         ];
     }
 }

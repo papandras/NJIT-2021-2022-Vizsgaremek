@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/LoginView.vue";
 import { useAuth } from '../store/auth.js';
+import axios from "axios";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -63,6 +64,16 @@ const router = createRouter({
       }
     },
     {
+      path: "/admin",
+      name: "admin",
+      component: () => import("../views/AdminView.vue"),
+      meta: {
+        title: "5File | Felhasználók",
+        requiresAuth: true,
+        requiredRole: "admin"
+      }
+    },
+    {
       path: "/settings",
       name: "settings",
       component: () => import("../views/SettingView.vue"),
@@ -114,6 +125,19 @@ router.beforeEach((to, from, next) => {
   }
   else if(store.logged && (to.path == '/' || to.path == "/register")){
     router.replace('/index');
+  }
+  else if(to.meta.requiredRole == "admin"){
+    axios
+    .get("http://localhost:8881/api/user", { withCredentials: true })
+    .then((response) => {
+        store.user = response.data;
+        if(store.user.role == "admin"){
+          next()
+        }
+        else{
+          router.replace(from.path)
+        }
+    });
   }
   else{
     next();
