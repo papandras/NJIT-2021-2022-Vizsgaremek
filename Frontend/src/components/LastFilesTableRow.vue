@@ -18,27 +18,24 @@
     <tr class="menurow" v-if="minimenu">
       <td></td>
       <td></td>
-      <td @click="download(type, title)" class="menuitem">Letöltés <img src="@/assets/download_icon.svg" alt="Letöltés"
-          id="downloadicon"><br>
+      <td @click="download(type, title)" class="menuitem"><p>Letöltés</p>
         <button class="button downloadbutton" @click="downloadselected">Letöltés</button>
       </td>
       <td class="menuitem">
         <p>Megosztás</p>
-        <img src="@/assets/share_icon.svg" alt="Megosztás" id="shareicon">
         <p v-if="groups.message != null">Hozz létre csoportot a megosztáshoz!</p>
         <div v-if="groups.message == null">
+          <button @click="share(id)" class="button sharebutton">Megosztom</button>
           <select :id="title">
             <option v-for="group in groups" :value="group.id">{{
               group.name
             }}
             </option>
           </select>
-          <button @click="share(id)" class="button sharebutton">Megosztom</button>
         </div>
         <span v-if="group != null" class="removegroup" @click="unshare(id)">[Megosztás visszavonása]</span>
       </td>
-      <td @click="deletefile(type, title)" class="menuitem">Törlés <img src="@/assets/delete_icon.svg" alt="Törlés"
-          id="deleteicon"><br><button class="button deletebutton" @click="deleteselected">Törlés</button></td>
+      <td @click="deletefile(type, title)" class="menuitem"><p>Törlés</p><button class="button deletebutton" @click="deleteselected">Törlés</button></td>
       <td></td>
       <td></td>
     </tr>
