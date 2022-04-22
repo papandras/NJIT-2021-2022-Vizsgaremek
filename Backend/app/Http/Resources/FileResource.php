@@ -16,17 +16,32 @@ class FileResource extends JsonResource
      */
     public function toArray($request)
     {
-        $filename = substr($this->title, strlen(Auth::user()->name)+1);
+        $filename = substr($this->title, strlen(Auth::user()->name) + 1);
         $splitfilename = explode('.', $filename);
-        $typelength = strlen($splitfilename[count($splitfilename)-1])+1;
-        $filename = substr($filename, 0, strlen($filename)-$typelength);
-        
+        $typelength = strlen($splitfilename[count($splitfilename) - 1]) + 1;
+        $filename = substr($filename, 0, strlen($filename) - $typelength);
+
+        $filesize = $this->size;
+
+        switch (true) {
+            case $filesize < 1024:
+                $filesize = round($filesize, 2) . " B";
+                break;
+            case $filesize < (1024 * 1024):
+                $filesize = round($filesize / 1024, 2) . " KB";
+                break;
+
+            case $filesize < (1024 * 1024 * 1024):
+                $filesize = round($filesize / (1024 * 1024), 2) . " MB";
+                break;
+        }
+
         return [
             "id" => $this->id,
             "owner_id" => $this->user_id,
             "type" => $this->type,
             "name" => $filename,
-            "size" => $this->size,
+            "size" => $filesize,
             "shared_group_id" => $this->group_id,
             "created" => Carbon::parse($this->created_at)->timezone('Europe/Budapest')->toDateTimeString(),
             "updated" => Carbon::parse($this->updated_at)->timezone('Europe/Budapest')->toDateTimeString(),

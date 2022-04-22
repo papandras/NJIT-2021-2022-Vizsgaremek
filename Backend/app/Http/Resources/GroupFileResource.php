@@ -22,13 +22,28 @@ class GroupFileResource extends JsonResource
         $splitfilename = explode('.', $filename);
         $typelength = strlen($splitfilename[count($splitfilename)-1])+1;
         $filename = substr($filename, 0, strlen($filename)-$typelength);
+
+        $filesize = $this->size;
+
+        switch (true) {
+            case $filesize < 1024:
+                $filesize = round($filesize, 2) . " B";
+                break;
+            case $filesize < (1024 * 1024):
+                $filesize = round($filesize / 1024, 2) . " KB";
+                break;
+
+            case $filesize < (1024 * 1024 * 1024):
+                $filesize = round($filesize / (1024 * 1024), 2) . " MB";
+                break;
+        }
         
         return [
             "id" => $this->id,
             "owner" => $owneruser->name,
             "type" => $this->type,
             "name" => $filename,
-            "size" => $this->size,
+            "size" => $filesize,
             "shared_group_id" => $this->group_id,
             "created" => Carbon::parse($this->created_at)->timezone('Europe/Budapest')->toDateTimeString(),
             "updated" => Carbon::parse($this->updated_at)->timezone('Europe/Budapest')->toDateTimeString(),
