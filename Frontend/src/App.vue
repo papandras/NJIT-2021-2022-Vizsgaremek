@@ -33,6 +33,20 @@
   margin: 10px;
 }
 
+.button:active {
+  animation: shadow .15s ease-in-out;
+}
+
+@keyframes shadow {
+  0% {
+    box-shadow: inset 5px 5px 10px black, inset 5px -5px 10px white;
+  }
+
+  100% {
+    box-shadow: none;
+  }
+}
+
   /* width */
 ::-webkit-scrollbar {
   width: 10px;
