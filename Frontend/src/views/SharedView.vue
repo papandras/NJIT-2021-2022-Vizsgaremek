@@ -18,6 +18,10 @@
                 nofilemessage = true;
               }
             " />
+            <tr>
+              <td colspan="4"></td>
+              <td><p class="leavegroup" @click="leavegroup(group.id)">[Kilépés a csoportból]</p></td>
+            </tr>
           </table>
           <div class="nofilemessage" :id="group.id + '-nofile'">
             A csoportban nem található fájl!
@@ -63,6 +67,12 @@ export default {
           }
         });
     },
+    leavegroup(id){
+      axios.delete(`http://localhost:8881/api/group/${id}/leave`, { withCredentials: true })
+          .then(response => {
+            this.loadgroups()
+          })
+    }
   },
   async mounted() {
     await axios
@@ -142,5 +152,14 @@ th {
   padding-bottom: 50px;
   opacity: 0.3;
   display: none;
+}
+
+.leavegroup{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.leavegroup:active {
+  color: rgb(0, 150, 136);
 }
 </style>

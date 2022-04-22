@@ -97,4 +97,12 @@ class GroupController extends Controller
             'message' => 'Csoporttag sikeresen törölve!'
         ]); 
     }
+
+    public function leavegroup($id) {
+        GroupMember::where([['group_id', $id],['group_member', Auth::user()->id]])->delete();
+
+        return response([
+            'message' => 'Sikeresen kiléptél a csoportból!'
+        ]); 
+    }
 }
