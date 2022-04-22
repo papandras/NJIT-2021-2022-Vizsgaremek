@@ -2,8 +2,8 @@
   <div id="statelement">
     <img :src="icon" :alt="typeName" />
     <span id="type" v-text="typeName"></span>
-    <span id="size" v-text="size + ' GB'"></span>
-    <ProgressBar :filled="progress" :color="color" maxsize="100" width="300" class="progress"></ProgressBar>
+    <span id="size" v-text="size"></span>
+    <ProgressBar :filled="progress" :color="color" maxsize="10485760" width="300" class="progress"></ProgressBar>
   </div>
 </template>
 
@@ -28,10 +28,11 @@ export default {
   width: 300px;
   display: grid;
   grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-columns: 1fr 2fr 3fr;
   grid-template-areas:
     "img type size"
     "progress progress progress";
+    position: relative;
 }
 
 #type {
@@ -40,6 +41,8 @@ export default {
 
 #size {
   grid-area: size;
+  position: absolute;
+  right: 10px;
 }
 
 .progress {

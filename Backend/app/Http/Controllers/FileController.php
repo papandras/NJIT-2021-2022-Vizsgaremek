@@ -26,7 +26,8 @@ class FileController extends Controller
             $file->user_id = Auth::user()->id;
             $file->type = $data['file']->getClientOriginalExtension();
             $file->title = $filename;
-            $file->size = $data['file']->getSize();;
+            $file->size = $data['file']->getSize();
+            $file->mimetype = $data['file']->getMimeType();
 
             $file->save();
 
@@ -93,5 +94,79 @@ class FileController extends Controller
         return response([
             "message" => "Megosztás sikeresen visszavonva!"
         ]);
+    }
+
+    private function unitexchange($byte) {
+        switch (true) {
+            case $byte < 1024:
+                return round($byte, 2) . " B";
+                break;
+            case $byte < (1024 * 1024):
+                return round($byte / 1024, 2) . " KB";
+                break;
+
+            case $byte < (1024 * 1024 * 1024):
+                return round($byte / (1024 * 1024), 2) . " MB";
+                break;
+        }
+    }
+
+    public function getstat()
+    {
+        $files = File::where('user_id', Auth::user()->id)->get();
+
+        $stat = [
+            "image" => [
+                "size" => 0,
+            ],
+            "text" => [
+                "size" => 0,
+            ],
+            "video" => [
+                "size" => 0,
+            ],
+            "audio" => [
+                "size" => 0,
+            ],
+            "other" => [
+                "size" => 0,
+            ],
+            "all" => [
+                "size" => 0,
+            ],
+        ];
+
+        for ($i = 0; $i < count($files); $i++) {
+            switch (true) {
+                case str_starts_with($files[$i]->mimetype, "image"):
+                    $stat["image"]["size"] += $files[$i]->size;
+                    $stat["all"]["size"] += $files[$i]->size;
+                    break;
+                case str_starts_with($files[$i]->mimetype, "text"):
+                    $stat["text"]["size"] += $files[$i]->size;
+                    $stat["all"]["size"] += $files[$i]->size;
+                    break;
+                case str_starts_with($files[$i]->mimetype, "video"):
+                    $stat["video"]["size"] += $files[$i]->size;
+                    $stat["all"]["size"] += $files[$i]->size;
+                    break;
+                case str_starts_with($files[$i]->mimetype, "audio"):
+                    $stat["audio"]["size"] += $files[$i]->size;
+                    $stat["all"]["size"] += $files[$i]->size;
+                    break;
+                default:
+                    $stat["other"]["size"] += $files[$i]->size;
+                    $stat["all"]["size"] += $files[$i]->size;
+            }
+        }
+
+        $stat["image"]["sizewithunit"] = $this->unitexchange($stat["image"]["size"]);
+        $stat["text"]["sizewithunit"] = $this->unitexchange($stat["text"]["size"]);
+        $stat["video"]["sizewithunit"] = $this->unitexchange($stat["video"]["size"]);
+        $stat["audio"]["sizewithunit"] = $this->unitexchange($stat["audio"]["size"]);
+        $stat["other"]["sizewithunit"] = $this->unitexchange($stat["other"]["size"]);
+        $stat["all"]["sizewithunit"] = $this->unitexchange($stat["all"]["size"]);
+
+        return $stat;
     }
 }

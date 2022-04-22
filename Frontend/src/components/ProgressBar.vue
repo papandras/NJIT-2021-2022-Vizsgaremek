@@ -1,7 +1,7 @@
 <template>
   <div id="progressbar" :style="{ width: width + 'px' }">
-    <div id="filled" :style="{ width: (width / 100) * filled + 'px', 'background-color': color }"></div>
-    <div id="unfilled" :style="{ width: width - (width / 100) * filled + 'px' }"></div>
+    <div id="filled" :style="{ width: (width / maxsize) * filled + 'px', 'background-color': color }"></div>
+    <div id="unfilled" :style="{ width: width - (width / maxsize) * filled + 'px' }"></div>
   </div>
 </template>
 

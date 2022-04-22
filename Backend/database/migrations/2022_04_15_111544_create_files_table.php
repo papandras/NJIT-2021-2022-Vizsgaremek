@@ -21,6 +21,7 @@ class CreateFilesTable extends Migration
             $table->string('title', 255);
             $table->integer('size');
             $table->unsignedBigInteger('group_id')->nullable();
+            $table->string('mimetype');
             $table->foreign('group_id')->references('id')->on('groups')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

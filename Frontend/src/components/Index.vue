@@ -8,15 +8,19 @@
       </div>
       <div id="stat">
         <h1>Statisztika</h1>
-        <div>
-          <StatElement class="statelement" icon="src/assets/category_icons/music-file.svg" typeName="Média fájlok"
-            size="15" progress="80" color="#03a0c2" />
-          <StatElement class="statelement" icon="src/assets/category_icons/image-file.svg" typeName="Képek" size="10"
-            progress="60" color="#1cc842" />
+        <div v-if="stat != null">
+          <StatElement class="statelement" icon="src/assets/category_icons/music-file.svg" typeName="Zenék"
+            :size="stat.audio.sizewithunit" :progress="stat.audio.size" color="#03a0c2" />
+          <StatElement class="statelement" icon="src/assets/category_icons/video-file.svg" typeName="Videók"
+            :size="stat.video.sizewithunit" :progress="stat.video.size" color="#DC143C" />
+          <StatElement class="statelement" icon="src/assets/category_icons/image-file.svg" typeName="Képek"
+            :size="stat.image.sizewithunit" :progress="stat.image.size" color="#1cc842" />
           <StatElement class="statelement" icon="src/assets/category_icons/text-file.svg" typeName="Dokumentumok"
-            size="7" progress="40" color="#ffc720" />
-          <StatElement class="statelement" icon="src/assets/category_icons/blank-file.svg" typeName="Egyéb fájlok"
-            size="5" progress="30" color="#9a45ee" />
+            :size="stat.text.sizewithunit" :progress="stat.text.size" color="#ffc720" />
+          <StatElement class="statelement" icon="src/assets/category_icons/unknown-file.svg" typeName="Egyéb fájlok"
+            :size="stat.other.sizewithunit" :progress="stat.other.size" color="#9a45ee" />
+          <StatElement class="statelement" icon="src/assets/category_icons/blank-file.svg" typeName="Összes fájl"
+            :size="stat.all.sizewithunit + ' / 10 MB'" :progress="stat.all.size" color="#009688" />
         </div>
       </div>
       <div id="upload">
@@ -47,6 +51,7 @@ export default {
   data() {
     return {
       lastfiles: null,
+      stat: null
     }
   },
   methods: {
@@ -88,10 +93,21 @@ export default {
       catch (e) {
         console.log(e.response.data.errors);
       }
+    },
+    getStat() {
+      axios
+        .get("http://localhost:8881/api/file/stat", {
+          withCredentials: true,
+        })
+        .then((response) => {
+          this.stat = response.data;
+          console.log(this.stat)
+        });
     }
   },
   mounted() {
     this.getlastfiles();
+    this.getStat();
   }
 };
 </script>
@@ -145,6 +161,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #stat>h1 {
@@ -166,6 +184,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #upload>h1 {

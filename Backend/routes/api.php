@@ -62,4 +62,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('file/delete/{filename}', [FileController::class, 'delete'])->name('file.delete');
     Route::put('/file/{id}', [FileController::class, 'sharewithgroup'])->name('file.share');
     Route::put('/file/{id}/unshare', [FileController::class, 'unshare'])->name('file.unshare');
+
+    Route::get('file/stat', [FileController::class, 'getstat'])->name('file.stat');
 });
