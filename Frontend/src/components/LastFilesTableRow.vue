@@ -18,7 +18,8 @@
     <tr class="menurow" v-if="minimenu">
       <td></td>
       <td></td>
-      <td @click="download(type, title)" class="menuitem"><p>Letöltés</p>
+      <td @click="download(type, title)" class="menuitem">
+        <p>Letöltés</p>
         <button class="button downloadbutton" @click="downloadselected">Letöltés</button>
       </td>
       <td class="menuitem">
@@ -35,7 +36,9 @@
         </div>
         <span v-if="group != null" class="removegroup" @click="unshare(id)">[Megosztás visszavonása]</span>
       </td>
-      <td @click="deletefile(type, title)" class="menuitem"><p>Törlés</p><button class="button deletebutton" @click="deleteselected">Törlés</button></td>
+      <td @click="deletefile(type, title)" class="menuitem">
+        <p>Törlés</p><button class="button deletebutton" @click="deleteselected">Törlés</button>
+      </td>
       <td></td>
       <td></td>
     </tr>

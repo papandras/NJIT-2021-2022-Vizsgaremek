@@ -1,23 +1,17 @@
 <template>
-  <div v-for="file in groupfiles" :key="file.id">
-    <tr class="row">
-      <td class="imgtd">
-        <img
-          :src="'src/assets/format_icons/' + file.type + '.svg'"
-          :alt="file.type"
-          :title="file.type"
-        />
-      </td>
-      <td>{{ file.name }}</td>
-      <td>{{ file.size }}</td>
-      <td>{{ file.owner }}</td>
-      <td>
-        <button class="button downloadbutton" @click="downloadselected">
-          Letöltés
-        </button>
-      </td>
-    </tr>
-  </div>
+  <tr v-for="file in groupfiles" :key="file.id">
+    <td class="imgtd">
+      <img :src="'src/assets/format_icons/' + file.type + '.svg'" :alt="file.type" :title="file.type" />
+    </td>
+    <td :title="file.name">{{ file.name }}</td>
+    <td>{{ file.size }}</td>
+    <td>{{ file.owner }}</td>
+    <td>
+      <button class="button downloadbutton" @click="download(file.type, file.name, file.owner)">
+        Letöltés
+      </button>
+    </td>
+  </tr>
 </template>
 
 <script>
@@ -32,6 +26,20 @@ export default {
       groupfiles: null,
     };
   },
+  methods: {
+    download(type, title, owner) {
+      let filename = `${owner}-${title}.${type}`;
+      axios.get(`http://localhost:8881/api/file/download/${filename}`, { withCredentials: true, responseType: 'arraybuffer' })
+        .then(response => {
+          console.log(response.data)
+          let blob = new Blob([response.data])
+          let link = document.createElement('a')
+          link.href = window.URL.createObjectURL(blob)
+          link.download = `${title}.${type}`
+          link.click()
+        })
+    }
+  },
   async mounted() {
     await axios
       .get(`http://localhost:8881/api/group/${this.groupid}/files`, {
@@ -39,7 +47,6 @@ export default {
       })
       .then((response) => {
         this.groupfiles = response.data.data;
-        console.log(this.groupfiles);
         document.getElementById(`${this.groupid}-nofile`).style.display =
           "none";
         document.getElementById(`${this.groupid}-table`).style.display =
@@ -52,31 +59,27 @@ export default {
             "none";
         }
       });
-    console.log(this.groupid);
   },
 };
 </script>
 
 <style scoped>
-img {
-  height: 30px;
+tr {
+  background-color: white;
 }
 
 td {
   padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  width: 20%;
+  padding-left: 20px;
+  padding-right: 20px;
   text-align: center;
 }
 
-tr {
-  margin-left: 20px;
-  margin-right: 20px;
-  background-color: white;
-  border-radius: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding-bottom: 20px;
+img {
+  height: 30px;
+}
+
+.downloadbutton {
+  background-color: #35b14a;
 }
 </style>

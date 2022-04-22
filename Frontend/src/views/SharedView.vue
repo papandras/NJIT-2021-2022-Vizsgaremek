@@ -6,23 +6,18 @@
         <div class="group" v-for="group in groups" :key="group.id">
           <h1>{{ group.name }}</h1>
           <table :id="group.id + '-table'">
-            <div>
-              <tr>
-                <th>Típus</th>
-                <th>Dokumentum neve</th>
-                <th>Méret</th>
-                <th>Tulajdonos</th>
-                <th>Letöltés</th>
-              </tr>
-            </div>
-            <TableRow
-              :groupid="group.id"
-              :nofilemessage="
-                () => {
-                  nofilemessage = true;
-                }
-              "
-            />
+            <tr class="thead">
+              <th>Típus</th>
+              <th>Dokumentum neve</th>
+              <th>Méret</th>
+              <th>Tulajdonos</th>
+              <th>Letöltés</th>
+            </tr>
+            <TableRow :groupid="group.id" :nofilemessage="
+              () => {
+                nofilemessage = true;
+              }
+            " />
           </table>
           <div class="nofilemessage" :id="group.id + '-nofile'">
             A csoportban nem található fájl!
@@ -98,16 +93,16 @@ export default {
 }
 
 .group {
-  background-color: #c4c4c4;
+  background-color: rgb(245, 246, 249);
+  padding-left: 20px;
+  padding-right: 20px;
   width: 90%;
   display: block;
   margin: auto;
   margin-bottom: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 
-.group > h1 {
+.group>h1 {
   text-align: left;
   margin-bottom: 20px;
   color: rgb(132, 148, 165);
@@ -116,31 +111,27 @@ export default {
 }
 
 table {
-  display: block;
-  margin: auto;
-  width: 90%;
-  background-color: rgb(245, 246, 249);
-  padding-left: 10rem;
-  padding-top: 1rem;
-  padding-bottom: 20px;
   border-collapse: collapse;
+  width: fit-content;
+  margin: auto;
+  color: rgb(70, 84, 114);
+  text-align: center;
+  padding-bottom: 20px;
 }
 
-tr {
-  margin-left: 20px;
-  margin-right: 20px;
+tr:first-child {
+  color: rgb(179, 187, 198);
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 th {
   padding: 5px;
   padding-left: 10px;
   padding-right: 10px;
-  width: 20%;
   text-align: center;
-}
-
-tr:first-child {
-  color: rgb(179, 187, 198);
 }
 
 .nofilemessage {
