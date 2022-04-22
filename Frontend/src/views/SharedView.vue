@@ -151,7 +151,6 @@ th {
   text-transform: uppercase;
   padding-bottom: 50px;
   opacity: 0.3;
-  display: none;
 }
 
 .leavegroup{

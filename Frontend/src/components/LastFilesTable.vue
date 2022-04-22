@@ -252,6 +252,12 @@ select {
   display: inline-block;
 }
 
+.sharemanybuttondiv > p {
+  width: 150px;
+  margin: 10px;
+  text-align: center;
+}
+
 #sharemany {
   margin-bottom: 20px;
 }

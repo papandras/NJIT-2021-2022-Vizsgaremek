@@ -72,6 +72,7 @@ export default {
             )
             .then((response) => {
               this.getlastfiles();
+              this.getStat();
             });
 
         }
@@ -161,8 +162,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 40px;
+  padding-bottom: 30px;
 }
 
 #stat>h1 {
@@ -184,8 +185,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 40px;
+  padding-bottom: 30px;
 }
 
 #upload>h1 {
