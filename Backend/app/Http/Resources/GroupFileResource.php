@@ -25,7 +25,7 @@ class GroupFileResource extends JsonResource
         
         return [
             "id" => $this->id,
-            "owner_id" => $this->user_id,
+            "owner" => $owneruser->name,
             "type" => $this->type,
             "name" => $filename,
             "size" => $this->size,

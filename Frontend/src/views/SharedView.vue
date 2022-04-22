@@ -3,26 +3,28 @@
     <Menu id="menu" activepage="shared"></Menu>
     <div id="content">
       <div v-if="groups != null">
-        <div
-          class="group"
-          v-for="group in groups"
-          :key="group.id"
-        >
+        <div class="group" v-for="group in groups" :key="group.id">
           <h1>{{ group.name }}</h1>
-          <table v-if="!nofilemessage">
-            <tr>
-              <th>
-                <input type="checkbox" name="" id="" @click="checkall" />
-              </th>
-              <th>Típus</th>
-              <th>Dokumentum neve</th>
-              <th>Méret</th>
-              <th>Legutóbbi módosítás</th>
-              <th>Tagok</th>
-              <th width="200px">#</th>
-            </tr>
+          <table :id="group.id + '-table'">
+            <div>
+              <tr>
+                <th>Típus</th>
+                <th>Dokumentum neve</th>
+                <th>Méret</th>
+                <th>Tulajdonos</th>
+                <th>Letöltés</th>
+              </tr>
+            </div>
+            <TableRow
+              :groupid="group.id"
+              :nofilemessage="
+                () => {
+                  nofilemessage = true;
+                }
+              "
+            />
           </table>
-          <div v-if="nofilemessage" class="nofilemessage">
+          <div class="nofilemessage" :id="group.id + '-nofile'">
             A csoportban nem található fájl!
           </div>
         </div>
@@ -38,16 +40,18 @@
 import Menu from "../components/LeftSideMenu.vue";
 import axios from "axios";
 import { useAuth } from "../store/auth.js";
+import TableRow from "../components/GroupFilesRow.vue";
 
 export default {
   components: {
     Menu,
+    TableRow,
   },
   data() {
     return {
       store: useAuth(),
       groups: null,
-      nofilemessage: true,
+      nofilemessage: false,
     };
   },
   methods: {
@@ -59,8 +63,9 @@ export default {
         .then((response) => {
           if (Object.keys(response.data) == "errors") {
             this.groups = null;
+          } else {
+            this.groups = response.data;
           }
-          this.groups = response.data;
         });
     },
   },
@@ -93,13 +98,13 @@ export default {
 }
 
 .group {
-  background-color: rgb(245, 246, 249);
-  padding-left: 20px;
-  padding-right: 20px;
+  background-color: #c4c4c4;
   width: 90%;
   display: block;
   margin: auto;
   margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .group > h1 {
@@ -110,9 +115,32 @@ export default {
   padding-top: 1rem;
 }
 
+table {
+  display: block;
+  margin: auto;
+  width: 90%;
+  background-color: rgb(245, 246, 249);
+  padding-left: 10rem;
+  padding-top: 1rem;
+  padding-bottom: 20px;
+  border-collapse: collapse;
+}
+
 tr {
   margin-left: 20px;
   margin-right: 20px;
+}
+
+th {
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 20%;
+  text-align: center;
+}
+
+tr:first-child {
+  color: rgb(179, 187, 198);
 }
 
 .nofilemessage {
@@ -122,5 +150,6 @@ tr {
   text-transform: uppercase;
   padding-bottom: 50px;
   opacity: 0.3;
+  display: none;
 }
 </style>
