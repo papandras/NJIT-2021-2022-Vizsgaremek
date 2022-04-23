@@ -4,12 +4,12 @@
         <div id="content">
             <div id="adminpage">
                 <div id="adminmenu">
-                    <button class="button" @click="changecomponnent">Fájlok kezelése</button>
-                    <button class="button" @click="changecomponnent">Felhasználók kezelése</button>
+                    <button class="button" @click="changecomponnent('files')">Fájlok kezelése</button>
+                    <button class="button" @click="changecomponnent('users')">Felhasználók kezelése</button>
                 </div>
                 <div id="admincontent">
-                    <Files v-if="showfiles"/>
-                    <Users v-if="showusers"/>
+                    <Files v-if="showfiles" />
+                    <Users v-if="showusers" />
                 </div>
             </div>
         </div>
@@ -34,9 +34,16 @@ export default {
         }
     },
     methods: {
-        changecomponnent() {
-            this.showfiles = !this.showfiles
-            this.showusers = !this.showusers
+        changecomponnent(component) {
+            if (component == "files") {
+                this.showusers = false
+                this.showfiles = true
+            }
+            else {
+                this.showusers = true
+                this.showfiles = false
+            }
+
         }
     }
 };

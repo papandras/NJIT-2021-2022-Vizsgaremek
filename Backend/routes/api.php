@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FriendController;
@@ -64,4 +65,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/file/{id}/unshare', [FileController::class, 'unshare'])->name('file.unshare');
 
     Route::get('file/stat', [FileController::class, 'getstat'])->name('file.stat');
+
+    //Admin
+    Route::get('/admin/users/{user?}', [AdminController::class, 'getUsers'])->name('admin.finduser');
+    Route::put('/admin/users/setrole/{user}/{role}', [AdminController::class, 'setrole'])->name('admin.setrole');
+    Route::delete('/admin/users/delete/{user}', [AdminController::class, 'deleteuser'])->name('admin.deleteuser');
 });
