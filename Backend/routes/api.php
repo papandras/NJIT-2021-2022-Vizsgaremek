@@ -70,4 +70,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/admin/users/{user?}', [AdminController::class, 'getUsers'])->name('admin.finduser');
     Route::put('/admin/users/setrole/{user}/{role}', [AdminController::class, 'setrole'])->name('admin.setrole');
     Route::delete('/admin/users/delete/{user}', [AdminController::class, 'deleteuser'])->name('admin.deleteuser');
+    Route::post('/admin/files/', [AdminController::class, 'getFiles'])->name('admin.getfiles');
 });

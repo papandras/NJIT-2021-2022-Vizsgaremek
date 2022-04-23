@@ -4,7 +4,7 @@
             <label for="username">Add meg a keresett felhasználó nevét: </label>
             <input type="text" id="username" v-model="username" required>
             <input class="button" type="submit" value="Keresés">
-            <label @click="searchUser(null)">[Összes megjelenítése]</label>
+            <label @click="searchUser(null)" id="showall">[Összes megjelenítése]</label>
         </form>
         <table v-if="users != null">
             <tr>
@@ -52,6 +52,20 @@
     text-align: center;
 }
 
+input[type=text] {
+    background-color: #c4c4c4;
+    opacity: 80%;
+    border-radius: 5px;
+    border-color: none;
+    width: 300px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
 .message {
     text-align: center;
     font-size: 120%;
@@ -68,6 +82,14 @@
 
 .sharebutton {
     background-color: #0f52ba;
+}
+
+#showall {
+    cursor: pointer;
+}
+
+#showall:active {
+    color: red;
 }
 </style>
 
@@ -94,7 +116,6 @@ export default {
                         this.users = null
                         this.message = "Nincsen találat"
                     }
-                    console.log(this.users)
                 })
         },
         changerole(id, name, role) {
