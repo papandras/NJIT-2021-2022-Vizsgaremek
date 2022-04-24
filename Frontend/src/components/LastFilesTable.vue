@@ -171,7 +171,7 @@ table {
 .table>h1 {
   text-align: left;
   margin-bottom: 20px;
-  color: rgb(132, 148, 165);
+  color: rgb(101,113,126);
   padding-left: 10rem;
   padding-top: 1rem;
 }
