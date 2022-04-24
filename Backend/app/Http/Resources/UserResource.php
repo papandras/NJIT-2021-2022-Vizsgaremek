@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             "email" => $this->email,
             "regisztralt" => $this->created_at,
             "rang" => $this->role,
+            "kep" => $this->profilpic
         ];
     }
 }

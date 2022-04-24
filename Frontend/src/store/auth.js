@@ -16,7 +16,8 @@ export const useAuth = defineStore("authStore", {
             user: {
                 id: null,
                 name: "default",
-                email: null
+                email: null,
+                profilpic: "base-notfound.svg"
             }
         }
     },
