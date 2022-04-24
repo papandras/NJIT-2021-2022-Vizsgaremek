@@ -71,4 +71,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/admin/users/setrole/{user}/{role}', [AdminController::class, 'setrole'])->name('admin.setrole');
     Route::delete('/admin/users/delete/{user}', [AdminController::class, 'deleteuser'])->name('admin.deleteuser');
     Route::post('/admin/files/', [AdminController::class, 'getFiles'])->name('admin.getfiles');
+
+    //Settings
+
+    Route::post('/user/settings', [AuthController::class, 'settings'])->name('user.settings');
+    Route::delete('/user/delete', [AuthController::class, 'removeaccount'])->name('user.delete');
 });

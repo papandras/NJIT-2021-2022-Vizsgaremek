@@ -102,7 +102,6 @@ export default {
         })
         .then((response) => {
           this.stat = response.data;
-          console.log(this.stat)
         });
     }
   },

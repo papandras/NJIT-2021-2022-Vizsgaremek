@@ -48,16 +48,19 @@
     height: 500px;
     border-radius: 5px;
     margin-left: 40px;
+    height: fit-content;
+    padding-bottom: 20px;
 }
 
 #whiteBackground {
     display: grid;
     grid-template-columns: 1fr 9fr;
-    grid-template-areas: "left right image";
+    grid-template-areas: "left right";
     background-color: white;
     margin: auto;
     margin-top: 50px; 
-    height: 300px;
+    height: fit-content;
+    padding-bottom: 20px;
     width: 80%;
     border-radius: 5px;
     position: relative;
@@ -68,17 +71,44 @@
     padding-top: 20px;
 }
 
-#picturegrid>img {
-    height: 50px;
-    width: 50px;
-    background-color: white;
-    border-radius: 50%;
-    margin: auto;
-    display: block;
-  }
-
 #save {
     position: absolute;
     right: 20px;
     bottom:  20px;
   }
+
+input {
+  background-color: #c4c4c4;
+  opacity: 80%;
+  border-radius: 5px;
+  border-color: none;
+  width: 60%;
+  height: 30px;
+  text-align: center;
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  outline: none;
+}
+
+#errorul {
+  padding: 10px;
+  padding-left: 100px;
+  padding-right: 100px;
+  border-radius: 10px;
+  background-color: #DC143C;
+  color: white;
+  font-weight: bold;
+  display: block;
+  margin: auto;
+  width: fit-content;
+}
+
+::marker {
+  color: #009688;
+  font-size: 1.2em;
+}
+
+#confirm {
+  width: 150px;
+}
