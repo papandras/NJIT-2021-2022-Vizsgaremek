@@ -21,6 +21,7 @@
 <style scoped>
 div {
   height: 200px;
+  padding-top: 10px;
 }
 
 div > * {

@@ -18,6 +18,10 @@ div {
 
 div > * {
     display: block;
-}
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-top: 8px;
+  }
 
 </style>

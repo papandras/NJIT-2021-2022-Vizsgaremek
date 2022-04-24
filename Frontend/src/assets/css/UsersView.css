@@ -48,6 +48,7 @@
       padding: 20px;
       border-radius: 10px;
       text-align: center;
+      height: 30px;
   }
   
   #keresesInput:focus {
@@ -56,6 +57,17 @@
 
   #keresesGomb:active {
     border: 2px solid #E9D8A6;
+  }
+
+  #keresesGomb {
+  background-color: #009688;
+  border-radius: 5px;
+  border: none;
+  width: 150px;
+  height: 30px;
+  color: white;
+  display: inline-block;
+  margin: 10px;
   }
   
   #userlistDiv {

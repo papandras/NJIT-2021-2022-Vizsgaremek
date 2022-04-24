@@ -217,6 +217,5 @@ form {
 }
 
 h1 {
-  color: rgb(82, 77, 103);
-}
+  color: rgb(82, 77, 103);}
 </style>
