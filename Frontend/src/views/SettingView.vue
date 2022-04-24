@@ -5,8 +5,8 @@
       <div id="contentButtons">
         <div id="whiteBackground">
           <div id="left">
-              <button id="adatokGomb" @click="displayDatas">Adatok</button>
-              <button id="biztonsagGomb" @click="displaySecurity">Biztonság</button>
+              <button id="dataButton" @click="displayDatas">Adatok</button>
+              <button id="securityButton" @click="displaySecurity">Biztonság</button>
               <button class="button" id="save">Módosítások mentése</button>           
           </div>
           <div id="right">
@@ -69,10 +69,6 @@ export default {
   position: absolute;
   right: 20px;
   bottom:  20px;
-}
-
-#right, #left {
-  padding: 10px;
 }
 </style>
 
