@@ -51,27 +51,5 @@ export default {
 </script>
 
 <style scoped>
-.settings {
-  display: grid;
-  grid-template-columns: 10% 90%;
-  grid-template-rows: 100%;
-  grid-template-areas: "menu content";
-}
-#content {
-  padding: 20px;
-}
-
-#whiteBackground {
-  position: relative;
-}
-
-#save {
-  position: absolute;
-  right: 20px;
-  bottom:  20px;
-}
-</style>
-
-<style scoped>
 @import url("../assets/css/SettingsView.css");
 </style>
