@@ -12,7 +12,9 @@
       <td>{{ lastedited }}</td>
       <td class="imgtd">
         <p v-if="group == null">{{ group ?? "Nincs megosztva senkivel" }}</p>
-        <img v-if="group != null" class="memberimage" v-for="groupmember in groupmembers" :src="'http://localhost:8881/profilpic/'+groupmember[0].kep" :alt="groupmember[0].nev" :title="groupmember[0].nev">
+        <img v-if="group != null" class="memberimage" v-for="groupmember in groupmembers"
+          :src="'http://localhost:8881/profilpic/' + groupmember[0].kep" :alt="groupmember[0].nev"
+          :title="groupmember[0].nev">
       </td>
       <td>
         <img src="@/assets/doticon.svg" alt="menu" @click="showmenu" />
@@ -135,7 +137,9 @@ export default {
   mounted() {
     this.getgroups()
     this.ischecked = document.getElementById(`checkbox-${this.id}`).checked
-    this.getgroupmembers(this.group)
+    if (this.group != null) {
+      this.getgroupmembers(this.group)
+    }
   },
   watch: {
     checked(newval, oldval) {
