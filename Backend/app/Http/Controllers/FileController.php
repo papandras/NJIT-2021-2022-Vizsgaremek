@@ -13,31 +13,33 @@ class FileController extends Controller
 {
     public function upload(Request $request)
     {
-        $data = $request->validate([
-            "file" => "required|file"
-        ]);
-
-        $filename = Auth::user()->name . "-" . $data['file']->getClientOriginalName();
-
-        if (count(File::where('title', $filename)->get()) == 0) {
-            $request->file("file")->storeAs("storage", $filename);
-
-            $file = new File();
-            $file->user_id = Auth::user()->id;
-            $file->type = $data['file']->getClientOriginalExtension();
-            $file->title = $filename;
-            $file->size = $data['file']->getSize();
-            $file->mimetype = $data['file']->getMimeType();
-
-            $file->save();
-
-            return response([
-                "message" => "$file->title sikeresen feltöltve!"
+        for ($i = 0; $i < count($request->all()); $i++) {
+            $data = $request->validate([
+                "file$i" => "required|file"
             ]);
+
+            $filename = Auth::user()->name . "-" . $data["file$i"]->getClientOriginalName();
+
+            if (count(File::where('title', $filename)->get()) == 0) {
+                $request->file("file$i")->storeAs("storage", $filename);
+
+                $file = new File();
+                $file->user_id = Auth::user()->id;
+                $file->type = $data["file$i"]->getClientOriginalExtension();
+                $file->title = $filename;
+                $file->size = $data["file$i"]->getSize();
+                $file->mimetype = $data["file$i"]->getMimeType();
+
+                $file->save();
+            } else {
+                return response([
+                    "error" => "A fájl már létezik!"
+                ]);
+            }
         }
 
         return response([
-            "error" => "A fájl már létezik!"
+            "message" => "A fájlok sikeresen feltöltve!"
         ]);
     }
 
@@ -96,7 +98,8 @@ class FileController extends Controller
         ]);
     }
 
-    private function unitexchange($byte) {
+    private function unitexchange($byte)
+    {
         switch (true) {
             case $byte < 1024:
                 return round($byte, 2) . " B";

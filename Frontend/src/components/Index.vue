@@ -27,7 +27,7 @@
         <h1>Fájl feltöltése</h1>
         <div>
           <form method="post" @submit.prevent="uploadfile" enctype="multipart/form-data">
-            <input type="file" name="file" id="selectfile">
+            <input type="file" name="file" id="selectfile" multiple>
             <button id="keresesGomb">Feltöltés</button>
           </form>
         </div>
@@ -62,7 +62,13 @@ export default {
       }
       else {
         let data = new FormData()
-        data.append('file', input.files[0]);
+        //data.append('file', input.files[0]);
+
+        for (let i = 0; i < input.files.length; i++) {
+          data.append("file" + i, input.files[i]);
+        }
+
+
         try {
           axios
             .post(
@@ -216,5 +222,6 @@ form {
 }
 
 h1 {
-  color: rgb(82, 77, 103);}
+  color: rgb(82, 77, 103);
+}
 </style>
