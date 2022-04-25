@@ -131,3 +131,5 @@ dist
 # TernJS port file
 .tern-port
 Backend/.notifier
+Backend/public/files
+Backend/public/profilpic
