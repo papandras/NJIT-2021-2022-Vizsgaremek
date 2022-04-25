@@ -14,7 +14,7 @@ export default {
     icon: String,
     typeName: String,
     size: String,
-    progress: String,
+    progress: Number,
     color: String,
   },
   components: {

@@ -54,7 +54,7 @@ export default {
     checkboxname: String,
     type: String,
     title: String,
-    size: Number,
+    size: String,
     lastedited: String,
     group: Number,
     refresh: Function,

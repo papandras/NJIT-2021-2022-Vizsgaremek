@@ -55,14 +55,13 @@ export default {
     }
   },
   methods: {
-    uploadfile() {
+    async uploadfile() {
       let input = document.querySelector("input[type=file]");
       if (input.files[0] == null) {
         alert("Nem választottál ki fájlt!")
       }
       else {
         let data = new FormData()
-        //data.append('file', input.files[0]);
 
         for (let i = 0; i < input.files.length; i++) {
           data.append("file" + i, input.files[i]);
@@ -70,7 +69,7 @@ export default {
 
 
         try {
-          axios
+          await axios
             .post(
               "http://localhost:8881/api/file/upload",
               data,

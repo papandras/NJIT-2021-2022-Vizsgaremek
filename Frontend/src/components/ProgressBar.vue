@@ -35,7 +35,7 @@
 export default {
   props: {
     maxsize: String,
-    filled: String,
+    filled: Number,
     width: String,
     color: String,
   },

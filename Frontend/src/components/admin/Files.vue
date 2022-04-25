@@ -51,7 +51,6 @@ export default {
     },
     methods: {
         searchFile() {
-            console.log(this.searchvalue)
             axios
                 .post(
                     "http://localhost:8881/api/admin/files/",
@@ -59,9 +58,7 @@ export default {
                     { withCredentials: true, mode: "no-cors" }
                 )
                 .then((response) => {
-                    console.log(response.data)
                     this.files = response.data.data
-                    console.log(this.files)
                     if (this.files.length == 0) {
                         this.files = null
                         this.message = "Nincsen találat"
@@ -72,7 +69,6 @@ export default {
             let filename = `${username}-${title}.${type}`;
             axios.get(`http://localhost:8881/api/file/download/${filename}`, { withCredentials: true, responseType: 'arraybuffer' })
                 .then(response => {
-                    console.log(response.data)
                     let blob = new Blob([response.data])
                     let link = document.createElement('a')
                     link.href = window.URL.createObjectURL(blob)
