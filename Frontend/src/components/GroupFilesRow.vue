@@ -31,7 +31,6 @@ export default {
       let filename = `${owner}-${title}.${type}`;
       axios.get(`http://localhost:8881/api/file/download/${filename}`, { withCredentials: true, responseType: 'arraybuffer' })
         .then(response => {
-          console.log(response.data)
           let blob = new Blob([response.data])
           let link = document.createElement('a')
           link.href = window.URL.createObjectURL(blob)

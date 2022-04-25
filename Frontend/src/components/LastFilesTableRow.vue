@@ -10,7 +10,10 @@
       <td>{{ title }}</td>
       <td>{{ size }}</td>
       <td>{{ lastedited }}</td>
-      <td>{{ group ?? "Nincs megosztva senkivel" }}</td>
+      <td class="imgtd">
+        <p v-if="group == null">{{ group ?? "Nincs megosztva senkivel" }}</p>
+        <img v-if="group != null" class="memberimage" v-for="groupmember in groupmembers" :src="'http://localhost:8881/profilpic/'+groupmember[0].kep" :alt="groupmember[0].nev" :title="groupmember[0].nev">
+      </td>
       <td>
         <img src="@/assets/doticon.svg" alt="menu" @click="showmenu" />
       </td>
@@ -29,7 +32,7 @@
           <button @click="share(id)" class="button sharebutton">Megosztom</button>
           <select :id="title">
             <option v-for="group in groups" :value="group.id">{{
-              group.name
+                group.name
             }}
             </option>
           </select>
@@ -66,7 +69,8 @@ export default {
       minimenu: false,
       store: useAuth(),
       groups: null,
-      ischecked: this.checked
+      ischecked: this.checked,
+      groupmembers: null
     }
   },
   methods: {
@@ -77,7 +81,6 @@ export default {
       let filename = `${this.store.user.name}-${title}.${type}`;
       axios.get(`http://localhost:8881/api/file/download/${filename}`, { withCredentials: true, responseType: 'arraybuffer' })
         .then(response => {
-          console.log(response.data)
           let blob = new Blob([response.data])
           let link = document.createElement('a')
           link.href = window.URL.createObjectURL(blob)
@@ -120,11 +123,19 @@ export default {
     },
     additem() {
       this.ischecked = !this.ischecked
-    }
+    },
+    async getgroupmembers(id) {
+      await axios.get(`http://localhost:8881/api/group/${id}/members`, {
+        withCredentials: true,
+      }).then(response => {
+        this.groupmembers = response.data
+      })
+    },
   },
   mounted() {
     this.getgroups()
     this.ischecked = document.getElementById(`checkbox-${this.id}`).checked
+    this.getgroupmembers(this.group)
   },
   watch: {
     checked(newval, oldval) {
@@ -236,5 +247,11 @@ table td:nth-child(7) {
 
 .downloadbutton {
   background-color: #35b14a;
+}
+
+.memberimage {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
 }
 </style>
