@@ -8,6 +8,9 @@ import 'package:get/get.dart';
 import 'home.dart';
 import '../main.dart';
 
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:cookie_jar/cookie_jar.dart';
+
 TextEditingController username = new TextEditingController();
 TextEditingController password = new TextEditingController();
 
@@ -153,7 +156,23 @@ class LoginButton extends StatelessWidget {
         if(username.text != "" || password.text != ""){
           if(password.text.length > 7){
             try{
-              var response = await Dio().post('${UrlPrefix.prefix}/api/login', data: jsonEncode(userdata));
+              var dio = Dio();
+              var cookieJar = CookieJar();
+              dio.interceptors.add(CookieManager(cookieJar));
+              var response = await dio.post('${UrlPrefix.prefix}/api/login', data: jsonEncode(userdata));
+              print(response.data);
+              var user = await dio.get('${UrlPrefix.prefix}/api/user');
+              UserController.loggeduser = UserModel(
+                id: user.data["id"],
+                name: user.data["name"].toString(),
+                email: user.data["email"].toString(),
+                registered: user.data["created_at"].toString(),
+                role: user.data["role"].toString(),
+                profilpic:  user.data["profilpic"].toString(),
+
+              );
+              print(user.data);
+              print(UserController.loggeduser!.name!);
 
               Navigator.push(
                 context,
