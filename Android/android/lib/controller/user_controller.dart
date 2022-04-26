@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import '../model/urlprefix.dart';
 
 class UserController extends GetxController {
-  UserModel? loggeduser;
+  static UserModel? loggeduser;
   var dio = Dio();
   var cookieJar = CookieJar();
 
@@ -39,13 +39,12 @@ class UserController extends GetxController {
             role: user.data["role"].toString(),
             profilpic: user.data["profilpic"].toString(),
           );
-          print(user.data);
           print(loggeduser!.name!);
 
           Get.offAndToNamed("/home");
         } catch (e) {
           Get.defaultDialog(
-              title: "Nem sikerült bejelentkezni", content: Text(e.toString()));
+              title: "Nem sikerült bejelentkezni", content: Text(e.toString().substring(0, 700)));
         }
       } else {
         Get.defaultDialog(
@@ -131,5 +130,24 @@ class UserController extends GetxController {
     }
     loggeduser = null;
     Get.toNamed('/login');
+  }
+
+  void settings(String email, String password, String confirm) async{
+    dynamic userdata = {
+      'password': password,
+      'email': email,
+      'confirm': confirm
+    };
+    print(userdata);
+    print("settings");
+    var settings = await dio.post('${UrlPrefix.prefix}/api/user/settings',
+        data: userdata,
+        options: Options(
+            method: "post", followRedirects: false, validateStatus: (status) {
+          return status! < 500;
+        }, headers: {
+          "Accept": "application/json"
+        }));
+    print(settings.data);
   }
 }

@@ -53,7 +53,7 @@ class _ProfilState extends State<Profil>{
                   ),
                 ),
                 Text(
-                  "Üdv ${_controller.loggeduser!.name!}!",
+                  "Üdv ${UserController.loggeduser!.name!}!",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2.0,
@@ -77,7 +77,7 @@ class _ProfilState extends State<Profil>{
                         ),
                       ),
                       Text(
-                        _controller.loggeduser!.name!,
+                        UserController.loggeduser!.name!,
                         style: const TextStyle(
                           fontSize: 20.0,
                         ),
@@ -98,7 +98,7 @@ class _ProfilState extends State<Profil>{
                         ),
                       ),
                       Text(
-                        _controller.loggeduser!.email!,
+                        UserController.loggeduser!.email!,
                         style: const TextStyle(
                           fontSize: 20.0,
                         ),
@@ -119,7 +119,7 @@ class _ProfilState extends State<Profil>{
                         ),
                       ),
                       Text(
-                        _controller.loggeduser!.registered!.split('T')[0].replaceAll('-', '.'),
+                        UserController.loggeduser!.registered!.split('T')[0].replaceAll('-', '.'),
                         style: const TextStyle(
                           fontSize: 20.0,
                         ),
