@@ -1,12 +1,7 @@
-import 'package:android/controller/userController.dart';
-import 'package:android/model/urlprefix.dart';
-import 'package:dio/dio.dart';
+import 'package:android/controller/user_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart';
 import '../components/menu.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import 'package:cookie_jar/cookie_jar.dart';
 
 bool isChecked = false;
 
@@ -18,6 +13,8 @@ class Profil extends StatefulWidget {
 }
 
 class _ProfilState extends State<Profil>{
+  final UserController _controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +53,7 @@ class _ProfilState extends State<Profil>{
                   ),
                 ),
                 Text(
-                  "Üdv ${UserController.loggeduser!.name!}!",
+                  "Üdv ${_controller.loggeduser!.name!}!",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2.0,
@@ -80,7 +77,7 @@ class _ProfilState extends State<Profil>{
                         ),
                       ),
                       Text(
-                        "${UserController.loggeduser!.name!}",
+                        _controller.loggeduser!.name!,
                         style: const TextStyle(
                           fontSize: 20.0,
                         ),
@@ -101,7 +98,7 @@ class _ProfilState extends State<Profil>{
                         ),
                       ),
                       Text(
-                        "${UserController.loggeduser!.email!}",
+                        _controller.loggeduser!.email!,
                         style: const TextStyle(
                           fontSize: 20.0,
                         ),
@@ -122,7 +119,7 @@ class _ProfilState extends State<Profil>{
                         ),
                       ),
                       Text(
-                        "${UserController.loggeduser!.registered!.split('T')[0].replaceAll('-', '.')}.",
+                        _controller.loggeduser!.registered!.split('T')[0].replaceAll('-', '.'),
                         style: const TextStyle(
                           fontSize: 20.0,
                         ),
@@ -165,31 +162,7 @@ class _ProfilState extends State<Profil>{
                     width: MediaQuery.of(context).size.width,
                     alignment: Alignment.bottomCenter,
                     child: ElevatedButton(
-                      onPressed: () async {
-                        var dio = Dio();
-                        var cookieJar = CookieJar();
-                        dio.interceptors.add(CookieManager(cookieJar));
-                        if(isChecked){
-                          print("delete");
-                          var delete = await dio.delete('${UrlPrefix.prefix}/api/user/delete', options: Options(method: "delete" , followRedirects: false, validateStatus: (status){
-                            return status! < 500;
-                          }, headers: {
-                            "Accept": "application/json"
-                          }));
-                          print(delete.data);
-                        }
-                        else {
-                          print("logout");
-                          var logout = await dio.post('${UrlPrefix.prefix}/api/logout', options: Options(method: "post" , followRedirects: false, validateStatus: (status){
-                            return status! < 500;
-                          }, headers: {
-                            "Accept": "application/json"
-                          }));
-                          print(logout.data);
-                        }
-                        UserController.loggeduser = null;
-                        Get.toNamed('/login');
-                      },
+                      onPressed: () => _controller.logout(isChecked),
                       style: ElevatedButton.styleFrom(
                         fixedSize: Size(
                             MediaQuery.of(context).size.width * 0.90, 80.0),

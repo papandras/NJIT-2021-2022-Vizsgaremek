@@ -1,19 +1,17 @@
-import 'dart:convert';
-
-import 'package:android/model/urlprefix.dart';
-import 'package:dio/dio.dart';
+import 'package:android/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../main.dart';
 
-TextEditingController fullname = TextEditingController();
-TextEditingController username = TextEditingController();
-TextEditingController password = TextEditingController();
-TextEditingController password_confirm = TextEditingController();
-TextEditingController email = TextEditingController();
+class Register extends StatelessWidget {
 
+  TextEditingController fullname = TextEditingController();
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController passwordConfirm = TextEditingController();
+  TextEditingController email = TextEditingController();
 
-class RegisterPage extends State<Register> {
+  final UserController _controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,113 +29,59 @@ class RegisterPage extends State<Register> {
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: const <Widget>[
-                RegisterTitle(),
-                Divider(
+              children: <Widget>[
+                const RegisterTitle(),
+                const Divider(
                   height: 40.0,
                   color: Colors.white,
                 ),
-                UserName(),
-                Email(),
-                Password(),
-                PasswordConfirm(),
-                Divider(
+                UserName(
+                  username: username,
+                ),
+                Email(
+                  email: email,
+                ),
+                Password(
+                  password: password,
+                ),
+                PasswordConfirm(
+                  passwordConfirm: passwordConfirm,
+                ),
+                const Divider(
                   height: 40.0,
                 ),
-                RegisterButton(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-_showDialog(BuildContext context, String message) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return Column(
-        children: [
-          Expanded(
-            child: AlertDialog(
-              title: Text('Figyelmeztetés'),
-              content: Text(message),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Bezárás', style: TextStyle(color: Colors.black),),
+                ElevatedButton(
+                  onPressed: () => _controller.register(
+                      fullname.text,
+                      username.text,
+                      password.text,
+                      passwordConfirm.text,
+                      email.text),
+                  child: const Text(
+                    'Regisztrálok',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: const Color.fromARGB(255, 0, 150, 137),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 15),
+                  ),
                 ),
               ],
             ),
           ),
-        ],
-      );
-    },
-  );
-}
-
-class RegisterButton extends StatelessWidget {
-  const RegisterButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () async {
-        if(password.text != password_confirm.text){
-          password_confirm.text == null;
-          _showDialog(context, 'A jelszavak nem egyeznek!');
-        }
-        else if(password.text == '' || password_confirm.text == '' || username.text == '' || email.text == ''){
-          _showDialog(context, 'Tölts ki minden mezőt!');
-        }
-        else if(username.text.length < 3){
-          _showDialog(context, 'A felhasználónév minimum 3 karakter!');
-        }
-        else if(email.text.length < 10){
-          _showDialog(context, 'Az email cím minimum 10 karakter!');
-        }
-        else if(password.text.length < 8){
-          _showDialog(context, 'A jelszó minimum 8 karakter!');
-        }
-        else{
-          dynamic userdata = {
-            'name': username.text,
-            'password': password.text,
-            'email': email.text,
-          };
-          try{
-            var response = await Dio().post('${UrlPrefix.prefix}/api/register', data: jsonEncode(userdata));
-            Get.toNamed('/login');
-          }catch(e){
-            print("Hiba: ${e}");
-            _showDialog(context, e.toString());
-          }
-        }
-        //Get.toNamed('/login');
-      },
-      child: const Text(
-        'Regisztrálok',
-        style: TextStyle(
-          fontSize: 20.0,
         ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: const Color.fromARGB(255, 0, 150, 137),
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
       ),
     );
   }
 }
 
 class Email extends StatelessWidget {
-  const Email({
-    Key? key,
-  }) : super(key: key);
+  final TextEditingController? email;
+
+  const Email({Key? key, required this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -170,9 +114,10 @@ class Email extends StatelessWidget {
 }
 
 class PasswordConfirm extends StatelessWidget {
-  const PasswordConfirm({
-    Key? key,
-  }) : super(key: key);
+  final TextEditingController? passwordConfirm;
+
+  const PasswordConfirm({Key? key, required this.passwordConfirm})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +138,7 @@ class PasswordConfirm extends StatelessWidget {
         ),
         TextField(
           maxLength: 20,
-          controller: password_confirm,
+          controller: passwordConfirm,
           obscureText: true,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
@@ -206,9 +151,9 @@ class PasswordConfirm extends StatelessWidget {
 }
 
 class UserName extends StatelessWidget {
-  const UserName({
-    Key? key,
-  }) : super(key: key);
+  final TextEditingController? username;
+
+  const UserName({Key? key, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -247,32 +192,30 @@ class RegisterTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              "Regisztráció",
-              style: TextStyle(
-                letterSpacing: 2.0,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            "Regisztráció",
+            style: TextStyle(
+              letterSpacing: 2.0,
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
 
 class Password extends StatelessWidget {
-  const Password({
-    Key? key,
-  }) : super(key: key);
+  final TextEditingController? password;
+
+  const Password({Key? key, required this.password}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

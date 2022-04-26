@@ -30,10 +30,10 @@ class _FilesState extends State<Files>{
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
+                children: const [
+                  SizedBox(
                     height: 50,
-                    child: const Padding(
+                    child: Padding(
                       padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
                       child: Center(
                           child: Text(

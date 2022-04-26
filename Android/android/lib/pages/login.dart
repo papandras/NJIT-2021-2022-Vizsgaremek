@@ -1,20 +1,13 @@
-import 'dart:convert';
-import 'package:android/controller/userController.dart';
-import 'package:android/model/urlprefix.dart';
-import 'package:android/model/user_model.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'home.dart';
-import '../main.dart';
+import '../controller/user_controller.dart';
 
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import 'package:cookie_jar/cookie_jar.dart';
+class Login extends StatelessWidget {
 
-TextEditingController username = new TextEditingController();
-TextEditingController password = new TextEditingController();
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
+  final UserController _controller = Get.find();
 
-class LoginPage extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,11 +31,25 @@ class LoginPage extends State<Login> {
                   height: 40.0,
                   color: Colors.white,
                 ),
-                const UserName(),
-                const Password(),
+                 UserName(username: username),
+                 Password(password: password),
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
-                  child: const LoginButton(),
+                  child: ElevatedButton(
+                    onPressed: () =>
+                        _controller.login(username.text, password.text),
+                    child: const Text(
+                      'Bejelentkezés',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color.fromARGB(255, 0, 150, 137),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
+                    ),
+                  ),
                 ),
                 const Divider(
                   height: 40.0,
@@ -58,31 +65,6 @@ class LoginPage extends State<Login> {
   }
 }
 
-_showDialog(BuildContext context, String message) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return Column(
-        children: [
-          Expanded(
-            child: AlertDialog(
-              title: Text('Figyelmeztetés'),
-              content: Text(message),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Bezárás', style: TextStyle(color: Colors.black),),
-                ),
-              ],
-            ),
-          ),
-        ],
-      );
-    },
-  );
-}
 
 class LoginTitle extends StatelessWidget {
   const LoginTitle({
@@ -91,24 +73,22 @@ class LoginTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              "Bejelentkezés",
-              style: TextStyle(
-                letterSpacing: 2.0,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            "Bejelentkezés",
+            style: TextStyle(
+              letterSpacing: 2.0,
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -132,87 +112,16 @@ class RegisterButton extends StatelessWidget {
       ),
       style: ElevatedButton.styleFrom(
         primary: const Color.fromARGB(255, 0, 150, 137),
-        padding: const EdgeInsets.symmetric(
-            horizontal: 30, vertical: 15),
-      ),
-    );
-  }
-}
-
-class LoginButton extends StatelessWidget {
-  const LoginButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () async {
-        dynamic userdata = {
-          'name': username.text,
-          'password': password.text,
-        };
-
-        if(username.text != "" || password.text != ""){
-          if(password.text.length > 7){
-            try{
-              var dio = Dio();
-              var cookieJar = CookieJar();
-              dio.interceptors.add(CookieManager(cookieJar));
-              var response = await dio.post('${UrlPrefix.prefix}/api/login', data: jsonEncode(userdata));
-              print(response.data);
-              var user = await dio.get('${UrlPrefix.prefix}/api/user');
-              UserController.loggeduser = UserModel(
-                id: user.data["id"],
-                name: user.data["name"].toString(),
-                email: user.data["email"].toString(),
-                registered: user.data["created_at"].toString(),
-                role: user.data["role"].toString(),
-                profilpic:  user.data["profilpic"].toString(),
-
-              );
-              print(user.data);
-              print(UserController.loggeduser!.name!);
-
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Home()),
-              );
-            }
-            catch(e){
-              _showDialog(context, e.toString());
-            }
-          }
-          else{
-            _showDialog(context, "A jelszó minimum 8 karakter!");
-          }
-        }
-        else{
-          _showDialog(context, "Töltsd ki az adatokat!");
-        }
-
-        /*print(UserController.loggeduser.name);
-        */
-      },
-      child: const Text(
-        'Bejelentkezés',
-        style: TextStyle(
-          fontSize: 20.0,
-        ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: Color.fromARGB(255, 0, 150, 137),
-        padding: const EdgeInsets.symmetric(
-            horizontal: 30, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
       ),
     );
   }
 }
 
 class Password extends StatelessWidget {
-  const Password({
-    Key? key,
-  }) : super(key: key);
+  final TextEditingController? password;
+
+  const Password({Key? key, required this.password}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -246,9 +155,9 @@ class Password extends StatelessWidget {
 }
 
 class UserName extends StatelessWidget {
-  const UserName({
-    Key? key,
-  }) : super(key: key);
+  final TextEditingController? username;
+
+  const UserName({Key? key, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
