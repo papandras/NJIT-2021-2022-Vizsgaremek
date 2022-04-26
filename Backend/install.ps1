@@ -6,3 +6,4 @@ docker-compose exec php php artisan migrate
 docker-compose exec php php artisan storage:link
 docker-compose exec php php artisan make:mail OrderShipped
 docker-compose exec php php artisan db:seed --class=AdminUserSeeder
+Copy-Item public\base-notfound.svg storage\app\profilpic
