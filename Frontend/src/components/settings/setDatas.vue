@@ -3,7 +3,7 @@
     <img :src="'http://localhost:8881/profilpic/' + store.user.profilpic" alt="Profilkép" title="Profilkép" />
     <label>Új kép feltöltése</label>
     <div class="file">
-      <input type="file" id="profilpicinput" @change="addfile" />
+      <input type="file" id="profilpicinput" accept="image/*" @change="addfile" />
       <input type="checkbox" id="checkbox" v-model="removepic" v-if="store.user.profilpic != 'base-notfound.svg'"><label for="checkbox" v-if="store.user.profilpic != 'base-notfound.svg'">Jelenlegi törlése</label>
     </div>
     <input type="email" placeholder="E-mail cím" class="input" v-model="email" />
