@@ -89,7 +89,7 @@ export default {
     confirm(newdata, olddata) {
       this.settings.append('confirm', newdata);
       if (newdata == null || newdata == "") {
-        this.changedsettings.delete('confirm')
+        this.settings.delete('confirm')
       }
     }
   }
