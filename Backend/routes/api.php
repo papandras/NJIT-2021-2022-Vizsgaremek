@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -72,6 +73,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/admin/files/', [AdminController::class, 'getFiles'])->name('admin.getfiles');
 
     //Settings
-    Route::post('/user/settings', [AuthController::class, 'settings'])->name('user.settings');
-    Route::delete('/user/delete', [AuthController::class, 'removeaccount'])->name('user.delete');
+    Route::post('/user/settings', [SettingsController::class, 'settings'])->name('user.settings');
+    Route::delete('/user/delete', [SettingsController::class, 'removeaccount'])->name('user.delete');
 });
