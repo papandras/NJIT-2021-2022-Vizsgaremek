@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\FriendResource;
 use App\Http\Resources\UserResource;
 use App\Models\Friend;
 use App\Models\User;

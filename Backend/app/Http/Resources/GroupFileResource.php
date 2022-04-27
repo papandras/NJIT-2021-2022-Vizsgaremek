@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class GroupFileResource extends JsonResource

@@ -8,7 +8,6 @@ use App\Models\Group;
 use App\Models\GroupMember;
 use App\Models\User;
 use App\Models\File;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
