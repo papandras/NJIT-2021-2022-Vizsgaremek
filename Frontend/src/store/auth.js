@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 const checkLogged = () => {
-    if (decodeURI(document.cookie.split('=')[1]) != "undefined"/* && decodeURI(document.cookie.split('=')[0] == "jwt")*/) {
+    if (decodeURI(document.cookie.split('=')[1]) != "undefined") {
         return true;
     }
     else {
@@ -20,8 +20,5 @@ export const useAuth = defineStore("authStore", {
                 profilpic: "base-notfound.svg"
             }
         }
-    },
-    actions: {
-
     }
 })

@@ -12,17 +12,17 @@
         <footer>
           <ul id="lettersearch">
             <li v-for="letter in letters" :key="letter">[<a @click="searchbyletter(letter)">{{
-              letter.toUpperCase()
+                letter.toUpperCase()
             }}</a>]</li>
           </ul>
         </footer>
         <!-- Section vége -->
       </div>
       <div id="userlistDiv" v-if="users != null">
-        <div v-if="submitted" class="sectionheader">
+        <!-- Section: Felhasználók kilistázása -->
+        <div v-if="getUsersgetUsersgetUsers" class="sectionheader">
           Találat a következő keresésre: {{ searchvalue }}
         </div>
-        <!-- Section: Felhasználók kilistázása -->
         <div v-if="users == null || users.length == 0" class="nocontentmessage result">Nincs találat</div>
         <ul id="userlist">
           <li v-for="user in users" :key="user.id" class="userListItem">

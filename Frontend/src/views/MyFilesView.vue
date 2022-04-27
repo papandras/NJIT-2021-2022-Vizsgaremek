@@ -1,36 +1,36 @@
 <template>
-    <div class="settings">
+    <div class="myfiles">
         <Menu id="menu" activepage="owned"></Menu>
         <div id="content">
-            <LastFilesTable :lastfilesobject="lastfiles" :refresh="getlastfiles" title="Saját fájlok" id="myfiles" name="myfiles"/>
+            <FileTable :lastfilesobject="files" :refresh="getfiles" title="Saját fájlok" id="myfiles" name="myfiles"/>
         </div>
     </div>
 </template>
 
 <script>
 import Menu from "../components/LeftSideMenu.vue";
-import LastFilesTable from "../components/LastFilesTable.vue";
+import FileTable from "../components/LastFilesTable.vue";
 import axios from "axios";
 
 export default {
     components: {
         Menu,
-        LastFilesTable
+        FileTable
     },
     data() {
         return {
-            lastfiles: null
+            files: null
         }
     },
     methods: {
-        getlastfiles() {
+        getfiles() {
             try {
                 axios
                     .get("http://localhost:8881/api/file/get", {
                         withCredentials: true,
                     })
                     .then((response) => {
-                        this.lastfiles = response.data;
+                        this.files = response.data;
                     });
             }
             catch (e) {
@@ -39,13 +39,13 @@ export default {
         }
     },
     mounted() {
-        this.getlastfiles();
+        this.getfiles();
     }
 };
 </script>
 
 <style scoped>
-.settings {
+.myfiles {
     display: grid;
     grid-template-columns: 10% 90%;
     grid-template-rows: 100%;
