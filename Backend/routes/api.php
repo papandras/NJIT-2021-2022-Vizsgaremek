@@ -49,8 +49,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('group/create', [GroupController::class, 'create'])->name('group.create');
     Route::post('group/addmember', [GroupController::class, 'addmember'])->name('group.addmember');
     Route::get('group/{id}/members', [GroupController::class, 'getmembers'])->name('group.members');
-    Route::get('user/{id}/groups', [UserController::class, 'getgroups'])->name('user.groups'); //amibe meghivtak
-    Route::get('user/groups', [UserController::class, 'getownedgroups'])->name('user.owngroups'); //ahol ő a tulajdonos
+    Route::get('user/{id}/groups', [UserController::class, 'getgroups'])->name('user.groups');
+    Route::get('user/groups', [UserController::class, 'getownedgroups'])->name('user.owngroups');
     Route::get('group/{id}/files', [UserController::class, 'getFilesInGroup'])->name('group.files');
     Route::delete('/group/{id}/delete', [GroupController::class, 'deletegroup'])->name('group.delete');
     Route::delete('/group/{group}/member/{user}/delete', [GroupController::class, 'deletememberfromgroup'])->name('group.delete.member');
@@ -63,7 +63,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('file/delete/{filename}', [FileController::class, 'delete'])->name('file.delete');
     Route::put('/file/{id}', [FileController::class, 'sharewithgroup'])->name('file.share');
     Route::put('/file/{id}/unshare', [FileController::class, 'unshare'])->name('file.unshare');
-
     Route::get('file/stat', [FileController::class, 'getstat'])->name('file.stat');
 
     //Admin
@@ -73,7 +72,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/admin/files/', [AdminController::class, 'getFiles'])->name('admin.getfiles');
 
     //Settings
-
     Route::post('/user/settings', [AuthController::class, 'settings'])->name('user.settings');
     Route::delete('/user/delete', [AuthController::class, 'removeaccount'])->name('user.delete');
 });
