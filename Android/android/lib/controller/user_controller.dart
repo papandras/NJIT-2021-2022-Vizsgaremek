@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:android/model/file_model.dart';
 import 'package:android/model/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -11,6 +12,9 @@ import '../model/urlprefix.dart';
 
 class UserController extends GetxController {
   static UserModel? loggeduser;
+  dynamic _files = Rx<List<FileModel>>([]);
+
+  List<FileModel> get files => _files.value;
   var dio = Dio();
   var cookieJar = CookieJar();
 
@@ -44,7 +48,8 @@ class UserController extends GetxController {
           Get.offAndToNamed("/home");
         } catch (e) {
           Get.defaultDialog(
-              title: "Nem sikerült bejelentkezni", content: Text(e.toString().substring(0, 700)));
+              title: "Nem sikerült bejelentkezni",
+              content: Text(e.toString().substring(0, 700)));
         }
       } else {
         Get.defaultDialog(
@@ -96,43 +101,41 @@ class UserController extends GetxController {
       } catch (e) {
         print("Hiba: $e");
         Get.defaultDialog(
-            title: "Nem sikerült regisztrálni",
-            content: Text(e.toString()));
+            title: "Nem sikerült regisztrálni", content: Text(e.toString()));
       }
     }
     //Get.toNamed('/login');
   }
 
-  void logout(bool isChecked) async{
+  void logout(bool isChecked) async {
     if (isChecked) {
       print("delete");
       var delete = await dio.delete('${UrlPrefix.prefix}/api/user/delete',
-          options: Options(method: "delete",
+          options: Options(
+              method: "delete",
               followRedirects: false,
               validateStatus: (status) {
                 return status! < 500;
               },
-              headers: {
-                "Accept": "application/json"
-              }));
+              headers: {"Accept": "application/json"}));
       print(delete.data);
-    }
-    else {
+    } else {
       print("logout");
       var logout = await dio.post('${UrlPrefix.prefix}/api/logout',
           options: Options(
-              method: "post", followRedirects: false, validateStatus: (status) {
-            return status! < 500;
-          }, headers: {
-            "Accept": "application/json"
-          }));
+              method: "post",
+              followRedirects: false,
+              validateStatus: (status) {
+                return status! < 500;
+              },
+              headers: {"Accept": "application/json"}));
       print(logout.data);
     }
     loggeduser = null;
     Get.toNamed('/login');
   }
 
-  void settings(String email, String password, String confirm) async{
+  void settings(String email, String password, String confirm) async {
     dynamic userdata = {
       'password': password,
       'email': email,
@@ -143,11 +146,32 @@ class UserController extends GetxController {
     var settings = await dio.post('${UrlPrefix.prefix}/api/user/settings',
         data: userdata,
         options: Options(
-            method: "post", followRedirects: false, validateStatus: (status) {
-          return status! < 500;
-        }, headers: {
-          "Accept": "application/json"
-        }));
+            method: "post",
+            followRedirects: false,
+            validateStatus: (status) {
+              return status! < 500;
+            },
+            headers: {"Accept": "application/json"}));
     print(settings.data);
   }
+
+  Future<void> loadFiles(int? limit) async {
+    print("töltt");
+    _files = Rx<List<FileModel>>([]);
+
+    try {
+      var fileresponse =
+          await dio.get('${UrlPrefix.prefix}/api/file/get${limit}');
+      print(fileresponse.data);
+      for (int i = 0; i < fileresponse.data["data"].length; i++) {
+        _files.value.add(FileModel.fromJson(fileresponse.data["data"][i]));
+        print(fileresponse.data["data"][i]);
+      }
+      print("response: ${fileresponse}");
+    } catch (e) {
+      print("Hiba:  $e");
+    }
+  }
+
+  Future<void> deleteFile() async {}
 }

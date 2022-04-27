@@ -1,3 +1,4 @@
+import 'package:android/controller/user_controller.dart';
 import 'package:android/pages/files.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,9 +26,9 @@ class FiveFile extends StatelessWidget{
       ),
       initialRoute: "/login",
       getPages: [
-        GetPage(name: '/home', page: () => const Home()),
-        GetPage(name: '/files', page: () => const Files()),
-        GetPage(name: '/settings', page: () => const Settings()),
+        GetPage(name: '/home', page: () => const Home(), binding: UserBinding()),
+        GetPage(name: '/files', page: () => const Files(), binding: UserBinding()),
+        GetPage(name: '/settings', page: () => const Settings(), binding: UserBinding()),
         GetPage(
             name: '/profil', page: () => const Profil(), binding: UserBinding()),
         GetPage(name: '/login', page: () => Login(), binding: UserBinding()),

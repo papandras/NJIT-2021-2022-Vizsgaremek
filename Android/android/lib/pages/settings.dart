@@ -193,7 +193,7 @@ class Email extends StatelessWidget {
           ),
         ),
         TextField(
-          maxLength: 20,
+          maxLength: 50,
           controller: email,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
