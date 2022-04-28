@@ -62,9 +62,9 @@ export default {
     }
   },
   props: {
-    lastfilesobject: Object, //the object of the files to display
-    refresh: Function, //the function what is refreshing the files
-    title: String, //the title of the component
+    lastfilesobject: Object,
+    refresh: Function,
+    title: String,
     name: String,
   },
   methods: {
