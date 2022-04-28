@@ -1,5 +1,5 @@
 <template>
-  <h1>Az oldal nem található</h1>
+  <h1 class="h1">Az oldal nem található</h1>
   <div class="container">
   
     <div class="row">
@@ -13,7 +13,7 @@
     <div class="row">
       <div class="bgc">
         <h2 class="hero-title back-front tittle">
-          444
+          404
         </h2>
       </div>
     </div>
@@ -45,6 +45,10 @@ p{
 h1 {
   text-align: center;
   margin-top: 30px;
+}
+
+.h1{
+  padding-top: 150px;
 }
 .title {
   text-align: center;
@@ -108,21 +112,23 @@ h1 {
     padding: 25px 30px;
     margin: auto;
     margin-top: 80px;
-    color: rgb(0, 150, 136);
+    color: #E9D8A6;
+    background: rgb(0, 150, 136);
     text-decoration: none;
     text-transform: uppercase;
     transition: 0.5s;
     letter-spacing: 4px;
     overflow: hidden;
+    box-shadow: 0 0 5px 5px #555;
    
 }
 .indexbutton:hover{
-    background: rgb(0, 150, 136);
-    color: white;
-    box-shadow: 0 0 5px rgb(0, 150, 136),
-                0 0 25px rgb(0, 150, 136),
-                0 0 50px rgb(0, 150, 136),
-                0 0 200px rgb(0, 150, 136);
+    background: #E9D8A6;
+    color: rgb(0, 150, 136);
+    box-shadow: 0 0 5px #E9D8A6,
+                0 0 25px #E9D8A6,
+                0 0 50px #E9D8A6,
+                0 0 200px #E9D8A6;
      -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
 }
 .indexbutton:nth-child(1){
@@ -137,7 +143,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg,transparent,rgb(0, 150, 136));
+    background: linear-gradient(90deg,transparent,#E9D8A6);
     animation: animate1 1s linear infinite;
 }
 @keyframes animate1{
@@ -156,6 +162,7 @@ h1 {
     background: linear-gradient(180deg,transparent,rgb(0, 150, 136));
     animation: animate2 1s linear infinite;
     animation-delay: 0.25s;
+    color: #E9D8A6;
 }
 @keyframes animate2{
     0%{
@@ -170,9 +177,10 @@ h1 {
     right: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(270deg,transparent,rgb(0, 150, 136));
+    background: linear-gradient(270deg,transparent,#E9D8A6);
     animation: animate3 1s linear infinite;
     animation-delay: 0.50s;
+    color: #E9D8A6;
 }
 @keyframes animate3{
     0%{
@@ -192,6 +200,7 @@ h1 {
     background: linear-gradient(360deg,transparent,rgb(0, 150, 136));
     animation: animate4 1s linear infinite;
     animation-delay: 0.75s;
+    color: #E9D8A6;
 }
 @keyframes animate4{
     0%{

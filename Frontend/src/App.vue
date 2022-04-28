@@ -1,4 +1,9 @@
 <template>
+
+
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
   <router-view></router-view>
 </template>
 
@@ -82,5 +87,36 @@
   padding: 20px;
   padding-left: 50px;
   padding-right: 50px;
+}
+
+.bg {
+  animation:slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-20deg, #009688 50%, #E9D8A6 50%);
+  bottom:0;
+  left:-100%;
+  opacity:.5;
+  position:fixed;
+  right:-50%;
+  top:0;
+  z-index:-1;
+  border-radius: 50%;
+}
+
+.bg2 {
+  animation-direction:alternate-reverse;
+  animation-duration:40s;
+}
+
+.bg3 {
+  animation-duration:50s;
+}
+
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(25%);
+  }
 }
 </style>

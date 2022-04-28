@@ -1,5 +1,5 @@
 <template>
-  <h1>Sikeres kijelentkezés</h1>
+  <h1 class="h1">Sikeres kijelentkezés</h1>
   <h1 id="counter" v-text="counter"></h1>
 </template>
 
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style scoped>
-  h1:first-child{
+  .h1{
     padding-top: 150px;
   }
 
