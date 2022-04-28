@@ -27,3 +27,22 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  h1:first-child{
+    padding-top: 150px;
+  }
+
+ h1 {
+    text-align: center;
+    top: 50%;
+    font-size: 120%;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.3;
+ }
+
+ #counter{
+   font-size: 500%;
+ }
+</style>

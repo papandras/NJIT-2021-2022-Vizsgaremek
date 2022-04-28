@@ -137,7 +137,6 @@ export default {
         })
         .then((response) => {
           store.logged = false;
-          router.push("/unauthorized");
         });
     };
 
