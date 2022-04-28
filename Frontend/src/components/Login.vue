@@ -64,7 +64,12 @@ export default {
         })
         .then((response) => {
           store.logged = true;
-          router.push("/index");
+          axios
+          .get("http://localhost:8881/api/user", { withCredentials: true })
+          .then((response) => {
+              store.user = response.data;
+              router.push("/index");
+          });
         })
         .catch((error) => {
           data.failed = true;

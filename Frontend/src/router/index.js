@@ -135,7 +135,7 @@ router.beforeEach((to, from, next) => {
           next()
         }
         else{
-          router.replace(from.path)
+          router.replace("/notfound")
         }
     });
   }
