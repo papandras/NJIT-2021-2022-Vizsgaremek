@@ -32,7 +32,8 @@ div>* {
 }
 
 .file>input[type=file] {
-  padding-left: 0;
+  padding: 0;
+  margin-right: 10px;
 }
 
 .input {

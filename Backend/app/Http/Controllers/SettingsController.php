@@ -40,7 +40,8 @@ class SettingsController extends Controller
             $data["password"] = Hash::make($data["password"]);
         }
 
-        if(isset($data["removepic"]) && $data["removepic"] == "true"){
+        if(isset($data["removepic"]
+        ) && $data["removepic"] == "true"){
             $data["profilpic"] = "base-notfound.svg";
         }
 

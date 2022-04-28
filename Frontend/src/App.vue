@@ -119,4 +119,27 @@
     transform:translateX(25%);
   }
 }
+
+input[type=file]::file-selector-button {
+  border: 2px solid #009688;
+  padding: .2em .4em;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: #009688;
+  transition: 1s;
+  padding: 10px 20px 10px 20px;
+  color: #E9D8A6;
+}
+
+input[type=file]{
+  background-color: #009688;
+  border-radius: 10px;
+}
+
+input[type=file]::file-selector-button:hover {
+  background-color: #E9D8A6;
+  color: #009688;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
 </style>
