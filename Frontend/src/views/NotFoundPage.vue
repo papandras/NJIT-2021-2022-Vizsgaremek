@@ -25,6 +25,13 @@
       </div>
     </div>
 
+<RouterLink to="/index" class="indexbutton">
+    <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Tovább a főoldalra
+</RouterLink>
 
 </div>
 
@@ -67,6 +74,8 @@ h1 {
   align-content: center; 
   justify-content: center;  
   z-index: 100000;
+  margin: auto;
+  padding: 30px 0 30px 0;
 }
 
 .loader__element {
@@ -76,7 +85,7 @@ h1 {
 }
 
 .loader__element:nth-child(1) {
-  animation: preloader .6s ease-in-out alternate infinite;
+  animation: preloader .6s ease-in-out alternate .0s infinite;
 }
 .loader__element:nth-child(2) {
   animation: preloader .6s ease-in-out alternate .2s infinite;
@@ -88,5 +97,108 @@ h1 {
 
 @keyframes preloader {
   100% { transform: scale(2); }
+}
+
+
+.indexbutton{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    padding: 25px 30px;
+    margin: auto;
+    margin-top: 50px;
+    color: rgb(0, 150, 136);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    overflow: hidden;
+   
+}
+.indexbutton:hover{
+    background: rgb(0, 150, 136);
+    color: white;
+    box-shadow: 0 0 5px rgb(0, 150, 136),
+                0 0 25px rgb(0, 150, 136),
+                0 0 50px rgb(0, 150, 136),
+                0 0 200px rgb(0, 150, 136);
+     -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+}
+.indexbutton:nth-child(1){
+    filter: hue-rotate(270deg);
+}
+.indexbutton span{
+    position: absolute;
+    display: block;
+}
+.indexbutton span:nth-child(1){
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg,transparent,rgb(0, 150, 136));
+    animation: animate1 1s linear infinite;
+}
+@keyframes animate1{
+    0%{
+        left: -100%;
+    }
+    50%,100%{
+        left: 100%;
+    }
+}
+.indexbutton span:nth-child(2){
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg,transparent,rgb(0, 150, 136));
+    animation: animate2 1s linear infinite;
+    animation-delay: 0.25s;
+}
+@keyframes animate2{
+    0%{
+        top: -100%;
+    }
+    50%,100%{
+        top: 100%;
+    }
+}
+.indexbutton span:nth-child(3){
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg,transparent,rgb(0, 150, 136));
+    animation: animate3 1s linear infinite;
+    animation-delay: 0.50s;
+}
+@keyframes animate3{
+    0%{
+        right: -100%;
+    }
+    50%,100%{
+        right: 100%;
+    }
+}
+
+
+.indexbutton span:nth-child(4){
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg,transparent,rgb(0, 150, 136));
+    animation: animate4 1s linear infinite;
+    animation-delay: 0.75s;
+}
+@keyframes animate4{
+    0%{
+        bottom: -100%;
+    }
+    50%,100%{
+        bottom: 100%;
+    }
 }
 </style>
