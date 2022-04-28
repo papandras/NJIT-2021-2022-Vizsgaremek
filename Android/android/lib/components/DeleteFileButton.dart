@@ -1,19 +1,21 @@
+import 'package:android/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
 class DeleteFileButton extends StatefulWidget {
-  int? id;
-  bool? subject;
   dynamic deleteFunction;
+  String? name;
 
-  DeleteFileButton({Key? key, this.id, this.subject, this.deleteFunction}) : super(key: key);
+  DeleteFileButton({Key? key, this.name}) : super(key: key);
 
   @override
   State<DeleteFileButton> createState() => _DeleteFileButtonState();
 }
 
 class _DeleteFileButtonState extends State<DeleteFileButton> {
+  final UserController _controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -23,12 +25,12 @@ class _DeleteFileButtonState extends State<DeleteFileButton> {
               middleText: "",
               confirm: ElevatedButton(
                 onPressed: () async {
-                  widget.deleteFunction(widget.id);
+                  _controller.deleteFile(widget.name);
                   Navigator.of(context).pop();
                 },
                 style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.red)),
+                    MaterialStateProperty.all<Color>(const Color.fromARGB(255, 220, 20, 61))),
                 child: const Text("Ok"),
               ),
               cancel: ElevatedButton(
@@ -38,9 +40,9 @@ class _DeleteFileButtonState extends State<DeleteFileButton> {
                 child: const Text("Mégse"),
                 style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.green)),
+                    MaterialStateProperty.all<Color>(const Color.fromARGB(255, 53, 177, 74))),
               ));
         },
-        icon: const Icon(Icons.delete));
+        icon: const Icon(Icons.delete, color: Color.fromARGB(255, 0, 150, 137)));
   }
 }

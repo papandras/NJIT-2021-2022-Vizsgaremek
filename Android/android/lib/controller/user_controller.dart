@@ -11,6 +11,8 @@ import 'package:get/get.dart';
 import '../model/urlprefix.dart';
 
 class UserController extends GetxController {
+  //final UserController instance;
+
   static UserModel? loggeduser;
   dynamic _files = Rx<List<FileModel>>([]);
 
@@ -33,6 +35,7 @@ class UserController extends GetxController {
         try {
           var response = await dio.post('${UrlPrefix.prefix}/api/login',
               data: jsonEncode(userdata));
+          dio.interceptors.add(CookieManager(cookieJar));
           print(response.data);
           var user = await dio.get('${UrlPrefix.prefix}/api/user');
           loggeduser = UserModel(
@@ -45,7 +48,7 @@ class UserController extends GetxController {
           );
           print(loggeduser!.name!);
 
-          Get.offAndToNamed("/home");
+          Get.toNamed("/home");
         } catch (e) {
           Get.defaultDialog(
               title: "Nem sikerült bejelentkezni",
@@ -161,7 +164,14 @@ class UserController extends GetxController {
 
     try {
       var fileresponse =
-          await dio.get('${UrlPrefix.prefix}/api/file/get${limit}');
+          await dio.get('${UrlPrefix.prefix}/api/file/get', options: Options(
+              method: "get",
+              followRedirects: false,
+              validateStatus: (status) {
+                return status! < 500;
+              },
+              headers: {"Accept": "application/json"}
+          ));
       print(fileresponse.data);
       for (int i = 0; i < fileresponse.data["data"].length; i++) {
         _files.value.add(FileModel.fromJson(fileresponse.data["data"][i]));
@@ -173,5 +183,8 @@ class UserController extends GetxController {
     }
   }
 
-  Future<void> deleteFile() async {}
+  Future<void> deleteFile(String? name) async {
+    var delete = await dio.delete('${UrlPrefix.prefix}/api/file/delete/${name}');
+    print(name);
+  }
 }

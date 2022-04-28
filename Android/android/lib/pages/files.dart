@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../controller/user_controller.dart';
 import '../components/menu.dart';
 
+final UserController _controller = Get.find();
+
 class Files extends StatefulWidget {
   const Files({Key? key}) : super(key: key);
 
@@ -14,8 +16,6 @@ class Files extends StatefulWidget {
 }
 
 class _FilesState extends State<Files> {
-  //final UserController userController = Get.put(UserController());
-  final UserController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -80,18 +80,18 @@ class _FilesState extends State<Files> {
                           motion: const ScrollMotion(),
                           children: [
                             DeleteFileButton(
-                                id: _controller.files[index].id, subject: true, deleteFunction: _controller.deleteFile()),
-                            DownloadButton(name: _controller.files[index].name),
+                                name: "${UserController.loggeduser!.name!}-${_controller.files[index].name}.${_controller.files[index].type}"),
+                            DownloadButton(name: "${UserController.loggeduser!.name!}-${_controller.files[index].name}.${_controller.files[index].type}"),
                           ],
                         ),
                         child: ListTile(
                           title: Text(
-                            _controller.files[index].name!,
+                            "${_controller.files[index].name!}.${_controller.files[index].type!}",
                             textAlign: TextAlign.left,
                           ),
                           onTap: () {
                           },
-                          tileColor: Colors.green[400],
+                          tileColor: Colors.white70,
                         ),
                       );
                     }));

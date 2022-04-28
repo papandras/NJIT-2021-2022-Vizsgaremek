@@ -34,6 +34,9 @@ dependencies:
   flutter_slidable:
   json_annotation:
   dio_cookie_manager: any
+  path_provider:
+  permission_handler:
+  downloads_path_provider_28:
 
 
   # The following adds the Cupertino Icons font to your application.
