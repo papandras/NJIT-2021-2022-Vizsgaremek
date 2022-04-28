@@ -5,8 +5,8 @@
     <div class="file">
       <input type="file" id="profilpicinput" accept="image/*" @change="addfile" />
       <input type="checkbox" id="checkbox" v-model="removepic" v-if="store.user.profilpic != 'base-notfound.svg'"><label for="checkbox" v-if="store.user.profilpic != 'base-notfound.svg'">Jelenlegi törlése</label>
+      <input type="email" placeholder="E-mail cím" class="input" v-model="email" />
     </div>
-    <input type="email" placeholder="E-mail cím" class="input" v-model="email" />
   </div>
 </template>
 
@@ -34,6 +34,11 @@ div>* {
 .file>input[type=file] {
   padding: 0;
   margin-right: 10px;
+  width: 300px;
+}
+
+.file>input[type=email] {
+  display: block;
 }
 
 .input {

@@ -128,12 +128,15 @@ input[type=file]::file-selector-button {
   background-color: #009688;
   transition: 1s;
   padding: 10px 20px 10px 20px;
+  margin-right: 20px;
   color: #E9D8A6;
 }
 
 input[type=file]{
   background-color: #009688;
   border-radius: 10px;
+  padding-right: 20px;
+  width: 100%;
 }
 
 input[type=file]::file-selector-button:hover {
