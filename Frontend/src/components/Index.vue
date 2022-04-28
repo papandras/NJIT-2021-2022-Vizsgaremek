@@ -67,7 +67,6 @@ export default {
           data.append("file" + i, input.files[i]);
         }
 
-
         try {
           await axios
             .post(
