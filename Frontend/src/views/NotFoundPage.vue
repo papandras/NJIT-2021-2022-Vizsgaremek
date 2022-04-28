@@ -107,7 +107,7 @@ h1 {
     text-align: center;
     padding: 25px 30px;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 80px;
     color: rgb(0, 150, 136);
     text-decoration: none;
     text-transform: uppercase;
