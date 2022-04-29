@@ -8,3 +8,7 @@ docker-compose exec php php artisan make:mail OrderShipped
 docker-compose exec php php artisan db:seed --class=AdminUserSeeder
 md storage\app\profilpic
 copy public\base-notfound.svg storage\app\profilpic
+md storage\app\storage
+copy public\files.zip storage\app\storage
+cd storage\app\storage
+tar -xf files.zip
