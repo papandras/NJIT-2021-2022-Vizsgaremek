@@ -11,8 +11,6 @@ import 'package:get/get.dart';
 import '../model/urlprefix.dart';
 
 class UserController extends GetxController {
-  //final UserController instance;
-
   static UserModel? loggeduser;
   dynamic _files = Rx<List<FileModel>>([]);
 
@@ -199,6 +197,6 @@ class UserController extends GetxController {
 
   Future<void> deleteFile(String? name) async {
     var delete = await dio.delete('${UrlPrefix.prefix}/api/file/delete/${name}');
-    print(name);
+    print("$name sikeresen törölve");
   }
 }
