@@ -15,3 +15,4 @@
 ###### A projekt üzembe helyezése:
 
 ###### Letöltjük a GitHub-ról a projektünket, majd elindítjuk a docker programot. Ezt követően a backend elindításához nem kell mást tenni, mint a Backend mappából elindítani az install kezdetű fájlok közül az általunk használt operációs rendszernek megfelelőt.  Ha lefutott, átlépünk a Frontend mappába, és az általunk használt CLI programban megnyitjuk a Frontend mappát, és kiadjuk a következő: npm install, npm run dev. Ez után a CLI-ben megjelenő localhost linken meg tudjuk nyitni az alkalmazást.
+###### Az android alkalmazás jelen állapotban csak az Android Studióból emulátorral futtatva tesztelhető.
