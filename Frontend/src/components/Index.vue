@@ -97,11 +97,14 @@ export default {
               .then((response) => {
                 this.getlastfiles();
                 this.getStat();
+                if(response.data.error != undefined){
+                  alert(response.data.error)
+                }
               });
 
           }
           catch (e) {
-            console.log(e.response.data.errors);
+            alert(e.response.data.errors.error);
           }
         }
       }
