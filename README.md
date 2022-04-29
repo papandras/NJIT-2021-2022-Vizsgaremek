@@ -6,7 +6,7 @@
 
 ###### Projekt leírása:
 
-###### Egy online fájl tároló szoftvert készítünk, melynek célja, hogy a felhasználó egy helyen el tudja érni a számára fontos fájlokat. Regisztráció után a felhasználók tudnak fájlokat feltölteni, letölteni és megosztani egymás között.
+###### Egy online fájl tároló szoftvert készítünk, melynek célja, hogy a felhasználó egy helyen el tudja érni a számára fontos fájlokat. Regisztráció után a felhasználók tudnak fájlokat feltölteni, letölteni, törölni és megosztani egymás között.
 
 ##### A projekt Trello táblája:
 
