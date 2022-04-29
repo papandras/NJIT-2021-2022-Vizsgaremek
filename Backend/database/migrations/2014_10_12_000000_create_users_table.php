@@ -17,11 +17,9 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ["user", "admin"])->default("user");
             $table->string('profilpic', 255)->default("base-notfound.svg");
-            $table->rememberToken();
             $table->timestamps();
         });
     }
