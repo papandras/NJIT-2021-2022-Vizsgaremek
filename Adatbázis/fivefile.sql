@@ -301,7 +301,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `profilpic`, `cr
 (2, 'polli', 'polli@example.com', '$2y$10$M4Ey5wPXWvtmNYp7pkY27.I//lp.7l/CHbx6JdRxrPIXJQWPQ2AvS', 'admin', 'base-notfound.svg', '2022-04-29 20:11:06', '2022-04-29 20:11:06'),
 (3, 'peti', 'peti@example.com', '$2y$10$EEqmLbBWXXQqS9PemITYv.h0cU6SIqDrzXEuxMU0PZ8zysD8Qhzy6', 'admin', 'base-notfound.svg', '2022-04-29 20:11:06', '2022-04-29 20:11:06'),
 (4, 'csiazsofia', 'csiazsofia@gmail.com', '$2y$10$.g/yBFA7WQd3YIGXWIQTDuSWA6izgknn2lBFT9hw6tE9Bx9kVERgy', 'user', 'base-notfound.svg', '2022-04-29 20:14:58', '2022-04-29 20:14:58'),
-(5, 'raczroland', 'raczroland@freemail.hu', '$2y$10$iJBdpAeTRkUIeSCHvTDp4Owjg3quMHmqWJXgvKpy..vT6tXEiLY/G', 'user', 'base-notfound.svg', '2022-04-29 20:15:53', '2022-04-29 20:15:53'),
+(5, 'raczroland', 'raczroland@freemail.hu', '$2y$10$iJBdpAeTRkUIeSCHvTDp4Owjg3quMHmqWJXgvKpy..vT6tXEiLY/G', 'admin', 'base-notfound.svg', '2022-04-29 20:15:53', '2022-04-29 20:15:53'),
 (6, 'mateszilvi', 'mateszilvi@hotmail.hu', '$2y$10$YuaUPuar02aGq78MtXW.AuOkHbd1yuIT7Ci30RbOrvb1VoAxRQrr.', 'user', 'base-notfound.svg', '2022-04-29 20:17:00', '2022-04-29 20:17:00'),
 (7, 'csehviktoria', 'csehviki@gmail.com', '$2y$10$ve.pAjqhRioQzmc8Mn0s2.tNclLhr2y8T/TRL9rQdJ0RKJKMpZrc6', 'user', 'base-notfound.svg', '2022-04-29 20:18:12', '2022-04-29 20:18:12');
 
