@@ -22,4 +22,6 @@
 
 ###### A telepítéseket követően a fenti linket megnyitva az a FiveFile adatbázisba be kell importálni az Adatbázis mappában található fivefile.sql fájlt.
 
-###### Az install fájlok lefutásával a Backend public mappájából a files.zip fájl átmásolódik a storage/app/storage mappába és kicsomagolódik. Amennyiben mégsem, ez a művelet kézzel elvégzendő a tesztadatok felöltése végett. 
+###### Az install fájlok lefutásával a Backend public mappájából a files.zip fájl átmásolódik a storage/app/storage mappába és kicsomagolódik. Amennyiben mégsem, ez a művelet kézzel elvégzendő a tesztadatok felöltése végett.
+
+###### Az adatbázis importálásával a következő felhasználói fiókok érhetőek el: csiazsofia, raczroland, mateszilvi, csehviktoria. Mindegyik fiókhoz a jelszó "12345678". Admin jogú felhasználó: raczroland
