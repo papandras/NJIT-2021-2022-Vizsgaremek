@@ -138,28 +138,42 @@ class UserController extends GetxController {
     Get.toNamed('/login');
   }
 
-  void settings(String email, String password, String confirm) async {
+  void settings(String? email, String? password, String confirm) async {
     dynamic userdata = {
-      'password': password,
-      'email': email,
       'confirm': confirm
     };
-    print(userdata);
-    print("settings");
-    var settings = await dio.post('${UrlPrefix.prefix}/api/user/settings',
-        data: userdata,
-        options: Options(
-            method: "post",
-            followRedirects: false,
-            validateStatus: (status) {
-              return status! < 500;
-            },
-            headers: {"Accept": "application/json"}));
-    print(settings.data);
+    if(password != ""){
+      userdata["password"] = password;
+    }
+    if(email != ""){
+      userdata["email"] = email;
+    }
+    try {
+      var settings = await dio.post('${UrlPrefix.prefix}/api/user/settings',
+          data: userdata,
+          options: Options(
+              method: "post",
+              followRedirects: false,
+              validateStatus: (status) {
+                return status! < 500;
+              },
+              headers: {"Accept": "application/json"}));
+      if (email != "") {
+        UserController.loggeduser!.email = email;
+      }
+      if (settings.statusCode! < 300) {
+        Get.defaultDialog(
+            title: "Üzenet",
+            content: const Text("Beállítások sikeresen elmentve!"));
+      }
+    }
+    catch(e){
+      Get.defaultDialog(
+          title: "Hiba", content: Text(e.toString()));
+    }
   }
 
-  Future<void> loadFiles(int? limit) async {
-    print("töltt");
+  Future<void> loadFiles() async {
     _files = Rx<List<FileModel>>([]);
 
     try {

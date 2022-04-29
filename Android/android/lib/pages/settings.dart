@@ -195,9 +195,10 @@ class Email extends StatelessWidget {
         TextField(
           maxLength: 50,
           controller: email,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            prefixIcon: Icon(Icons.alternate_email_outlined),
+          decoration: InputDecoration(
+            hintText: UserController.loggeduser!.email,
+            border: const OutlineInputBorder(),
+            prefixIcon: const Icon(Icons.alternate_email_outlined),
           ),
         ),
       ],

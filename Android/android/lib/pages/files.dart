@@ -42,7 +42,7 @@ class _FilesState extends State<Files> {
             });
           },
           child: FutureBuilder(
-            future: _controller.loadFiles(null),
+            future: _controller.loadFiles(),
             builder: (context, files) {
               if (files.connectionState != ConnectionState.done &&
                   _controller.files.length == 0) {
@@ -67,6 +67,21 @@ class _FilesState extends State<Files> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                );
+              } else if(_controller.files.length == 0) {
+                return const SizedBox(
+                  height: 50,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                    child: Center(
+                        child: Text(
+                          'Nem találhatóak feltöltött fájlok!',
+                          style: TextStyle(
+                              fontSize: 20.0
+                          ),
+                        )
                     ),
                   ),
                 );

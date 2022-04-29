@@ -25,8 +25,9 @@ class _DeleteFileButtonState extends State<DeleteFileButton> {
               middleText: "",
               confirm: ElevatedButton(
                 onPressed: () async {
-                  _controller.deleteFile(widget.name);
+                  await _controller.deleteFile(widget.name);
                   Navigator.of(context).pop();
+                  _controller.loadFiles();
                 },
                 style: ButtonStyle(
                     backgroundColor:

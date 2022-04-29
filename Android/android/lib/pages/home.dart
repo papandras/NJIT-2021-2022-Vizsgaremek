@@ -45,6 +45,20 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(4, 8, 4, 0),
+                      child: Center(
+                          child: Text(
+                            'Az alkalmazás kizárólag korlátozott funkciókat biztosít! Teljes körű használatért látogass el a FiveFile böngészőből elérhető alkalmazására!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20.0,
+                            ),
+                          )
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ],
