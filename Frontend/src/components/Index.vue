@@ -51,10 +51,23 @@ export default {
   data() {
     return {
       lastfiles: null,
-      stat: null
+      stat: null,
+      maxsize: 0,
+      canupload: true
     }
   },
   methods: {
+    chechuploadedfilessize() {
+      if (this.maxsize >= 2048 * 1024) {
+        alert("Maximum 2 MB adatot tölthetsz fel egyszerre!")
+        this.canupload = false
+      }
+
+      if ((10485760 - this.stat.all.size) < this.maxsize) {
+        alert("A feltöltendő fájlok mérete meghaladja a tárhelyedből maradt " + ((10485760 - this.stat.all.size) / 1024 / 1024).toFixed(2) + " MB-ot!")
+        this.canupload = false
+      }
+    },
     async uploadfile() {
       let input = document.querySelector("input[type=file]");
       if (input.files[0] == null) {
@@ -62,26 +75,34 @@ export default {
       }
       else {
         let data = new FormData()
+        if (input.files.length > 5) {
+          return alert("Maximum 5 fájlt tölthetsz fel egyszerre!")
+        }
 
         for (let i = 0; i < input.files.length; i++) {
           data.append("file" + i, input.files[i]);
+          this.maxsize += input.files[i].size;
         }
 
-        try {
-          await axios
-            .post(
-              "http://localhost:8881/api/file/upload",
-              data,
-              { withCredentials: true, mode: "no-cors", Accept: "application/json" }
-            )
-            .then((response) => {
-              this.getlastfiles();
-              this.getStat();
-            });
+        this.chechuploadedfilessize()
 
-        }
-        catch (e) {
-          console.log(e.response.data.errors);
+        if (this.canupload) {
+          try {
+            await axios
+              .post(
+                "http://localhost:8881/api/file/upload",
+                data,
+                { withCredentials: true, mode: "no-cors", Accept: "application/json" }
+              )
+              .then((response) => {
+                this.getlastfiles();
+                this.getStat();
+              });
+
+          }
+          catch (e) {
+            console.log(e.response.data.errors);
+          }
         }
       }
     },
