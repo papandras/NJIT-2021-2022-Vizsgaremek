@@ -24,4 +24,9 @@
 
 ###### Az install fájlok lefutásával a Backend public mappájából a files.zip fájl átmásolódik a storage/app/storage mappába és kicsomagolódik. Amennyiben mégsem, ez a művelet kézzel elvégzendő a tesztadatok felöltése végett.
 
-###### Az adatbázis importálásával a következő felhasználói fiókok érhetőek el: csiazsofia, raczroland, mateszilvi, csehviktoria. Mindegyik fiókhoz a jelszó "12345678". Admin jogú felhasználó: raczroland
+###### Az adatbázis importálásával a következő felhasználói fiókok érhetőek el: 
+###### csiazsofia - 12345678
+###### raczroland - 12345678
+###### mateszilvi - 12345678
+###### csehviktoria - 12345678
+###### Admin jogú felhasználó: raczroland
