@@ -69,7 +69,7 @@ INSERT INTO `files` (`id`, `user_id`, `type`, `title`, `size`, `group_id`, `mime
 (7, 5, 'jpg', 'raczroland-Pizigani_1367_Chart_1MB.jpg', 1093957, 2, 'image/jpeg', '2022-04-29 20:51:25', '2022-04-29 20:52:22'),
 (8, 5, 'txt', 'raczroland-rolika.txt', 17, 2, 'text/plain', '2022-04-29 20:51:26', '2022-04-29 21:18:22'),
 (9, 7, 'png', 'csehviktoria-fbqr.png', 15693, 4, 'image/png', '2022-04-29 21:00:36', '2022-04-29 21:15:53'),
-(10, 7, 'jfif', 'csehviktoria-letöltés.jfif', 6470, 3, 'image/jpeg', '2022-04-29 21:00:36', '2022-04-29 21:15:01'),
+(10, 7, 'jfif', 'csehviktoria-letoltes.jfif', 6470, 3, 'image/jpeg', '2022-04-29 21:00:36', '2022-04-29 21:15:01'),
 (12, 7, 'txt', 'csehviktoria-vikike.txt', 17, NULL, 'text/plain', '2022-04-29 21:00:36', '2022-04-29 21:00:36'),
 (13, 6, 'jpg', 'mateszilvi-eso1205a.jpg', 1204505, NULL, 'image/jpeg', '2022-04-29 21:09:54', '2022-04-29 21:09:54'),
 (14, 6, 'pdf', 'mateszilvi-initial-assessment-and-triage-questionnaire-client-version.pdf', 140357, NULL, 'application/pdf', '2022-04-29 21:09:54', '2022-04-29 21:09:54'),
